@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LSLS.ViewModels.TruckLocationViewModel>
+
+@{
+    ViewBag.Title = "TruckTracking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TruckTracking</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Truck Location
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruckId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruckDriverFullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruckCurrentTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TruckCurrentAddress)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            var lat = @Html.Raw(item.Latitude)
+            var long = @Html.Raw(item.Longitude)
+            <iframe width="600"
+                    height="450"
+                    frameborder="0" style="border: 0"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4
+            &q=lat,long" allowfullscreen></iframe>
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TruckId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TruckDriverFullname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TruckCurrentTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TruckCurrentAddress)
+        </td>
+    </tr>
+}
+
+</table>
+@*
+    
+*@

@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - LSLS</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,13 +16,30 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("LSLS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Management
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Company Staff", "ListAllStaffs", "Staff")</li>
+                            <li>@Html.ActionLink("Truck's Driver", "ListAllTruckDrivers", "TruckDriver")</li>
+                        </ul>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Truck Tracking", "TruckTracking", "TruckTracking")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Job Assignment", "EventList", "Event")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Documentation", "ListDocuments", "Documents")
+                    </li>
+
                 </ul>
             </div>
         </div>

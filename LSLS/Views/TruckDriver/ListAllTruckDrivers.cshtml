@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LSLS.Models.TruckDriver>
+
+
+@{
+    ViewBag.Title = "Truck's Drivers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li class="active">Truck's Drivers</li>
+</ul>
+
+<p>
+    @Html.ActionLink("Add Truck's Driver", "FormCreateTruckDriver", null, new { @class = "btn btn-success" })
+</p>
+
+<table id="drivers" class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>TruckID</th>
+        <th>Phone Number</th>
+        <th>Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TruckDriverFullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TruckId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TruckDriverTelephoneNo)
+            </td>
+
+            <td>
+                @Html.ActionLink("Details", "DetailsTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-primary btn-sm" })
+                @Html.ActionLink("Edit", "FormEditTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-warning btn-sm" })
+                @Html.ActionLink("Delete", "DeleteTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-danger btn-sm" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#drivers").DataTable();
+        });
+    </script>
+}
+
