@@ -9,7 +9,7 @@ namespace LSLS.Repository
 {
     public interface ITruckLocationRepository
     {
-        IEnumerable<TruckLocationViewModel> GetAllTruckLocation();
-        TruckLocationViewModel GetTruckLocationByTruckId(TruckLocationViewModel truckLocation);
+        IEnumerable<TruckLocationViewModel> GetAllTruckLocations();
+        TruckLocationViewModel GetTruckLocationByTruckId(string truckId);
     }
 }

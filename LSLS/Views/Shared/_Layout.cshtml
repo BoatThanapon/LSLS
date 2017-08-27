@@ -19,7 +19,7 @@
                 @Html.ActionLink("LSLS", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-left">
                     <li>
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Management
@@ -39,6 +39,12 @@
                     <li>
                         @Html.ActionLink("Documentation", "ListDocuments", "Documents")
                     </li>
+                    <li>
+                        @Html.ActionLink("Shipping", "Shipping", "Shipping")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Report", "Shipping", "Shipping")
+                    </li>
 
                 </ul>
             </div>
@@ -52,8 +58,7 @@
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
 </body>
 </html>

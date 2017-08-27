@@ -1,60 +1,149 @@
 ﻿@model IEnumerable<LSLS.ViewModels.TruckLocationViewModel>
 
 @{
-    ViewBag.Title = "TruckTracking";
+    ViewBag.Title = "Truck Tracking";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    #map {
+        height: 600px;
+        width: 100%;
+    }
+</style>
 
-<h2>TruckTracking</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            Truck Location
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TruckId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TruckDriverFullname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TruckCurrentTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TruckCurrentAddress)
-        </th>
-        <th></th>
-    </tr>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li class="active">Truck Tracking</li>
+</ul>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            var lat = @Html.Raw(item.Latitude)
-            var long = @Html.Raw(item.Longitude)
-            <iframe width="600"
-                    height="450"
-                    frameborder="0" style="border: 0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4
-            &q=lat,long" allowfullscreen></iframe>
-        </td>
-
-        <td>
-            @Html.DisplayFor(modelItem => item.TruckId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TruckDriverFullname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TruckCurrentTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TruckCurrentAddress)
-        </td>
-    </tr>
-}
-
-</table>
-@*
+<div class="row">
     
-*@
+    <div class="col-md-12">
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading">TruckID</div>
+                <div class="panel-body">
+                    <table id="trucklocation" class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>TruckID</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TruckId)
+                                </td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Search Location TruckId</div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SearchTruckId", "TruckTracking"))
+                    {
+                        @Html.ValidationSummary(true, "TruckId Not Found", htmlAttributes: new {@class = "alert alert-danger alert-dismissable"})
+                        <div class="form-group">
+                            <div class="col-md-2">
+                                <label class="control-label">Search:</label>
+                            </div>
+                            <div class="col-md-9">
+                                @Html.Editor("truckId", new {htmlAttributes = new {@class = "form-control", @placeholder = "TruckID"}})
+                            </div>                            
+                            <div class="col-md-offset-2  col-md-9">
+                                <br />
+                                <input type="submit" value="Search" class="btn btn-primary btn-block"/>
+                                <input type="reset" value="Reset" class="btn btn-block">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">Map</div>
+            <div id="map"></div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function() {
+            $("#trucklocation").DataTable({
+            });
+        });
+    </script>
+
+    <script>
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('map'),
+                {
+                    center: { lat: 18.267156, lng: 100.1128905 },
+                    zoom: 7
+                });
+
+            var infowindow;
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("GetAllTruckLocations", "TruckTracking")',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function(data) {
+                    $.each(data,
+                        function(i, item) {
+                            // alert(item.Longitude);
+                            var marker = new google.maps.Marker({
+                                'position': new google.maps.LatLng(item.Latitude, item.Longitude),
+                                'map': map,
+                                'title': item.TruckDriverFullname
+                            });
+
+                            // Make the marker-pin blue!
+                            marker.setIcon('http://maps.google.com/mapfiles/ms/micons/green-dot.png')
+
+                            google.maps.event.addListener(marker,
+                                'click',
+                                function() {
+                                    if (infowindow) infowindow.close();
+                                    infowindow = new google.maps.InfoWindow({
+                                        content: "<div class='infoDiv'><h3>" +
+                                            item.TruckId +
+                                            "</h3>" +
+                                            item.TruckDriverFullname +
+                                            "</div>"
+                                    });
+                                    infowindow.open(map, marker);
+                                });
+                        });
+                }
+            }).done(function() {
+                $(".loadingOverlay").hide();
+            });
+        }
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&callback=initMap">
+    </script>
+
+}

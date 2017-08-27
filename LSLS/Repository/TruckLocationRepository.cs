@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using LSLS.Models;
 using LSLS.ViewModels;
 
@@ -9,16 +7,16 @@ namespace LSLS.Repository
 {
     public class TruckLocationRepository : ITruckLocationRepository
     {
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public TruckLocationRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<TruckLocationViewModel> GetAllTruckLocation()
+        public IEnumerable<TruckLocationViewModel> GetAllTruckLocations()
         {
-            List<TruckLocationViewModel> TruckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
+            List<TruckLocationViewModel> truckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
             var truckLocationlist = (
                 from truckLocation in _context.TruckLocations
                 join truckDriver in _context.TruckDrivers on 
@@ -43,15 +41,25 @@ namespace LSLS.Repository
                 truckLocationViewModel.TruckCurrentTime = item.TruckCurrentTime;
                 truckLocationViewModel.TruckCurrentAddress = item.TruckCurrentAddress;
 
-                TruckLocationVMlist.Add(truckLocationViewModel);
+                truckLocationVMlist.Add(truckLocationViewModel);
             }
 
-            return TruckLocationVMlist.ToList();
+            return truckLocationVMlist.ToList();
         }
 
-        public TruckLocationViewModel GetTruckLocationByTruckId(TruckLocationViewModel truckLocation)
+        public TruckLocationViewModel GetTruckLocationByTruckId(string truckId)
         {
-            throw new NotImplementedException();
+            IEnumerable<TruckLocationViewModel> truckLocation = GetAllTruckLocations();
+
+            if (truckId != null)
+            {
+                var findTruckID = truckLocation.FirstOrDefault(u => u.TruckId.Equals(truckId));
+
+                return findTruckID;
+            }
+
+            return null;
         }
+
     }
 }
