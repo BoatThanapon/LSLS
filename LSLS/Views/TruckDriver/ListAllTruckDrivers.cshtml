@@ -11,42 +11,53 @@
     <li class="active">Truck's Drivers</li>
 </ul>
 
-<p>
-    @Html.ActionLink("Add Truck's Driver", "FormCreateTruckDriver", null, new { @class = "btn btn-success" })
-</p>
+<div class="container body-content">
+    <p>
+        @Html.ActionLink("Add Truck's Driver", "FormCreateTruckDriver", null, new { @class = "btn btn-success" })
+    </p>
 
-<table id="drivers" class="table table-striped table-hover">
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>TruckID</th>
-        <th>Phone Number</th>
-        <th>Option</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TruckDriverFullname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TruckId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TruckDriverTelephoneNo)
-            </td>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title"><span class="glyphicon glyphicon-th-list"></span> Truck's Drivers</h2>
+        </div>
+        <div class="panel-body">
+            <table id="drivers" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>TruckID</th>
+                    <th>Phone Number</th>
+                    <th>Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TruckDriverFullname)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TruckId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TruckDriverTelephoneNo)
+                        </td>
 
-            <td>
-                @Html.ActionLink("Details", "DetailsTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-primary btn-sm" })
-                @Html.ActionLink("Edit", "FormEditTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-warning btn-sm" })
-                @Html.ActionLink("Delete", "DeleteTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-danger btn-sm" })
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+                        <td>
+                            @Html.ActionLink("Details", "DetailsTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Edit", "FormEditTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Delete", "DeleteTruckDriver", new { truckdriverId = item.TruckDriverId }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
 
 @section scripts
 {
