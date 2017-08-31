@@ -9,7 +9,7 @@ namespace LSLS.Models
 
         [Required]
         [Display(Name = "EmployeeID")]
-        [RegularExpression(@"^([E])+(\d{4})", ErrorMessage = "EmployeeID must be begin with E and follow by number 0-9 in 4 digits.")]
+        [RegularExpression(@"^([E])+(\d{4})", ErrorMessage ="EmployeeID must be begin with E and follow by number 0-9 in 4 digits.")]
         public string StaffEmployeeId { get; set; }
 
         [Required]
@@ -25,7 +25,8 @@ namespace LSLS.Models
 
         [Required]
         [Display(Name = "Confirm Password")]
-        [StringLength(15, MinimumLength = 4, ErrorMessage = "Confirm Password length must be between 4 to 15 characters")]
+        [StringLength(15, MinimumLength = 4,
+            ErrorMessage = "Confirm Password length must be between 4 to 15 characters")]
         [Compare("StaffPassword", ErrorMessage = "Confirm password doesn't match, Type again !")]
         [DataType(DataType.Password)]
         public string StaffConfirmPassword { get; set; }
@@ -64,6 +65,5 @@ namespace LSLS.Models
         [Display(Name = "Telephone Number")]
         [RegularExpression(@"^(\d{10})$", ErrorMessage = "Telephone Number must be number of 0-9 in 10 digits")]
         public string StaffTelephoneNo { get; set; }
-
     }
 }

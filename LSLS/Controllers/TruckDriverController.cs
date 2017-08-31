@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using LSLS.Models;
-using LSLS.Repository;
+using LSLS.Repository.Abstract;
+
 // ReSharper disable SuggestVarOrType_SimpleTypes
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 
@@ -41,7 +38,7 @@ namespace LSLS.Controllers
             if (truckdriverId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TruckDriver truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
+            var truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
             if (truckDriver == null)
                 return HttpNotFound();
 
@@ -55,7 +52,7 @@ namespace LSLS.Controllers
             if (truckdriverId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TruckDriver truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
+            var truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
             if (truckDriver == null)
                 return HttpNotFound();
 
@@ -72,19 +69,15 @@ namespace LSLS.Controllers
 
             if (truckDriver.TruckDriverId == 0)
             {
-                bool truckdriverAdd = _truckDriverRepository.AddTruckDriver(truckDriver);
+                var truckdriverAdd = _truckDriverRepository.AddTruckDriver(truckDriver);
                 if (truckdriverAdd.Equals(true))
-                {
                     return RedirectToAction("ListAllTruckDrivers");
-                }             
             }
             else
             {
-                bool truckdriverEdit = _truckDriverRepository.UpdateTruckDriver(truckDriver);
+                var truckdriverEdit = _truckDriverRepository.UpdateTruckDriver(truckDriver);
                 if (truckdriverEdit.Equals(true))
-                {
                     return RedirectToAction("ListAllTruckDrivers");
-                }
             }
 
             return View(truckDriver);
@@ -97,7 +90,7 @@ namespace LSLS.Controllers
             if (truckdriverId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            TruckDriver truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
+            var truckDriver = _truckDriverRepository.GetTruckDriverById(truckdriverId);
             if (truckDriver == null)
                 return HttpNotFound();
 
@@ -110,17 +103,14 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTruckDriverConfirmed(int? truckdriverId)
         {
-            if(truckdriverId == null)
+            if (truckdriverId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            bool truckDriver = _truckDriverRepository.DeleteTruckDriver(truckdriverId);
+            var truckDriver = _truckDriverRepository.DeleteTruckDriver(truckdriverId);
             if (truckDriver.Equals(true))
-            {
                 return RedirectToAction("ListAllTruckDrivers");
-            }
 
             return View("DeleteTruckDriver");
         }
-
     }
 }

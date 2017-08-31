@@ -1,0 +1,111 @@
+﻿@model LSLS.Models.TransportationInf
+
+@{
+    ViewBag.Title = "DeleteTransportationInf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li>@Html.ActionLink("Company Staffs", "ListAllStaffs", "Staff")</li>
+    <li class="active">Delete Company Staff Profile</li>
+</ul>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th"></span> Delete Shipping
+        </div>
+        <div class="panel-body">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Employer) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Employer)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.OrderDate) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.OrderDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DateOfTransportation) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.DateOfTransportation)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductName) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartingPoint):
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartingPoint)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Destination) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Destination) 
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RecieverName) :
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RecieverName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StatusOfTransportation) :
+                </dt>
+
+                <dd>
+                    @(Model.StatusOfTransportation.Equals(true) ?
+                      Html.Label("Complete", new { @class = "label label-success" }) :
+                      Html.Label("Not Complete", new { @class = "label label-danger" }))
+                </dd>
+
+            </dl>
+            <hr/>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-8">
+                        <input type="submit" value="Delete" class="btn btn-danger " onclick="return confirm('Do you want to delete ? ');" />
+                        @Html.ActionLink("Cancel", "ListAllTransportationInfs", "TransportationInf", new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+  
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

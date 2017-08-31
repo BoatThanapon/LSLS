@@ -1,0 +1,90 @@
+﻿@model IEnumerable<LSLS.Models.JobAssingment>
+
+@{
+    ViewBag.Title = "JobAssignments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li class="active">Job Assignments</li>
+</ul>
+
+<div class="container-fluid">
+    <p>
+        @Html.ActionLink("Add Job Assignments", "FromCreateJobAssignment", 0, new {@class = "btn btn-success"})
+    </p>
+
+    <div class="panel panel-default">
+       
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                <span class="glyphicon glyphicon-th-list"></span> Job Assignments
+            </h2>
+        </div>
+
+        <div class="panel-body">
+            
+            <table id="jobAssignments" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Date Time</th>
+                    <th>TruckId</th>
+                    <th>Starting Point</th>
+                    <th>Destination</th>
+                    <th>Shipping No.</th>
+                    <th>Status</th>
+                    <th>Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.JobAssignmentDateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TruckDriver.TruckId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartingPointJob)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DestinationJob)
+                        </td>
+                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShippingId)
+                        </td>
+
+                        <td>
+                            @(item.JobAssignmentStatus.Equals(true) ? Html.Label("Complete", new {@class = "label label-success"}) : Html.Label("Not Complete", new {@class = "label label-danger"}))
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Details", "DetailsJobAssignment", new { jobAssignmentId = item.JobAssignmentId }, new { @class = "btn btn-primary btn-sm" })
+                            @Html.ActionLink("Edit", "FromEditJobAssignment", new { jobAssignmentId = item.JobAssignmentId }, new { @class = "btn btn-warning btn-sm" })
+                            @Html.ActionLink("Delete", "DeleteJobAssignment", new { jobAssignmentId = item.JobAssignmentId }, new { @class = "btn btn-danger btn-sm" })
+                        </td>
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#jobAssignments").DataTable();
+        });
+    </script>
+}

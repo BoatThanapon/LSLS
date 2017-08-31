@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LSLS.Models;
 
-namespace LSLS.Repository
+namespace LSLS.Repository.Abstract
 {
     public interface IStaffRepository
     {
@@ -14,7 +10,5 @@ namespace LSLS.Repository
         bool AddStaff(Staff staff);
         bool UpdateStaff(Staff staff);
         bool DeleteStaff(int? staffId);
-        Staff CheckLoginStaff();
-
     }
 }

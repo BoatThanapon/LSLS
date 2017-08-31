@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
-using LSLS.Models;
-using LSLS.Repository;
+using LSLS.Repository.Abstract;
 using LSLS.ViewModels;
 
 namespace LSLS.Controllers
@@ -28,20 +23,17 @@ namespace LSLS.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost, ActionName("Login")]
+        [HttpPost]
+        [ActionName("Login")]
         public ActionResult CheckLogin(LoginStaffViewModel loginStaff)
         {
-            Staff staff = _authProvider.AuthenticateStaff(loginStaff);
+            var staff = _authProvider.AuthenticateStaff(loginStaff);
 
             if (staff != null)
-            {
-                return RedirectToAction("Main", "Account");                
-            }
+                return RedirectToAction("Main", "Account");
             ModelState.AddModelError("", "");
 
             return View(loginStaff);
-        
-            
         }
 
         [Authorize]

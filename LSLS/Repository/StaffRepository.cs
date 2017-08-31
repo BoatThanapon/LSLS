@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using LSLS.Models;
+using LSLS.Repository.Abstract;
 
 namespace LSLS.Repository
 {
@@ -23,9 +24,7 @@ namespace LSLS.Repository
         {
             // ReSharper disable once ConvertIfStatementToReturnStatement
             if (staffId == null)
-            {
                 return null;
-            }
 
             return _context.Staffs.Find(staffId);
         }
@@ -33,9 +32,7 @@ namespace LSLS.Repository
         public bool AddStaff(Staff staff)
         {
             if (staff == null)
-            {
                 return false;
-            }
 
             _context.Staffs.Add(staff);
             _context.SaveChanges();
@@ -45,11 +42,9 @@ namespace LSLS.Repository
         public bool UpdateStaff(Staff staff)
         {
             if (staff == null)
-            {
                 return false;
-            }
 
-            Staff staffInDb = _context.Staffs.FirstOrDefault(s => s.StaffId == staff.StaffId);
+            var staffInDb = _context.Staffs.FirstOrDefault(s => s.StaffId == staff.StaffId);
             if (staffInDb != null)
             {
                 staffInDb.StaffEmployeeId = staff.StaffEmployeeId;
@@ -72,26 +67,17 @@ namespace LSLS.Repository
         public bool DeleteStaff(int? staffId)
         {
             if (staffId == null)
-            {
                 return false;
-            }
 
             // ReSharper disable once SuggestVarOrType_SimpleTypes
-            Staff staff = _context.Staffs.Find(staffId);
+            var staff = _context.Staffs.Find(staffId);
             if (staff == null)
-            {
                 return false;
-            }
 
             _context.Staffs.Remove(staff);
             _context.SaveChanges();
 
             return true;
-        }
-
-        public Staff CheckLoginStaff()
-        {
-            throw new NotImplementedException();
         }
     }
 }

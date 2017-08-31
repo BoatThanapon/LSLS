@@ -1,0 +1,144 @@
+﻿@model LSLS.Models.JobAssingment
+
+@{
+    ViewBag.Title = "DeleteJobAssignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li>@Html.ActionLink("Job Assignments", "ListAllJobAssignments", "JobAssignment")</li>
+    <li class="active">Delete JobAssignment</li>
+</ul>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Delete JobAssignment
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobAssignmentStatus)
+                        </dt>
+
+                        <dd>
+                            @(Model.JobAssignmentStatus.Equals(true) ?
+                                  Html.Label("Complete", new { @class = "alert alert-success" }) :
+                                  Html.Label("Not Complete", new { @class = "alert alert-danger" }))
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ShippingId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ShippingId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TruckDriverId)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TruckDriverId)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.JobAssignmentDateTime)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.JobAssignmentDateTime)
+                        </dd>
+
+                        <hr/>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.StartingPointJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.StartingPointJob)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LatitudeStartJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LatitudeStartJob)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LongitudeStartJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LongitudeStartJob)
+                        </dd>
+
+                        <hr/>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.DestinationJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.DestinationJob)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LatitudeDesJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LatitudeDesJob)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.LongitudeDesJob)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.LongitudeDesJob)
+                        </dd>
+
+                    </dl>
+                    <hr/>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-8">
+                                <input type="submit" value="Delete" class="btn btn-danger " onclick="return confirm('Do you want to delete ? ');" />
+                                @Html.ActionLink("Cancel", "ListAllJobAssignments", "JobAssignment", new { @class = "btn btn-default" })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Search Map
+                </div>
+                <iframe
+                    width=100%
+                    height="500px"
+                    frameborder="0" style="border:0"
+                    src="//www.google.com/maps/embed/v1/directions?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4
+                        &origin=@Model.StartingPointJob
+                        &destination=@Model.DestinationJob"
+   
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+</div>

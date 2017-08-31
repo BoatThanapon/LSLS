@@ -4,72 +4,72 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <section id="loginForm">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <h3 class="text-capitalize">
+                        <strong>Login</strong>
+                    </h3>
+                    <hr/>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @Html.ValidationSummary(true, "Login failed. EmployeeID or Username or Password is incorrect.", new {@class = "alert alert-danger alert-dismissable"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-8">
+                            @Html.LabelFor(model => model.StaffEmployeeId, new {htmlAttributes = new {@class = "label-control"}})
+                            @Html.EditorFor(model => model.StaffEmployeeId, new {htmlAttributes = new {@class = "form-control", placeholder = "EmployeeID"}})
+                            @Html.ValidationMessageFor(model => model.StaffEmployeeId, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
 
-<div class="row">
-    <div class="col-md-6">
-        <section id="loginForm">
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                <h1>Login</h1>
-                <hr />
-                <div class="form-group">
-                    <div class="col-md-12">
-                        @Html.ValidationSummary(true, "Login failed. EmployeeID or Username or Password is incorrect.", htmlAttributes: new { @class = "alert alert-danger alert-dismissable" })
+                        <div class="col-md-offset-2 col-md-10">
+                            @Html.LabelFor(model => model.StaffUsername, new {htmlAttributes = new {@class = "label-control"}})
+                            @Html.EditorFor(model => model.StaffUsername, new {htmlAttributes = new {@class = "form-control", placeholder = "Username"}})
+                            @Html.ValidationMessageFor(model => model.StaffUsername, "", new {@class = "text-danger"})
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-8">
-                        @Html.LabelFor(model => model.StaffEmployeeId, new { htmlAttributes = new { @class = "label-control" } })
-                        @Html.EditorFor(model => model.StaffEmployeeId, new { htmlAttributes = new { @class = "form-control", @placeholder = "EmployeeID" } })
-                        @Html.ValidationMessageFor(model => model.StaffEmployeeId, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @Html.LabelFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "label-control" } })
+                            @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                            @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })<br />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.StaffUsername, new { htmlAttributes = new { @class = "label-control" } })
-                        @Html.EditorFor(model => model.StaffUsername, new { htmlAttributes = new { @class = "form-control", @placeholder = "Username" } })
-                        @Html.ValidationMessageFor(model => model.StaffUsername, "", new { @class = "text-danger" })
+                    <div class="form-group">                       
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="LOGIN" class="btn btn-block btn-primary btn-lg"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.LabelFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "label-control" } })
-                        @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = "Password" } })
-                        @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <br />
-                        <input type="submit" value="Login" class="btn btn-info btn-block btn-lg" />
-                        <br />
-                    </div>
-                </div>
-            }
-        </section>
-
-    </div>
-    <div class="col-md-6">
-        <div class="jumbotron">
-            <h1 class="text-center">
-                <strong>LSLS</strong>
-            </h1>
-            <hr />
-            <h4>
-                <strong>Logical Supporting Logistic System</strong>
-                <br />
-            </h4>
-            <h5>
-                is the application for support the logistic company.
-                The user can use two platforms together.
-                Logical Supporting Logistic System provides on this web application and Android mobile application for used to help each other.
-                In the side of company staff and truck's driver for getting more efficient.
-                <br /><br /><br /><br />
-                Let's Strat! Please Login first
-            </h5>
+                }
+            </section>
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <h1 class="text-center">
+                    <strong>LSLS</strong>
+                </h1>
+                <hr/>
+                <h4>
+                    <strong>Logical Supporting Logistic System</strong>
+                    <br/>
+                </h4>
+                <h5>
+                    is the application for support the logistic company.
+                    The user can use two platforms together.
+                    Logical Supporting Logistic System provides on this web application and Android mobile application for used to help each other.
+                    In the side of company staff and truck's driver for getting more efficient.
+                    <br/><br/><br/><br/>
+                    Let's Strat! Please Login first
+                </h5>
+            </div>
         </div>
     </div>
 </div>
-
-

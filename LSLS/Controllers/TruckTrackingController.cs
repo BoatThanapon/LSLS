@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using LSLS.Repository;
-using LSLS.ViewModels;
+﻿using System.Web.Mvc;
+using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers
 {
@@ -19,7 +14,7 @@ namespace LSLS.Controllers
 
         // GET: TruckTracking       
         public ActionResult TruckTracking()
-        {               
+        {
             return View("TruckTracking", _truckLocationRepository.GetAllTruckLocations());
         }
 
@@ -27,8 +22,8 @@ namespace LSLS.Controllers
         [HttpGet]
         public JsonResult GetAllTruckLocations()
         {
-            IEnumerable<TruckLocationViewModel> allTruckLocation = _truckLocationRepository.GetAllTruckLocations();
-            return Json(allTruckLocation , JsonRequestBehavior.AllowGet);
+            var allTruckLocation = _truckLocationRepository.GetAllTruckLocations();
+            return Json(allTruckLocation, JsonRequestBehavior.AllowGet);
         }
 
         // Get: TruckTracking/SearchTruckId
@@ -38,10 +33,7 @@ namespace LSLS.Controllers
             var resultSearchTruckId = _truckLocationRepository.GetTruckLocationByTruckId(truckId);
 
             if (resultSearchTruckId != null)
-            {
                 return View("SearchTruckId", resultSearchTruckId);
-
-            }
 
             ModelState.AddModelError("", "");
 

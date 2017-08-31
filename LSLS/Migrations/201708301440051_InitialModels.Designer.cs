@@ -7,13 +7,13 @@ namespace LSLS.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class InitailModels : IMigrationMetadata
+    public sealed partial class InitialModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitailModels));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201708241607079_InitailModels"; }
+            get { return "201708301440051_InitialModels"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Security;
 using LSLS.Models;
+using LSLS.Repository.Abstract;
 using LSLS.ViewModels;
 
 namespace LSLS.Repository
@@ -28,10 +29,6 @@ namespace LSLS.Repository
 
             FormsAuthentication.SetAuthCookie(staffInDb.StaffUsername, false);
             return staffInDb;
-
         }
-
-
-
     }
 }

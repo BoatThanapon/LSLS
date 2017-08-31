@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Truck Tracking";
-    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
     #map {
@@ -10,13 +10,12 @@
         width: 100%;
     }
 </style>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li class="active">Truck Tracking</li>
+</ul>
 
 <div class="container-fluid body-content">
-    <ul class="breadcrumb">
-        <li>@Html.ActionLink("Home", "Main", "Account")</li>
-        <li class="active">Truck Tracking</li>
-    </ul>
-
     <div class="row">
         <div class="col-md-5">
             <div class="col-md-12">
@@ -25,17 +24,17 @@
                     <div class="panel-body">
                         @using (Html.BeginForm("SearchTruckId", "TruckTracking"))
                         {
-                            @Html.ValidationSummary(true, "TruckId Not Found", htmlAttributes: new { @class = "alert alert-danger alert-dismissable" })
+                            @Html.ValidationSummary(true, "TruckId Not Found", new {@class = "alert alert-danger alert-dismissable"})
                             <div class="form-group">
                                 <div class="col-md-2">
                                     <label class="control-label">Search:</label>
                                 </div>
                                 <div class="col-md-9">
-                                    @Html.Editor("truckId", new { htmlAttributes = new { @class = "form-control", @placeholder = "TruckID" } })
+                                    @Html.Editor("truckId", new {htmlAttributes = new {@class = "form-control", placeholder = "TruckID"}})
                                 </div>
                                 <div class="col-md-offset-2  col-md-9">
-                                    <br />
-                                    <input type="submit" value="Search" class="btn btn-primary btn-block" />
+                                    <br/>
+                                    <input type="submit" value="Search" class="btn btn-primary btn-block"/>
                                     <input type="reset" value="Reset" class="btn btn-block">
                                 </div>
                             </div>
@@ -79,7 +78,7 @@
         </div>
 
     </div>
-    
+
 </div>
 
 @section scripts
@@ -98,8 +97,8 @@
 
             var map = new google.maps.Map(document.getElementById('map'),
                 {
-                    center: { lat: 17.267156, lng: 100.1128905 },
-                    zoom: 7
+                    center: { lat: 15.767156, lng: 101.1128905 },
+                    zoom: 6
                 });
 
             var infowindow;
@@ -119,7 +118,7 @@
                             });
 
                             // Make the marker-pin blue!
-                            marker.setIcon('http://maps.google.com/mapfiles/ms/micons/green-dot.png')
+                            marker.setIcon('http://maps.google.com/mapfiles/ms/micons/green-dot.png');
 
                             google.maps.event.addListener(marker,
                                 'click',

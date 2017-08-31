@@ -1,0 +1,203 @@
+﻿@model LSLS.ViewModels.FormJobAssignmentViewModel
+
+
+@{
+    ViewBag.Title = "FromEditJobAssignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li>@Html.ActionLink("Job Assignments", "ListAllJobAssignments", "JobAssignment")</li>
+    <li class="active">Edit Job Assignment</li>
+</ul>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Edit Job Assignment
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SaveJobAssignment", "JobAssignment"))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-horizontal">
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.JobAssignmentDateTime, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.JobAssignmentDateTime, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.JobAssignmentDateTime)
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.TruckDriverId, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.JobAssingment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.TruckDriverId)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.ShippingId, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.ShippingId, new { htmlAttributes = new { @class = "form-control", placeholder = "Shipping No." } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.StartingPointJob, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.StartingPointJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Latitude", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeStartJob)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Longitude", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LongitudeStartJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.LongitudeStartJob)
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.DestinationJob, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.DestinationJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Destination" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.DestinationJob)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Latitude", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LatitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeDesJob)
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-offset-2">
+                                @Html.Label("Longitude", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LongitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.LongitudeDesJob)
+                                </div>
+                            </div>
+
+
+                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentId)
+                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentStatus)
+                            <hr />
+                            <div class="form-group">
+                                <div class="col-md-10 col-lg-offset-2">
+                                    <input type="submit" class="btn btn-primary" value="Assign Jop" onclick="return confirm('Make sure that it proud in correct TruckId!');" />
+                                    @Html.ActionLink("Cancel", "ListAllJobAssignments", "JobAssignment", new { @class = "btn btn-default" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Search Map
+                </div>
+                <div id="myMap"></div>
+                <div class="panel-body">
+                    Address : <input id="address" type="text" class="input-sm" style="width: 5000px" /><br />
+                    Latitude : <input type="text" id="latitude" placeholder="Latitude" class="input-sm" />
+                    Longitude : <input type="text" id="longitude" placeholder="Longitude" class="input-sm" />
+                </div>
+
+            </div>
+            <p><a href="https://www.google.co.th/maps/" class="btn btn-primary btn-lg" target="_blank">More Search By Google Map</a></p>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&sensor=false">
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
+</script>
+<script type="text/javascript">
+
+    var map;
+    var marker;
+    var myLatlng = new google.maps.LatLng(15.767156, 101.1128905);
+    var geocoder = new google.maps.Geocoder();
+    var infowindow = new google.maps.InfoWindow();
+    function initialize(){
+        var mapOptions = {
+            zoom: 6,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
+
+        marker = new google.maps.Marker({
+            map: map,
+            position: myLatlng,
+            draggable: true
+        });
+
+
+
+        geocoder.geocode({'latLng': myLatlng }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    $('#latitude,#longitude').show();
+                    $('#address').val(results[0].formatted_address);
+                    $('#latitude').val(marker.getPosition().lat());
+                    $('#longitude').val(marker.getPosition().lng());
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+                }
+            }
+        });
+
+        google.maps.event.addListener(marker, 'dragend', function() {
+
+            geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $('#address').val(results[0].formatted_address);
+                        $('#latitude').val(marker.getPosition().lat());
+                        $('#longitude').val(marker.getPosition().lng());
+                        infowindow.setContent(results[0].formatted_address);
+                        infowindow.open(map, marker);
+                    }
+                }
+            });
+        });
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using LSLS.Models;
+using LSLS.Repository.Abstract;
 using LSLS.ViewModels;
 
 namespace LSLS.Repository
@@ -16,24 +17,25 @@ namespace LSLS.Repository
 
         public IEnumerable<TruckLocationViewModel> GetAllTruckLocations()
         {
-            List<TruckLocationViewModel> truckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
+            var truckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
             var truckLocationlist = (
                 from truckLocation in _context.TruckLocations
-                join truckDriver in _context.TruckDrivers on 
-                truckLocation.TruckDriverId equals truckDriver.TruckDriverId
-            select new {
-                truckDriver.TruckId,
-                truckDriver.TruckDriverFullname,
-                truckLocation.Latitude,
-                truckLocation.Longitude,
-                truckLocation.TruckCurrentTime,
-                truckLocation.TruckCurrentAddress
-            }).ToList();
+                join truckDriver in _context.TruckDrivers on
+                    truckLocation.TruckDriverId equals truckDriver.TruckDriverId
+                select new
+                {
+                    truckDriver.TruckId,
+                    truckDriver.TruckDriverFullname,
+                    truckLocation.Latitude,
+                    truckLocation.Longitude,
+                    truckLocation.TruckCurrentTime,
+                    truckLocation.TruckCurrentAddress
+                }).ToList();
 
             //query getting data from database from joining two tables and storing data in customerlist
             foreach (var item in truckLocationlist)
             {
-                TruckLocationViewModel truckLocationViewModel = new TruckLocationViewModel(); // ViewModel
+                var truckLocationViewModel = new TruckLocationViewModel(); // ViewModel
                 truckLocationViewModel.TruckId = item.TruckId;
                 truckLocationViewModel.TruckDriverFullname = item.TruckDriverFullname;
                 truckLocationViewModel.Latitude = item.Latitude;
@@ -49,7 +51,7 @@ namespace LSLS.Repository
 
         public TruckLocationViewModel GetTruckLocationByTruckId(string truckId)
         {
-            IEnumerable<TruckLocationViewModel> truckLocation = GetAllTruckLocations();
+            var truckLocation = GetAllTruckLocations();
 
             if (truckId != null)
             {
@@ -60,6 +62,5 @@ namespace LSLS.Repository
 
             return null;
         }
-
     }
 }

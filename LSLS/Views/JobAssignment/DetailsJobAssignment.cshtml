@@ -1,0 +1,146 @@
+﻿@model LSLS.ViewModels.FormJobAssignmentViewModel
+
+@{
+    ViewBag.Title = "DetailsJobAssignment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #myMap {
+        height: 450px;
+        width: 100%;
+    }
+</style>
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li>@Html.ActionLink("Job Assignments", "ListAllJobAssignments", "JobAssignment")</li>
+    <li class="active">Details Job Assignment</li>
+</ul>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Details Job Assignment
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("SaveJobAssignment", "JobAssignment"))
+                    {
+
+                        <div class="form-horizontal">
+                            
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-md-12">
+                                    @(Model.JobAssingment.JobAssignmentStatus.Equals(true) ?
+                                          Html.Label("Complete", new { @class = "alert alert-success"}) :
+                                          Html.Label("Not Complete", new { @class = "alert alert-danger" }))  
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.JobAssignmentDateTime, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.JobAssignmentDateTime, new {htmlAttributes = new {@class = "form-control", type = "date", disabled = "disabled" } })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.TruckDriverId, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.JobAssingment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new {@class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.ShippingId, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.ShippingId, new {htmlAttributes = new {@class = "form-control", placeholder = "Shipping No.", disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                            <hr/>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.StartingPointJob, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.StartingPointJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Starting Point", disabled = "disabled" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Latitude", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LatitudeStartJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Starting Point", disabled = "disabled" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Longitude", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LongitudeStartJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Starting Point", disabled = "disabled" } })
+                                </div>
+                            </div>
+
+                            <hr/>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssingment.DestinationJob, new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.DestinationJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Destination", disabled = "disabled" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Latitude", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LatitudeDesJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Starting Point", disabled = "disabled" } })
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-offset-2">
+                                @Html.Label("Longitude", new {@class = "control-label col-md-2"})
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.JobAssingment.LongitudeDesJob, new {htmlAttributes = new {@class = "form-control", placeholder = "Starting Point", disabled = "disabled" } })
+                                </div>
+                            </div>
+
+
+                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentId)
+                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentStatus)
+                            <hr/>
+                            <div class="form-group">
+                                <div class="col-md-10 col-lg-offset-2">
+                                    @Html.ActionLink("Edit", "FromEditJobAssignment", new { jobAssignmentId = Model.JobAssingment.JobAssignmentId}, new {@class = "btn btn-primary"})
+                                    @Html.ActionLink("Cancel", "ListAllJobAssignments", "JobAssignment", new {@class = "btn btn-default"})
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-th"></span> Search Map
+                </div>
+                <iframe
+                    width=100%
+                    height="500px"
+                    frameborder="0" style="border:0"
+                    src="//www.google.com/maps/embed/v1/directions?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4
+                        &origin=@Model.JobAssingment.StartingPointJob
+                        &destination=@Model.JobAssingment.DestinationJob"
+   
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

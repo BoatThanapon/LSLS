@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,7 +11,7 @@
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&sensor=false"></script>
 
 <script type="text/javascript">
-    $(document).ready(function () {
+    $(document).ready(function() {
         var gmarkers = [];
         var map;
 
@@ -34,42 +33,52 @@
             url: '@Url.Action("GetAllTruckLocations", "TruckTracking")',
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            success: function (data) {
-                $.each(data, function (i, item) {
-                    // alert(item.Longitude);
-                    var marker = new google.maps.Marker({
-                        'position': new google.maps.LatLng(item.Latitude, item.Longitude),
-                        'map': map,
-                        'title': item.TruckDriverFullname
-                    });
+            success: function(data) {
+                $.each(data,
+                    function(i, item) {
+                        // alert(item.Longitude);
+                        var marker = new google.maps.Marker({
+                            'position': new google.maps.LatLng(item.Latitude, item.Longitude),
+                            'map': map,
+                            'title': item.TruckDriverFullname
+                        });
 
-                    // Make the marker-pin blue!
-                    marker.setIcon('http://maps.google.com/mapfiles/ms/micons/green-dot.png')
+                        // Make the marker-pin blue!
+                        marker.setIcon('http://maps.google.com/mapfiles/ms/micons/green-dot.png');
 
-                    google.maps.event.addListener(marker, 'click', function () {
-                        if (infowindow) infowindow.close();
-                        infowindow = new google.maps.InfoWindow({ content: "<div class='infoDiv'><h3>" + item.TruckId + "</h3>" + item.TruckDriverFullname + "</div>" });
-                        infowindow.open(map, marker);
+                        google.maps.event.addListener(marker,
+                            'click',
+                            function() {
+                                if (infowindow) infowindow.close();
+                                infowindow = new google.maps.InfoWindow({
+                                    content: "<div class='infoDiv'><h3>" +
+                                        item.TruckId +
+                                        "</h3>" +
+                                        item.TruckDriverFullname +
+                                        "</div>"
+                                });
+                                infowindow.open(map, marker);
+                            });
                     });
-                });
             }
-        }).done(function () {
+        }).done(function() {
             $(".loadingOverlay").hide();
-            });
+        });
 
 
-        $("#txtSearch").keyup(function () {
+        $("#txtSearch").keyup(function() {
             var x = $("#txtSearch").val();
 
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("SearchTruckId", "TruckTracking")', //"../Map/Search"
-                    contentType: "application/json; charset=utf-8",
-                    data: JSON.stringify({ "truckId": x }),
-                    dataType: "json",
-                    success: function (data) {
-                        var table = "";
-                        $.each(data, function (index, value) {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SearchTruckId", "TruckTracking")', //"../Map/Search"
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ "truckId": x }),
+                dataType: "json",
+                success: function(data) {
+                    var table = "";
+                    $.each(data,
+                        function(index, value) {
                             table += "";
                             var latlng = new google.maps.LatLng(value.Latitude, value.Longitude);
                             var marker = new google.maps.Marker({
@@ -81,16 +90,18 @@
                             gmarkers.push(marker);
 
                         });
-                        table += "<table class="table"> <tbody><tr>" + value.TruckId + "";
-                        $("#myData").html(table);
+                    table += "<table class=";
+                    table;
+                    "> <tbody><tr>" + value.TruckId + "";
+                    $("#myData").html(table);
 
-                        if (x == "") {
-                            for (j = 0; j < gmarkers.length; j++) {
-                                gmarkers[j].setMap(null);
-                            }
+                    if (x == "") {
+                        for (j = 0; j < gmarkers.length; j++) {
+                            gmarkers[j].setMap(null);
                         }
                     }
-                });
+                }
+            });
         });
     });
 </script>
@@ -115,20 +126,20 @@
             <div class="panel-heading">Truck Tracking</div>
             <div class="panel-body">
                 <div class="form-group">
-                    @Html.TextBox("txtSearch", null, new { @placeholder = "Search TruckId" })
+                    @Html.TextBox("txtSearch", null, new {placeholder = "Search TruckId"})
                 </div>
 
                 <div id="myData">
                     @foreach (var item in Model)
-                         {
-                             <table class="table">
-                                 <tbody>
-                                 <tr>
-                                     <td>@item.TruckId</td>
-                                 </tr>
-                                 </tbody>
-                             </table>
-                         }
+                    {
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>@item.TruckId</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    }
                 </div>
 
             </div>

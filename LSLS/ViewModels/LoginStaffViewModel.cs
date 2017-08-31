@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LSLS.ViewModels
 {
@@ -20,6 +16,5 @@ namespace LSLS.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string StaffPassword { get; set; }
-
     }
 }

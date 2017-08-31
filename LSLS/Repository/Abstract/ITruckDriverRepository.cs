@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LSLS.Models;
 
-namespace LSLS.Repository
+namespace LSLS.Repository.Abstract
 {
     public interface ITruckDriverRepository
     {
@@ -14,6 +10,5 @@ namespace LSLS.Repository
         bool AddTruckDriver(TruckDriver truckDriver);
         bool UpdateTruckDriver(TruckDriver truckDriver);
         bool DeleteTruckDriver(int? truckdriverId);
-
     }
 }

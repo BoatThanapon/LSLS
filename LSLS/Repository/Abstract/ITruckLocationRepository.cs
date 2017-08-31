@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LSLS.ViewModels;
 
-namespace LSLS.Repository
+namespace LSLS.Repository.Abstract
 {
     public interface ITruckLocationRepository
     {

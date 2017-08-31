@@ -1,5 +1,4 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace LSLS
 {
@@ -29,12 +28,12 @@ namespace LSLS
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
-                //"~/Content/bootstrap-theme.css",
+                "~/Content/bootstrap-theme.css",
                 "~/content/datatables/css/datatables.bootstrap.css",
                 "~/content/typeahead.css",
                 "~/content/toastr.css",
-                "~/Content/site.css"));
+                "~/Content/Site.css"));
         }
-
+    
     }
 }

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using LSLS.Repository;
+using LSLS.Repository.Abstract;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Mvc;
 
@@ -17,6 +14,7 @@ namespace LSLS.Infrastructure
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             return container;
         }
+
         private static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
@@ -27,14 +25,16 @@ namespace LSLS.Infrastructure
             container.RegisterType<ITruckDriverRepository, TruckDriverRepository>();
             container.RegisterType<ITruckLocationRepository, TruckLocationRepository>();
             container.RegisterType<IAuthProvider, FormsAuthProvider>();
+            container.RegisterType<IJobAssignmentRepository, JobAssignmentRepository>();
+            container.RegisterType<ITransportationInfRepository, TransportationInfRepository>();
 
 
             RegisterTypes(container);
             return container;
         }
+
         public static void RegisterTypes(IUnityContainer container)
         {
-
         }
     }
 }

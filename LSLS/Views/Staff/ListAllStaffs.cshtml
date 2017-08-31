@@ -10,14 +10,16 @@
 </ul>
 
 <div class="container body-content">
-    
+
     <p>
-        @Html.ActionLink("Add Staff", "FormCreateStaff", null, new { @class = "btn btn-success" })
+        @Html.ActionLink("Add Staff", "FormCreateStaff", null, new {@class = "btn btn-success"})
     </p>
 
     <div class="panel panel-default">
-        <div class="panel-heading">        
-            <h2 class="panel-title"><span class="glyphicon glyphicon-th-list"></span> Company Staff</h2>
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                <span class="glyphicon glyphicon-th-list"></span> Company Staff
+            </h2>
         </div>
         <div class="panel-body">
 
@@ -57,11 +59,10 @@
 </div>
 
 
-
 @section scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#staffs").DataTable();
         });
     </script>

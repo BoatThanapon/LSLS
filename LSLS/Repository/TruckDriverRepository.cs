@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using LSLS.Models;
+using LSLS.Repository.Abstract;
 
 namespace LSLS.Repository
 {
@@ -23,9 +23,7 @@ namespace LSLS.Repository
         {
             // ReSharper disable once ConvertIfStatementToReturnStatement
             if (truckdriverId == null)
-            {
                 return null;
-            }
 
             return _context.TruckDrivers.Find(truckdriverId);
         }
@@ -33,9 +31,7 @@ namespace LSLS.Repository
         public bool AddTruckDriver(TruckDriver truckDriver)
         {
             if (truckDriver == null)
-            {
                 return false;
-            }           
             _context.TruckDrivers.Add(truckDriver);
             _context.SaveChanges();
 
@@ -45,12 +41,11 @@ namespace LSLS.Repository
         public bool UpdateTruckDriver(TruckDriver truckDriver)
         {
             if (truckDriver == null)
-            {
                 return false;
-            }
-            
+
             // ReSharper disable once SuggestVarOrType_SimpleTypes
-            TruckDriver truckDriverInDb = _context.TruckDrivers.SingleOrDefault(s => s.TruckDriverId == truckDriver.TruckDriverId);
+            var truckDriverInDb =
+                _context.TruckDrivers.SingleOrDefault(s => s.TruckDriverId == truckDriver.TruckDriverId);
             if (truckDriverInDb != null)
             {
                 truckDriverInDb.TruckDriverUsername = truckDriver.TruckDriverUsername;
@@ -64,7 +59,7 @@ namespace LSLS.Repository
                 truckDriverInDb.TruckDriverAddress = truckDriver.TruckDriverAddress;
                 truckDriverInDb.TruckDriverEmail = truckDriver.TruckDriverEmail;
                 truckDriverInDb.TruckDriverTelephoneNo = truckDriver.TruckDriverTelephoneNo;
-                truckDriverInDb.TruckId = truckDriver.TruckId;                
+                truckDriverInDb.TruckId = truckDriver.TruckId;
             }
             _context.SaveChanges();
 
@@ -74,22 +69,17 @@ namespace LSLS.Repository
         public bool DeleteTruckDriver(int? truckdriverId)
         {
             if (truckdriverId == null)
-            {
                 return false;
-            }
 
             // ReSharper disable once SuggestVarOrType_SimpleTypes
-            TruckDriver truckDriver = _context.TruckDrivers.Find(truckdriverId);
+            var truckDriver = _context.TruckDrivers.Find(truckdriverId);
             if (truckDriver == null)
-            {
                 return false;
-            }
 
             _context.TruckDrivers.Remove(truckDriver);
             _context.SaveChanges();
 
             return true;
         }
-        
     }
 }

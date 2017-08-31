@@ -1,7 +1,7 @@
 ﻿using LSLS.Models;
 using LSLS.ViewModels;
 
-namespace LSLS.Repository
+namespace LSLS.Repository.Abstract
 {
     public interface IAuthProvider
     {

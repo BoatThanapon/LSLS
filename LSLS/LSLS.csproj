@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.3.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -204,40 +206,50 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\StaffApiController.cs" />
-    <Compile Include="Controllers\Api\TruckDriversController.cs" />
+    <Compile Include="Controllers\Api\TruckDriverApiController.cs" />
+    <Compile Include="Controllers\JobAssignmentController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\TransportationInfController.cs" />
     <Compile Include="Controllers\TruckDriverController.cs" />
     <Compile Include="Controllers\TruckTrackingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Bootstrapper.cs" />
-    <Compile Include="Migrations\201708241607079_InitailModels.cs" />
-    <Compile Include="Migrations\201708241607079_InitailModels.Designer.cs">
-      <DependentUpon>201708241607079_InitailModels.cs</DependentUpon>
+    <Compile Include="Migrations\201708301440051_InitialModels.cs" />
+    <Compile Include="Migrations\201708301440051_InitialModels.Designer.cs">
+      <DependentUpon>201708301440051_InitialModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\JobAssingment.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\TransportationInf.cs" />
     <Compile Include="Models\TruckDriver.cs" />
     <Compile Include="Models\TruckLocation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Abstract\IJobAssignmentRepository.cs" />
+    <Compile Include="Repository\Abstract\ITransportationInfRepository.cs" />
     <Compile Include="Repository\FormsAuthProvider.cs" />
-    <Compile Include="Repository\IAuthProvider.cs" />
-    <Compile Include="Repository\IStaffRepository.cs" />
-    <Compile Include="Repository\ITruckDriverRepository.cs" />
-    <Compile Include="Repository\ITruckLocationRepository.cs" />
+    <Compile Include="Repository\Abstract\IAuthProvider.cs" />
+    <Compile Include="Repository\Abstract\IStaffRepository.cs" />
+    <Compile Include="Repository\Abstract\ITruckDriverRepository.cs" />
+    <Compile Include="Repository\Abstract\ITruckLocationRepository.cs" />
+    <Compile Include="Repository\JobAssignmentRepository.cs" />
     <Compile Include="Repository\StaffRepository.cs" />
+    <Compile Include="Repository\TransportationInfRepository.cs" />
     <Compile Include="Repository\TruckDriverRepository.cs" />
     <Compile Include="Repository\TruckLocationRepository.cs" />
+    <Compile Include="Service\ITruckDriverService.cs" />
+    <Compile Include="Service\TruckDriverService.cs" />
+    <Compile Include="ViewModels\FormJobAssignmentViewModel.cs" />
     <Compile Include="ViewModels\LoginStaffViewModel.cs" />
     <Compile Include="ViewModels\TruckLocationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\LSLSDatabase.mdf" />
-    <Content Include="App_Data\LSLSDatabase_log.ldf">
-      <DependentUpon>LSLSDatabase.mdf</DependentUpon>
+    <Content Include="App_Data\LSLS_Project.mdf" />
+    <Content Include="App_Data\LSLS_Project_log.ldf">
+      <DependentUpon>LSLS_Project.mdf</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -400,9 +412,6 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\toastr.css" />
-    <Content Include="Content\toastr.min.css" />
-    <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -410,24 +419,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\bloodhound.js" />
-    <Content Include="Scripts\bloodhound.min.js" />
-    <Content Include="Scripts\bootbox.js" />
-    <Content Include="Scripts\bootbox.min.js" />
-    <Content Include="Content\DataTables\css\semanticui.scss" />
-    <Content Include="Content\DataTables\css\mixins.scss" />
-    <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Content\toastr.scss" />
-    <Content Include="Content\toastr.less" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -506,6 +497,18 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -522,12 +525,6 @@
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\toastr.js" />
-    <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Scripts\typeahead.bundle.js" />
-    <Content Include="Scripts\typeahead.bundle.min.js" />
-    <Content Include="Scripts\typeahead.jquery.js" />
-    <Content Include="Scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -555,24 +552,37 @@
     <Content Include="Views\Account\Main.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Shared\_layoutMap.cshtml" />
+    <Content Include="Views\JobAssignment\ListAllJobAssignments.cshtml" />
+    <Content Include="Views\JobAssignment\FromCreateJobAssignment.cshtml" />
+    <Content Include="Views\JobAssignment\FromEditJobAssignment.cshtml" />
+    <Content Include="Views\TransportationInf\ListAllTransportationInfs.cshtml" />
+    <Content Include="Views\TransportationInf\FormCreateTransportationInf.cshtml" />
+    <Content Include="Views\TransportationInf\FormEditTransportationInf.cshtml" />
+    <Content Include="Views\TransportationInf\DetailsTransportationInf.cshtml" />
+    <Content Include="Views\TransportationInf\DeleteTransportationInf.cshtml" />
+    <Content Include="Views\JobAssignment\DetailsJobAssignment.cshtml" />
+    <Content Include="Views\JobAssignment\DeleteJobAssignment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708241607079_InitailModels.resx">
-      <DependentUpon>201708241607079_InitailModels.cs</DependentUpon>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708301440051_InitialModels.resx">
+      <DependentUpon>201708301440051_InitialModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
