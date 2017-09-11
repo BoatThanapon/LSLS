@@ -3,7 +3,7 @@ namespace LSLS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialModels : DbMigration
+    public partial class InitailModels : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,7 @@ namespace LSLS.Migrations
                         JobAssignmentId = c.Int(nullable: false, identity: true),
                         ShippingId = c.Int(nullable: false),
                         TruckDriverId = c.Int(nullable: false),
-                        JobAssignmentDateTime = c.DateTime(nullable: false),
+                        JobAssignmentDate = c.String(nullable: false),
                         StartingPointJob = c.String(),
                         LatitudeStartJob = c.Single(nullable: false),
                         LongitudeStartJob = c.Single(nullable: false),
@@ -34,12 +34,12 @@ namespace LSLS.Migrations
                 c => new
                     {
                         ShippingId = c.Int(nullable: false, identity: true),
-                        Employer = c.String(nullable: false, maxLength: 30),
-                        OrderDate = c.DateTime(nullable: false),
-                        DateOfTransportation = c.DateTime(nullable: false),
+                        OrderDate = c.String(nullable: false),
+                        DateOfTransportation = c.String(nullable: false),
                         ProductName = c.String(nullable: false, maxLength: 30),
                         StartingPoint = c.String(nullable: false),
                         Destination = c.String(nullable: false),
+                        Employer = c.String(nullable: false, maxLength: 30),
                         RecieverName = c.String(nullable: false),
                         StatusOfTransportation = c.Boolean(nullable: false),
                         ShipingDocImageUrl = c.String(),

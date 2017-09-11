@@ -17,7 +17,7 @@ namespace LSLS.Repository
 
         public IEnumerable<TruckLocationViewModel> GetAllTruckLocations()
         {
-            var truckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
+            List<TruckLocationViewModel> truckLocationVMlist = new List<TruckLocationViewModel>(); // to hold list of Customer and order details
             var truckLocationlist = (
                 from truckLocation in _context.TruckLocations
                 join truckDriver in _context.TruckDrivers on

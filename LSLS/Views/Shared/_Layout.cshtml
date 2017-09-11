@@ -11,7 +11,7 @@
 
 <body>
 
-<div class="navbar navbar-default navbar-fixed-top">
+<div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -36,18 +36,17 @@
                             <li>@Html.ActionLink("Truck's Driver", "ListAllTruckDrivers", "TruckDriver")</li>
                         </ul>
                     </li>
-
                     <li>
                         @Html.ActionLink("Truck Tracking", "TruckTracking", "TruckTracking")
                     </li>
                     <li>
-                        @Html.ActionLink("Job Assignment", "ListAllJobAssignments", "JobAssignment")
+                        @Html.ActionLink("Job Assign", "ListAllJobAssignments", "JobAssignment")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Transportation Information", "ListAllTransportationInfs", "TransportationInf")
                     </li>
                     <li>
                         @Html.ActionLink("Documentation", "", "Documents")
-                    </li>
-                    <li>
-                        @Html.ActionLink("Transportation Informations", "ListAllTransportationInfs", "TransportationInf")
                     </li>
                     <li>
                         @Html.ActionLink("Report", "", "Shipping")

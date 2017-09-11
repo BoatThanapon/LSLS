@@ -14,14 +14,14 @@ namespace LSLS.Models
         public virtual int ShippingId { get; set; }
 
 
-        //TruckDriver
         public TruckDriver TruckDriver { get; set; }
+        [Display(Name = "TruckID")]
         public virtual int TruckDriverId { get; set; }
 
         [Required]
-        [Display(Name = "Date")]
+        [Display(Name = "Date of Transportation")]
         [DataType(DataType.Date)]
-        public DateTime JobAssignmentDateTime { get; set; }
+        public string JobAssignmentDate { get; set; }
 
         [Display(Name = "From")]
         public string StartingPointJob { get; set; }
@@ -34,7 +34,6 @@ namespace LSLS.Models
 
         public float LatitudeDesJob { get; set; }
         public float LongitudeDesJob { get; set; }
-
 
         [Display(Name = "Status")]
         public bool JobAssignmentStatus { get; set; }

@@ -48,6 +48,7 @@ namespace LSLS.Models
         [Required]
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
+
         public string StaffBirthdate { get; set; }
 
         [Required]
@@ -65,5 +66,6 @@ namespace LSLS.Models
         [Display(Name = "Telephone Number")]
         [RegularExpression(@"^(\d{10})$", ErrorMessage = "Telephone Number must be number of 0-9 in 10 digits")]
         public string StaffTelephoneNo { get; set; }
+
     }
 }

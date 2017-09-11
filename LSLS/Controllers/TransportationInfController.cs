@@ -6,27 +6,30 @@ using System.Web;
 using System.Web.Mvc;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
+using LSLS.ViewModels;
 
 namespace LSLS.Controllers
 {
     public class TransportationInfController : Controller
     {
         private readonly ITransportationInfRepository _transportationInfRepository;
+        private readonly IJobAssignmentRepository _jobAssignmentRepository;
 
-        public TransportationInfController(ITransportationInfRepository transportationInfRepository)
+
+        public TransportationInfController(ITransportationInfRepository transportationInfRepository, IJobAssignmentRepository jobAssignmentRepository)
         {
             _transportationInfRepository = transportationInfRepository;
+            _jobAssignmentRepository = jobAssignmentRepository;
         }
 
-        // GET: TransportationInf
-        [HttpGet]
+        // GET: TransportationInfs/ListAllTransportationInfs
         public ActionResult ListAllTransportationInfs()
         {
-            
-            return View("ListAllTransportationInfs", _transportationInfRepository.GetAllTransportationInfs());
+            var listTranInf = _transportationInfRepository.GetAllTransportationInfs();
+            return View("ListAllTransportationInfs", listTranInf);
         }
 
-        //GET: TransportationInf/DetailsTransportationInf/shippingId
+        //GET: TransportationInfs/DetailsTransportationInf/shippingId
         [HttpGet]
         public ActionResult DetailsTransportationInf(int? shippingId)
         {
@@ -40,14 +43,30 @@ namespace LSLS.Controllers
             return View("DetailsTransportationInf", detailsTrans);
         }
 
-        //GET TransportationInf/FormCreateTransportationInf
+        //GET: TransportationInfs/FormCreateTransportationInf
         [HttpGet]
         public ActionResult FormCreateTransportationInf()
         {
             return View("FormCreateTransportationInf");
         }
 
-        //GET TransportationInf/FormEditTransportationInf/shippingId
+        //POST: TransportationInfs/FormCreateTransportationInf
+        [HttpPost]
+        [ActionName("FormCreateTransportationInf")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateTransportationInf(TransportationInf transportationInf)
+        {
+            if (!ModelState.IsValid)
+                return View(transportationInf);
+
+            bool transportationInfAdd = _transportationInfRepository.AddTransportationInf(transportationInf);
+            if (transportationInfAdd.Equals(true))
+                return RedirectToAction("ListAllTransportationInfs");
+
+            return View(transportationInf);
+        }
+
+        //GET TransportationInfs/FormEditTransportationInf/shippingId
         [HttpGet]
         public ActionResult FormEditTransportationInf(int? shippingId)
         {
@@ -61,31 +80,23 @@ namespace LSLS.Controllers
             return View("FormEditTransportationInf", transportationInfInDb);
         }
 
-        // POST: TransportationInf/SaveTransportationInf
+        //POST: TransportationInfs/FormEditTransportationInf
         [HttpPost]
+        [ActionName("FormEditTransportationInf")]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveTransportationInf(TransportationInf transportationInf)
+        public ActionResult EditTransportationInf(TransportationInf transportationInf)
         {
             if (!ModelState.IsValid)
                 return View(transportationInf);
 
-            if (transportationInf.ShippingId == 0)
-            {
-                bool transportationInfAdd = _transportationInfRepository.AddTransportationInf(transportationInf);
-                if (transportationInfAdd.Equals(true))
-                    return RedirectToAction("ListAllTransportationInfs");
-            }
-            else
-            {
-                bool transportationInfEdit = _transportationInfRepository.UpdateTransportationInf(transportationInf);
-                if (transportationInfEdit.Equals(true))
-                    return RedirectToAction("ListAllTransportationInfs");
-            }
+            bool transportationInfEdit = _transportationInfRepository.UpdateTransportationInf(transportationInf);
+            if (transportationInfEdit.Equals(true))
+                return RedirectToAction("ListAllTransportationInfs");
 
             return View(transportationInf);
         }
 
-        // GET:TransportationInf/DeleteTransportationInf/shippingId
+        // GET: TransportationInfs/DeleteTransportationInf/shippingId
         [HttpGet]
         public ActionResult DeleteTransportationInf(int? shippingId)
         {
@@ -99,7 +110,7 @@ namespace LSLS.Controllers
             return View("DeleteTransportationInf", transportationInfInDb);
         }
 
-        //POST:TransportationInf/DeleteTransportationInf/shippingId
+        //POST: TransportationInfs/DeleteTransportationInf/shippingId
         [HttpPost]
         [ActionName("DeleteTransportationInf")]
         [ValidateAntiForgeryToken]
@@ -113,6 +124,38 @@ namespace LSLS.Controllers
                 return RedirectToAction("ListAllTransportationInfs");
 
             return View("DeleteTransportationInf");
+        }
+
+
+        // GET: JobAssignment/FormCreateJobAssignment
+        [HttpGet]
+        public ActionResult FromCreateJobAssignment(int? shippingId)
+        {
+            FormJobAssignmentViewModel fromCreate = _transportationInfRepository.FromJobAssingment(shippingId);
+            if (fromCreate == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            }
+
+            return View("FromCreateJobAssignment", fromCreate);
+        }
+
+        // POST: JobAssignment/FromCreateJobAssignment
+        [HttpPost]
+        [ActionName("FromCreateJobAssignment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateJobAssignment(JobAssingment jobAssingment)
+        {
+            if (!ModelState.IsValid)
+                return View(jobAssingment);
+
+            var createJob = _jobAssignmentRepository.AddJobAssignment(jobAssingment);
+            if (createJob.Equals(true))
+            {
+                return RedirectToAction("ListAllTransportationInfs");
+            }
+
+            return View(jobAssingment);
         }
 
     }

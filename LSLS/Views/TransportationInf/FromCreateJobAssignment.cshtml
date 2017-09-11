@@ -1,14 +1,86 @@
 ﻿@model LSLS.ViewModels.FormJobAssignmentViewModel
 
 @{
-    ViewBag.Title = "FromCreateJobAssignment";
+    ViewBag.Title = "FromCreateJob";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    #myMap {
+    #map {
         height: 400px;
         width: 100%;
+    }
+
+    #description {
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+    }
+
+    #infowindow-content .title {
+        font-weight: bold;
+    }
+
+    #infowindow-content {
+        display: none;
+    }
+
+    #map #infowindow-content {
+        display: inline;
+    }
+
+    .pac-card {
+        margin: 10px 10px 0 0;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        font-family: Roboto;
+    }
+
+    #pac-container {
+        padding-bottom: 12px;
+        margin-right: 12px;
+    }
+
+    .pac-controls {
+        display: inline-block;
+        padding: 5px 11px;
+    }
+
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+    #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+    }
+
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
+
+    #title {
+        color: #fff;
+        background-color: #4d90fe;
+        font-size: 25px;
+        font-weight: 500;
+        padding: 6px 12px;
+    }
+
+    #target {
+        width: 345px;
     }
 </style>
 
@@ -27,7 +99,7 @@
                     <span class="glyphicon glyphicon-th"></span> Create New Job Assignment
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("SaveJobAssignment", "JobAssignment"))
+                    @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -35,10 +107,10 @@
                         <div class="form-horizontal">
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.JobAssignmentDateTime, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssingment.JobAssignmentDate, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.JobAssignmentDateTime, new { htmlAttributes = new { @class = "form-control", type = "date" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.JobAssignmentDateTime)
+                                    @Html.EditorFor(model => model.JobAssingment.JobAssignmentDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssingment.JobAssignmentDate)
                                 </div>
                             </div>
 
@@ -54,11 +126,11 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssingment.ShippingId, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.ShippingId, new { htmlAttributes = new { @class = "form-control", placeholder = "Shipping No." } })
+                                    @Html.EditorFor(model => model.JobAssingment.ShippingId, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point"} })
                                     @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
                                 </div>
                             </div>
-                            
+
                             <hr />
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssingment.StartingPointJob, new { @class = "control-label col-md-2" })
@@ -67,13 +139,15 @@
                                     @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 @Html.Label("Latitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
                                     @Html.EditorFor(model => model.JobAssingment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
                                     @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeStartJob)
                                 </div>
-                            </div>                           
+                            </div>
+
                             <div class="form-group">
                                 @Html.Label("Longitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -82,7 +156,7 @@
                                 </div>
                             </div>
 
-                            <hr/>
+                            <hr />
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssingment.DestinationJob, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -96,7 +170,7 @@
                                     @Html.EditorFor(model => model.JobAssingment.LatitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
                                     @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeDesJob)
                                 </div>
-                            </div>                           
+                            </div>
                             <div class="form-group col-lg-offset-2">
                                 @Html.Label("Longitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
@@ -112,7 +186,7 @@
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-offset-2">
                                     <input type="submit" class="btn btn-primary" value="Assign Jop" onclick="return confirm('Make sure that it proud in correct TruckId!');" />
-                                    @Html.ActionLink("Cancel", "ListAllJobAssignments", "JobAssignment", new { @class = "btn btn-default" })
+                                    @Html.ActionLink("Cancel", "ListAllTransportationInfs", "JobAssignment", new { @class = "btn btn-default" })
                                 </div>
                             </div>
                         </div>
@@ -126,18 +200,23 @@
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th"></span> Search Map
                 </div>
-                <div id="myMap"></div>
-                <div class="panel-body">
-                    Address : <input id="address" type="text" class="input-sm" style="width: 5000px"/><br/>
-                    Latitude : <input type="text" id="latitude" placeholder="Latitude" class="input-sm"/>                
-                    Longitude : <input type="text" id="longitude" placeholder="Longitude" class="input-sm" />
+                <input id="pac-input" class="controls" type="text"
+                       placeholder="Enter a location">
+                <div id="map"></div>
+                <div id="infowindow-content">
+                    <span id="place-name" class="title"></span><br>
+                    Place ID <span id="place-id"></span><br>
+                    <span id="place-address"></span><br>
+                    Location
+                    <span id="lat"></span>
+                    <span id="lng"></span>
                 </div>
-
             </div>
-            <p><a href="https://www.google.co.th/maps/" class="btn btn-primary btn-lg" target="_blank" >More Search By Google Map</a></p>
         </div>
 
+
     </div>
+
 </div>
 
 
@@ -146,61 +225,75 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&sensor=false">
+<script>
+
 </script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
-</script>
-<script type="text/javascript"> 
-    var map;
-    var marker;
-    var myLatlng = new google.maps.LatLng(15.767156, 101.1128905);
-    var geocoder = new google.maps.Geocoder();
-    var infowindow = new google.maps.InfoWindow();
-    function initialize(){
-        var mapOptions = {
-            zoom: 6,
-            center: myLatlng,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        map = new google.maps.Map(document.getElementById("myMap"), mapOptions);
-
-        marker = new google.maps.Marker({
-            map: map,
-            position: myLatlng,
-            draggable: true 
-        }); 
 
 
+<script>
+        // This sample uses the Place Autocomplete widget to allow the user to search
+        // for and select a place. The sample then displays an info window containing
+        // the place ID and other information about the place that the user has
+        // selected.
 
-        geocoder.geocode({'latLng': myLatlng }, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    $('#latitude,#longitude').show();
-                    $('#address').val(results[0].formatted_address);
-                    $('#latitude').val(marker.getPosition().lat());
-                    $('#longitude').val(marker.getPosition().lng());
-                    infowindow.setContent(results[0].formatted_address);
-                    infowindow.open(map, marker);
-                }
-            }
-        });
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        //<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-        google.maps.event.addListener(marker, 'dragend', function() {
-
-            geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    if (results[0]) {
-                        $('#address').val(results[0].formatted_address);
-                        $('#latitude').val(marker.getPosition().lat());
-                        $('#longitude').val(marker.getPosition().lng());
-                        infowindow.setContent(results[0].formatted_address);
-                        infowindow.open(map, marker);
-                    }
-                }
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 15.767156, lng: 101.1128905 },
+                zoom: 6
             });
-        });
 
-    }
-    google.maps.event.addDomListener(window, 'load', initialize);
+            var input = document.getElementById('pac-input');
+
+            var autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.bindTo('bounds', map);
+
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            var infowindow = new google.maps.InfoWindow();
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var marker = new google.maps.Marker({
+                map: map
+            });
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+
+            autocomplete.addListener('place_changed', function () {
+                infowindow.close();
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    return;
+                }
+
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);
+                }
+
+                // Set the position of the marker using the place ID and location.
+                marker.setPlace({
+                    placeId: place.place_id,
+                    location: place.geometry.location
+                });
+                marker.setVisible(true);
+
+                infowindowContent.children['place-name'].textContent = place.name;
+                infowindowContent.children['place-id'].textContent = place.place_id;
+                infowindowContent.children['place-address'].textContent =
+                    place.formatted_address;
+
+                infowindowContent.children['lat'].textContent = place.geometry.location.lat;
+                infowindowContent.children['lng'].textContent = place.geometry.location.lng;
+                infowindow.open(map, marker);
+            });
+        }
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&libraries=places&callback=initMap"
+        async defer></script>

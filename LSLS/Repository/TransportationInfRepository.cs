@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
+using LSLS.ViewModels;
 
 namespace LSLS.Repository
 {
@@ -23,19 +25,22 @@ namespace LSLS.Repository
 
         public TransportationInf GetTransportationInfById(int? shippingId)
         {
-            if(shippingId == null)
+            if (shippingId == null)
+            {
                 return null;
+            }
 
             TransportationInf transportationInfInDb = _context.TransportationInfs.Find(shippingId);
-            
+
             return transportationInfInDb;
         }
 
         public bool AddTransportationInf(TransportationInf transportationInf)
         {
             if (transportationInf == null)
+            {
                 return false;
-
+            }
             _context.TransportationInfs.Add(transportationInf);
             _context.SaveChanges();
 
@@ -45,23 +50,11 @@ namespace LSLS.Repository
         public bool UpdateTransportationInf(TransportationInf transportationInf)
         {
             if (transportationInf == null)
-                return false;
-
-            TransportationInf transportationInfInDb =
-                _context.TransportationInfs.FirstOrDefault(t => t.ShippingId == transportationInf.ShippingId);
-
-            if (transportationInfInDb != null)
             {
-                transportationInfInDb.Employer = transportationInf.Employer;
-                transportationInfInDb.OrderDate = transportationInf.OrderDate;
-                transportationInfInDb.DateOfTransportation = transportationInf.DateOfTransportation;
-                transportationInfInDb.ProductName = transportationInf.ProductName;
-                transportationInfInDb.StartingPoint = transportationInf.StartingPoint;
-                transportationInfInDb.Destination = transportationInf.Destination;
-                transportationInfInDb.RecieverName = transportationInf.RecieverName;
-                transportationInfInDb.StatusOfTransportation = transportationInf.StatusOfTransportation;
-                transportationInfInDb.ShipingDocImageUrl = transportationInf.ShipingDocImageUrl;
+                return false;
             }
+
+            _context.Entry(transportationInf).State = EntityState.Modified;
 
             _context.SaveChanges();
 
@@ -74,7 +67,7 @@ namespace LSLS.Repository
                 return false;
 
             // ReSharper disable once SuggestVarOrType_SimpleTypes
-            TransportationInf transportationInfInDb  = _context.TransportationInfs.FirstOrDefault(t => t.ShippingId == shippingId);
+            TransportationInf transportationInfInDb = _context.TransportationInfs.Find(shippingId);
             if (transportationInfInDb == null)
                 return false;
 
@@ -83,5 +76,30 @@ namespace LSLS.Repository
 
             return true;
         }
+
+        public FormJobAssignmentViewModel FromJobAssingment(int? shippingId)
+        {
+            TransportationInf findTransportationInf = _context.TransportationInfs.Find(shippingId);
+            if (findTransportationInf != null)
+            {
+                FormJobAssignmentViewModel formCreateJobAssignment = new FormJobAssignmentViewModel
+                {
+                    JobAssingment = new JobAssingment
+                    {
+                        ShippingId = findTransportationInf.ShippingId,
+                        StartingPointJob = findTransportationInf.StartingPoint,
+                        DestinationJob = findTransportationInf.Destination,
+                        JobAssignmentDate = findTransportationInf.DateOfTransportation,
+                        
+                    },
+                        TruckDrivers = _context.TruckDrivers.ToList(),
+                        TransportationInf = _context.TransportationInfs.ToList(),
+                    };
+
+                    return formCreateJobAssignment;
+            }
+            return null;
+        }
+            
     }
 }

@@ -1,4 +1,8 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
@@ -19,35 +23,43 @@ namespace LSLS.Controllers
         [HttpGet]
         public ActionResult ListAllJobAssignments()
         {
-            return View("ListAllJobAssignments", _jobAssignmentRepository.GetAllJobAssingments());
+            IEnumerable<JobAssingment> listJobAssingments = _jobAssignmentRepository.GetAllJobAssingments();
+
+            return View("ListAllJobAssignments", listJobAssingments);
         }
 
-        // GET: JobAssignment/FormCreateJobAssignment
-        [HttpGet]
-        public ActionResult FromCreateJobAssignment(int? jobAssignmentId)
-        {
-            FormJobAssignmentViewModel fromCreate = _jobAssignmentRepository.FromJobAssingment(jobAssignmentId);
-            if (fromCreate == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-            }
-
-            return View("FromCreateJobAssignment", fromCreate);
-        }
-        
-        // Get: JobAssignment/FormEditJobAssignment/jobAssignmentId
+        // GET: JobAssignment/FormEditJobAssignment/jobAssignmentId
         [HttpGet]
         public ActionResult FromEditJobAssignment(int? jobAssignmentId)
         {
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FormJobAssignmentViewModel fromCreate = _jobAssignmentRepository.FromJobAssingment(jobAssignmentId);
+            FormJobAssignmentViewModel fromEdit = _jobAssignmentRepository.FromJobAssingment(jobAssignmentId);
 
-            return View("FromCreateJobAssignment", fromCreate);
+            return View("FromEditJobAssignment", fromEdit);
         }
 
-        // Get: JobAssignment/DetailsJobAssignment/jobAssignmentId
+        // POST: JobAssignment/FromEditJobAssignment
+        [HttpPost]
+        [ActionName("FromEditJobAssignment")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditJobAssignment(JobAssingment jobAssingment)
+        {
+            if (!ModelState.IsValid)
+                return View(jobAssingment);
+
+            var editJob = _jobAssignmentRepository.UpdateJobAssignment(jobAssingment);
+            if (editJob.Equals(true))
+            {
+                return RedirectToAction("ListAllJobAssignments");
+            }
+
+            return View(jobAssingment);
+        }
+
+
+        // GET: JobAssignment/DetailsJobAssignment/jobAssignmentId
         [HttpGet]
         public ActionResult DetailsJobAssignment(int? jobAssignmentId)
         {
@@ -60,58 +72,41 @@ namespace LSLS.Controllers
 
         }
 
-
-        // POST: JobAssignment/SaveJobAssignment
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SaveJobAssignment(JobAssingment jobAssingment)
-        {
-            if (!ModelState.IsValid)
-                return View(jobAssingment);
-
-            if (jobAssingment.JobAssignmentId == 0)
-            {
-                var jobAssignmentAdd = _jobAssignmentRepository.AddJobAssignment(jobAssingment);
-                if (jobAssignmentAdd.Equals(true))
-                    return RedirectToAction("ListAllJobAssignments");
-            }
-            else
-            {
-                var jobAssignmentEdit = _jobAssignmentRepository.UpdateJobAssignment(jobAssingment);
-                if (jobAssignmentEdit.Equals(true))
-                    return RedirectToAction("ListAllJobAssignments");
-            }
-
-            return View(jobAssingment);
-        }
-
-        // GET: JobAsignmet/DeleteJobAssignment/jobAssignmentId
+        // GET: JobAssignment/DeleteJobAssignment/jobAssignmentId
         [HttpGet]
         public ActionResult DeleteJobAssignment(int? jobAssignmentId)
         {
             if (jobAssignmentId == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            var jobAssingment = _jobAssignmentRepository.GetJobAssingmentById(jobAssignmentId);
-            if (jobAssingment == null)
+            var findJob = _jobAssignmentRepository.GetJobAssingmentById(jobAssignmentId);
+            if (findJob == null)
+            {
                 return HttpNotFound();
+            }
 
-            return View("DeleteJobAssignment", jobAssingment);
+            return View("DeleteJobAssignment", findJob);
         }
 
-        // POST: Staffs/DeleteJobAssignment/jobAssignmentId
+        // POST: JobAssignment/DeleteAssignment
         [HttpPost]
         [ActionName("DeleteJobAssignment")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteJobAssignmentConfirmed(int? jobAssignmentId)
         {
-            // ReSharper disable once SuggestVarOrType_BuiltInTypes
-            bool jobAssignment = _jobAssignmentRepository.DeleteJobAssignment(jobAssignmentId);
-            if (jobAssignment.Equals(true))
+            if (jobAssignmentId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var deleteJob = _jobAssignmentRepository.DeleteJobAssignment(jobAssignmentId);
+            if (deleteJob.Equals(true))
+            {
                 return RedirectToAction("ListAllJobAssignments");
+            }
 
-            return View("DeleteJobAssignment");
-        }
-
+            return View(deleteJob);
+        }       
     }
 }

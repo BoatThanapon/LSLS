@@ -10,7 +10,7 @@
     <li class="active">Transportation Informations</li>
 </ul>
 
-<div class="container-fluid body-content">
+<div class="container-fluid">
 
     <p>
         @Html.ActionLink("Add Shipping", "FormCreateTransportationInf", null, new { @class = "btn btn-success" })
@@ -26,40 +26,36 @@
 
             <table id="shippings" class="table table-striped table-hover">
                 <thead>
-                <tr>
-                    <th>
-                        Shipping No.
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.OrderDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DateOfTransportation)
-                    </th>
+                    <tr>
+                        <th>
+                            ShippingNo.
+                        </th>                       
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Employer)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.StartingPoint)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Destination)
+                        </th>
+                        <th>
+                            Status Shipping
+                        </th>
+                        <th>
+                            Job Assign
+                        </th>
+                        <th>
+                            Options
+                        </th>
 
-                    <th>
-                        @Html.DisplayNameFor(model => model.Employer)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.StartingPoint)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Destination)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.RecieverName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.StatusOfTransportation)
-                    </th>
-                    <th>
-                        Options
-                    </th>
-                </tr>
+                    </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
@@ -70,9 +66,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.OrderDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DateOfTransportation)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Employer)
@@ -87,18 +80,21 @@
                                 @Html.DisplayFor(modelItem => item.Destination)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.RecieverName)
-                            </td>
-                            <td>
                                 @(item.StatusOfTransportation.Equals(true) ?
-                                      Html.Label("Complete", new {@class = "label label-success"}) :
-                                      Html.Label("Not Complete", new {@class = "label label-danger"}))
+                                      Html.Label("Complete", new { @class = "label label-success" }) :
+                                      Html.Label("Not Complete", new { @class = "label label-danger" }))
                             </td>
                             <td>
-                                @Html.ActionLink("Details", "DetailsTransportationInf", new {shippingId = item.ShippingId}, new {@class = "btn btn-primary btn-sm"})
-                                @Html.ActionLink("Edit", "FormEditTransportationInf", new {shippingId = item.ShippingId}, new {@class = "btn btn-warning btn-sm"})
-                                @Html.ActionLink("Delete", "DeleteTransportationInf", new {shippingId = item.ShippingId}, new {@class = "btn btn-danger btn-sm"})
+                                @(item.JobIsActive.Equals(true) ? 
+                                      Html.Label("Active", new {@class = "label label-success"}) : 
+                                      Html.ActionLink("Add Job", "FromCreateJobAssignment", new {shippingId = item.ShippingId}, new {@class = "btn btn-info btn-sm"}))
                             </td>
+                            <td>
+                                @Html.ActionLink("Details", "DetailsTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("Edit", "FormEditTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-warning btn-sm" })
+                                @Html.ActionLink("Delete", "DeleteTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                            
                         </tr>
                     }
                 </tbody>
@@ -116,4 +112,3 @@
         });
     </script>
 }
-

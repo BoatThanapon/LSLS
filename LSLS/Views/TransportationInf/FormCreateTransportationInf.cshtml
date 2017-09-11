@@ -18,7 +18,7 @@
             <span class="glyphicon glyphicon-th"></span> Create New Shipping
         </div>
         <div class="panel-body">
-            @using (Html.BeginForm("SaveTransportationInf", "TransportationInf"))
+            @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
@@ -35,7 +35,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.OrderDate, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.DateOfTransportation, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.DateOfTransportation, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.DateOfTransportation, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.DateOfTransportation, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             @Html.ValidationMessageFor(model => model.StartingPoint, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.Destination, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -71,7 +71,7 @@
                             @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         @Html.LabelFor(model => model.RecieverName, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
@@ -79,14 +79,12 @@
                             @Html.ValidationMessageFor(model => model.RecieverName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                    
-                    @Html.HiddenFor(model => model.ShippingId)
-                    @Html.HiddenFor(model => model.StatusOfTransportation)
+
                     <hr />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Create" class="btn btn-success" />
-                            @Html.ActionLink("Cancel", "ListAllTransportationInfs", "TransportationInf", new {@class = "btn btn-default"})
+                            @Html.ActionLink("Cancel", "ListAllTransportationInfs","", new { @class = "btn btn-default" })
                         </div>
 
                     </div>

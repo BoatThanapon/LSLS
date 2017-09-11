@@ -1,4 +1,10 @@
-﻿@model LSLS.Models.TransportationInf
+﻿
+@{
+    ViewBag.Title = "DeleteTransportationInf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model LSLS.Models.TransportationInf
 
 @{
     ViewBag.Title = "DeleteTransportationInf";
@@ -7,14 +13,14 @@
 
 <ul class="breadcrumb">
     <li>@Html.ActionLink("Home", "Main", "Account")</li>
-    <li>@Html.ActionLink("Company Staffs", "ListAllStaffs", "Staff")</li>
-    <li class="active">Delete Company Staff Profile</li>
+    <li>@Html.ActionLink("Delete Transportation Information", "ListAllTransportationInfs", "TruckTransportation")</li>
+    <li class="active">Delete Transportation Information</li>
 </ul>
 
-<div class="container">
+<div class="container-fluid">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="glyphicon glyphicon-th"></span> Delete Shipping
+            <span class="glyphicon glyphicon-th"></span> Delete Transportation Information
         </div>
         <div class="panel-body">
             <dl class="dl-horizontal">
@@ -63,7 +69,7 @@
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.Destination) 
+                    @Html.DisplayFor(model => model.Destination)
                 </dd>
 
                 <dt>
@@ -72,6 +78,15 @@
 
                 <dd>
                     @Html.DisplayFor(model => model.RecieverName)
+                </dd>
+                
+                <dt>
+                    @Html.DisplayNameFor(model => model.ShipingDocImageUrl) :
+                </dt>
+
+                <dd>
+                    @(Model.ShipingDocImageUrl != null ? Html.DisplayFor(model => model.ShipingDocImageUrl) : Html.Display(" - "))
+
                 </dd>
 
                 <dt>
@@ -85,7 +100,7 @@
                 </dd>
 
             </dl>
-            <hr/>
+            <hr />
 
             @using (Html.BeginForm())
             {
@@ -94,13 +109,13 @@
                 <div class="form-group">
                     <div class="col-md-offset-1 col-md-8">
                         <input type="submit" value="Delete" class="btn btn-danger " onclick="return confirm('Do you want to delete ? ');" />
-                        @Html.ActionLink("Cancel", "ListAllTransportationInfs", "TransportationInf", new { @class = "btn btn-default" })
+                        @Html.ActionLink("Cancel", "ListAllTransportationInfs", "", new { @class = "btn btn-default" })
                     </div>
                 </div>
             }
         </div>
     </div>
-  
+
 </div>
 
 @section scripts
@@ -108,4 +123,8 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 }
+
+
+
+
 

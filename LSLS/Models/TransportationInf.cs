@@ -9,19 +9,14 @@ namespace LSLS.Models
         public int ShippingId { get; set; }
 
         [Required]
-        [StringLength(30, MinimumLength = 4, ErrorMessage = "Employer length must be between 4 to 30 characters")]
-        [Display(Name = "Employer")]
-        public string Employer { get; set; }
-
-        [Required]
         [Display(Name = "Order Date")]
         [DataType(DataType.Date)]
-        public DateTime? OrderDate { get; set; }
+        public string OrderDate { get; set; }
 
         [Required]
         [Display(Name = "Date of Transportation")]
         [DataType(DataType.Date)]
-        public DateTime? DateOfTransportation { get; set; }
+        public string DateOfTransportation { get; set; }
 
         [Required]
         [Display(Name = "Product Name")]
@@ -36,6 +31,12 @@ namespace LSLS.Models
         [Display(Name = "Destination")]
         public string Destination { get; set; }
 
+
+        [Required]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = "Employer length must be between 4 to 30 characters")]
+        [Display(Name = "Employer")]
+        public string Employer { get; set; }
+
         [Required]
         [Display(Name = "Reciever Name")]
         public string RecieverName { get; set; }
@@ -44,8 +45,12 @@ namespace LSLS.Models
         [Display(Name = "Status of Transportation")]
         public bool StatusOfTransportation { get; set; }
 
+        [Required]
+        public bool JobIsActive { get; set; }
+
 
         [DataType(DataType.ImageUrl)]
+        [Display(Name = "Shipping Document")]
         public string ShipingDocImageUrl { get; set; }
 
 

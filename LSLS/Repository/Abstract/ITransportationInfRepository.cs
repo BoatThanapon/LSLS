@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LSLS.Models;
+using LSLS.ViewModels;
 
 namespace LSLS.Repository.Abstract
 {
@@ -15,5 +16,6 @@ namespace LSLS.Repository.Abstract
         bool UpdateTransportationInf(TransportationInf transportationInf);
         bool DeleteTransportationInf(int? shippingId);
 
+        FormJobAssignmentViewModel FromJobAssingment(int? shippingId);
     }
 }
