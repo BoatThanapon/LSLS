@@ -30,5 +30,17 @@ namespace LSLS.Repository
             FormsAuthentication.SetAuthCookie(staffInDb.StaffUsername, false);
             return staffInDb;
         }
+
+        public bool AuthenticateTruckDriver(string username, string password)
+        {
+            TruckDriver truckDriverInDb = _context.TruckDrivers.FirstOrDefault(u =>
+                u.TruckDriverUsername.Equals(username) &&
+                u.TruckDriverPassword.Equals(password));
+
+            if (truckDriverInDb == null)
+                return false;
+
+            return true;
+        }
     }
 }

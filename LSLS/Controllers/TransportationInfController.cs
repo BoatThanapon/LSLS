@@ -144,7 +144,7 @@ namespace LSLS.Controllers
         [HttpPost]
         [ActionName("FromCreateJobAssignment")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateJobAssignment(JobAssingment jobAssingment)
+        public ActionResult CreateJobAssignment(JobAssignment jobAssingment)
         {
             if (!ModelState.IsValid)
                 return View(jobAssingment);

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LSLS.Models
 {
-    public class JobAssingment
+    public class JobAssignment
     {
         [Key]
         public int JobAssignmentId { get; set; }

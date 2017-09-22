@@ -84,7 +84,7 @@ namespace LSLS.Repository
             {
                 FormJobAssignmentViewModel formCreateJobAssignment = new FormJobAssignmentViewModel
                 {
-                    JobAssingment = new JobAssingment
+                    JobAssignment = new JobAssignment
                     {
                         ShippingId = findTransportationInf.ShippingId,
                         StartingPointJob = findTransportationInf.StartingPoint,

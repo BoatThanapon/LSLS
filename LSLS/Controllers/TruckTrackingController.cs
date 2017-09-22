@@ -40,15 +40,5 @@ namespace LSLS.Controllers
             return View("TruckTracking", _truckLocationRepository.GetAllTruckLocations());
         }
 
-        /*
-        [HttpGet]
-        [ActionName("SearchTruckId")]
-        public JsonResult JSearchTruckId(string truckId)
-        {
-            var resultSearchTruckId = _truckLocationRepository.GetTruckLocationByTruckId(truckId);
-
-            return Json(resultSearchTruckId, JsonRequestBehavior.AllowGet);
-        }
-        */
     }
 }

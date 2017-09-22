@@ -18,30 +18,30 @@ namespace LSLS.Repository
             _context = context;
         }
 
-        public IEnumerable<JobAssingment> GetAllJobAssingments()
+        public IEnumerable<JobAssignment> GetAllJobAssignments()
         {
-            IEnumerable<JobAssingment> jobAssingments = _context.JobAssingments.Include(j => j.TruckDriver).Include(t => t.TransportationInf).ToList();
+            IEnumerable<JobAssignment> jobAssingments = _context.JobAssignments.Include(j => j.TruckDriver).Include(t => t.TransportationInf).ToList();
 
             return jobAssingments;
         }
 
-        public JobAssingment GetJobAssingmentById(int? jobAssignmentId)
+        public JobAssignment GetJobAssignmentById(int? jobAssignmentId)
         {
-            JobAssingment jobAssingmentInDb = _context.JobAssingments.Include(j => j.TruckDriver).Include(t => t.TransportationInf).SingleOrDefault(j => j.JobAssignmentId == jobAssignmentId);
+            JobAssignment jobAssignmentInDb = _context.JobAssignments.Include(j => j.TruckDriver).Include(t => t.TransportationInf).SingleOrDefault(j => j.JobAssignmentId == jobAssignmentId);
 
-            return jobAssingmentInDb;
+            return jobAssignmentInDb;
         }
 
-        public bool AddJobAssignment(JobAssingment jobAssingment)
+        public bool AddJobAssignment(JobAssignment jobAssignment)
         {
-            if (jobAssingment == null)
+            if (jobAssignment == null)
             {
                 return false;
             }
 
-            _context.JobAssingments.Add(jobAssingment);
+            _context.JobAssignments.Add(jobAssignment);
             TransportationInf transportationInf =
-                _context.TransportationInfs.Find(jobAssingment.ShippingId);
+                _context.TransportationInfs.Find(jobAssignment.ShippingId);
 
             if (transportationInf != null)
                 transportationInf.JobIsActive = true;
@@ -51,7 +51,7 @@ namespace LSLS.Repository
             return true;
         }
 
-        public bool UpdateJobAssignment(JobAssingment jobAssingment)
+        public bool UpdateJobAssignment(JobAssignment jobAssingment)
         {
             if (jobAssingment == null)
             {
@@ -70,14 +70,14 @@ namespace LSLS.Repository
             if (jobAssignmentId == null)
                 return false;
            
-            JobAssingment jobAssingment = _context.JobAssingments.Find(jobAssignmentId);
-            if (jobAssingment == null)
+            JobAssignment jobAssignmentIndb = _context.JobAssignments.Find(jobAssignmentId);
+            if (jobAssignmentIndb == null)
                 return false;
 
-            _context.JobAssingments.Remove(jobAssingment);
+            _context.JobAssignments.Remove(jobAssignmentIndb);
 
             TransportationInf transportationInf =
-                _context.TransportationInfs.Find(jobAssingment.ShippingId);
+                _context.TransportationInfs.Find(jobAssignmentIndb.ShippingId);
 
             if (transportationInf != null)
                 transportationInf.JobIsActive = false;
@@ -87,10 +87,10 @@ namespace LSLS.Repository
             return true;
         }
 
-        public FormJobAssignmentViewModel FromJobAssingment(int? jobAssignmentId)
+        public FormJobAssignmentViewModel FromJobAssignment(int? jobAssignmentId)
         {
-            JobAssingment findJobAssingment = _context.JobAssingments.Find(jobAssignmentId);
-            if (findJobAssingment == null)
+            JobAssignment findJobAssignment = _context.JobAssignments.Find(jobAssignmentId);
+            if (findJobAssignment == null)
             {
                 return null;
             }
@@ -98,7 +98,7 @@ namespace LSLS.Repository
             FormJobAssignmentViewModel formEditJobAssignment = new FormJobAssignmentViewModel
             {                
                 TruckDrivers = _context.TruckDrivers.ToList(),
-                JobAssingment = findJobAssingment,
+                JobAssignment = findJobAssignment,
             };
 
             return formEditJobAssignment;

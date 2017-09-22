@@ -7,7 +7,7 @@
 
 <style>
     #map {
-        height: 400px;
+        height: 625px;
         width: 100%;
     }
 
@@ -82,6 +82,15 @@
     #target {
         width: 345px;
     }
+
+    .controls {
+        position: absolute;
+        left: 300px;
+        width: 140px;
+        top: 0px;
+        z-index: 5;
+        background-color: #fff;
+    }
 </style>
 
 <ul class="breadcrumb">
@@ -93,7 +102,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th"></span> Edit Job Assignment
@@ -107,81 +116,81 @@
                         <div class="form-horizontal">
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.JobAssignmentDate, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssignment.JobAssignmentDate, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.JobAssignmentDate, new { htmlAttributes = new { @class = "form-control", type = "date", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.JobAssignmentDate)
+                                    @Html.EditorFor(model => model.JobAssignment.JobAssignmentDate, new { htmlAttributes = new { @class = "form-control", type = "date", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.JobAssignmentDate)
                                 </div>
                             </div>
 
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.TruckDriverId, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssignment.TruckDriverId, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.JobAssingment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.TruckDriverId)
+                                    @Html.DropDownListFor(model => model.JobAssignment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.TruckDriverId)
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.ShippingId, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssignment.ShippingId, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.ShippingId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
+                                    @Html.EditorFor(model => model.JobAssignment.ShippingId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.ShippingId)
                                 </div>
                             </div>
 
                             <hr />
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.StartingPointJob, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssignment.StartingPointJob, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.StartingPointJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.ShippingId)
+                                    @Html.EditorFor(model => model.JobAssignment.StartingPointJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.ShippingId)
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.Label("Latitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Latitude" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeStartJob)
+                                    @Html.EditorFor(model => model.JobAssignment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Latitude" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.LatitudeStartJob)
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.Label("Longitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.LongitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Longitude" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.LongitudeStartJob)
+                                    @Html.EditorFor(model => model.JobAssignment.LongitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Longitude" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.LongitudeStartJob)
                                 </div>
                             </div>
 
                             <hr />
                             <div class="form-group">
-                                @Html.LabelFor(model => model.JobAssingment.DestinationJob, new { @class = "control-label col-md-2" })
+                                @Html.LabelFor(model => model.JobAssignment.DestinationJob, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.DestinationJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.DestinationJob)
+                                    @Html.EditorFor(model => model.JobAssignment.DestinationJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.DestinationJob)
                                 </div>
                             </div>
                             <div class="form-group">
                                 @Html.Label("Latitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.LatitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.LatitudeDesJob)
+                                    @Html.EditorFor(model => model.JobAssignment.LatitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.LatitudeDesJob)
                                 </div>
                             </div>
                             <div class="form-group col-lg-offset-2">
                                 @Html.Label("Longitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssingment.LongitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
-                                    @Html.ValidationMessageFor(model => model.JobAssingment.LongitudeDesJob)
+                                    @Html.EditorFor(model => model.JobAssignment.LongitudeDesJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.ValidationMessageFor(model => model.JobAssignment.LongitudeDesJob)
                                 </div>
                             </div>
 
 
-                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentId)
-                            @Html.HiddenFor(model => model.JobAssingment.JobAssignmentStatus)
+                            @Html.HiddenFor(model => model.JobAssignment.JobAssignmentId)
+                            @Html.HiddenFor(model => model.JobAssignment.JobAssignmentStatus)
                             <hr />
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-offset-2">
@@ -195,7 +204,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th"></span> Search Map
@@ -205,9 +214,9 @@
                 <div id="map"></div>
                 <div id="infowindow-content">
                     <span id="place-name" class="title"></span><br>
-                    Place ID <span id="place-id"></span><br>
+                    Address:
                     <span id="place-address"></span><br>
-                    Location
+                    Location:
                     <span id="lat"></span>
                     <span id="lng"></span>
                 </div>
@@ -279,18 +288,16 @@
 
                 // Set the position of the marker using the place ID and location.
                 marker.setPlace({
-                    placeId: place.place_id,
                     location: place.geometry.location
                 });
                 marker.setVisible(true);
 
                 infowindowContent.children['place-name'].textContent = place.name;
-                infowindowContent.children['place-id'].textContent = place.place_id;
                 infowindowContent.children['place-address'].textContent =
                     place.formatted_address;
 
-                infowindowContent.children['lat'].textContent = place.geometry.location.lat;
-                infowindowContent.children['lng'].textContent = place.geometry.location.lng;
+                infowindowContent.children['lat'].textContent = place.geometry.location.lat();
+                infowindowContent.children['lng'].textContent = place.geometry.location.lng();
                 infowindow.open(map, marker);
             });
         }

@@ -17,6 +17,7 @@ namespace LSLS
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+
             //Initialize bootstrapper class
             Bootstrapper.Initialise();
         }

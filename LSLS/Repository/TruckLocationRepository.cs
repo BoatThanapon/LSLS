@@ -55,9 +55,9 @@ namespace LSLS.Repository
 
             if (truckId != null)
             {
-                var findTruckID = truckLocation.FirstOrDefault(u => u.TruckId.Equals(truckId));
+                var findTruckId = truckLocation.FirstOrDefault(u => u.TruckId.Equals(truckId));
 
-                return findTruckID;
+                return findTruckId;
             }
 
             return null;

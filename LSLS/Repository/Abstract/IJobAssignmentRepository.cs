@@ -10,13 +10,13 @@ namespace LSLS.Repository.Abstract
 {
     public interface IJobAssignmentRepository
     {
-        IEnumerable<JobAssingment> GetAllJobAssingments();
-        JobAssingment GetJobAssingmentById(int? jobAssignmentId);
-        bool AddJobAssignment(JobAssingment jobAssingment);
-        bool UpdateJobAssignment(JobAssingment jobAssingment);
+        IEnumerable<JobAssignment> GetAllJobAssignments();
+        JobAssignment GetJobAssignmentById(int? jobAssignmentId);
+        bool AddJobAssignment(JobAssignment jobAssignment);
+        bool UpdateJobAssignment(JobAssignment jobAssignment);
         bool DeleteJobAssignment(int? jobAssignmentId);
 
-        FormJobAssignmentViewModel FromJobAssingment(int? jobAssignmentId);
+        FormJobAssignmentViewModel FromJobAssignment(int? jobAssignmentId);
 
     }
 }

@@ -23,7 +23,7 @@ namespace LSLS.Controllers
         [HttpGet]
         public ActionResult ListAllJobAssignments()
         {
-            IEnumerable<JobAssingment> listJobAssingments = _jobAssignmentRepository.GetAllJobAssingments();
+            IEnumerable<JobAssignment> listJobAssingments = _jobAssignmentRepository.GetAllJobAssignments();
 
             return View("ListAllJobAssignments", listJobAssingments);
         }
@@ -35,7 +35,7 @@ namespace LSLS.Controllers
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FormJobAssignmentViewModel fromEdit = _jobAssignmentRepository.FromJobAssingment(jobAssignmentId);
+            FormJobAssignmentViewModel fromEdit = _jobAssignmentRepository.FromJobAssignment(jobAssignmentId);
 
             return View("FromEditJobAssignment", fromEdit);
         }
@@ -44,7 +44,7 @@ namespace LSLS.Controllers
         [HttpPost]
         [ActionName("FromEditJobAssignment")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditJobAssignment(JobAssingment jobAssingment)
+        public ActionResult EditJobAssignment(JobAssignment jobAssingment)
         {
             if (!ModelState.IsValid)
                 return View(jobAssingment);
@@ -66,7 +66,7 @@ namespace LSLS.Controllers
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FormJobAssignmentViewModel fromDetails = _jobAssignmentRepository.FromJobAssingment(jobAssignmentId);
+            FormJobAssignmentViewModel fromDetails = _jobAssignmentRepository.FromJobAssignment(jobAssignmentId);
 
             return View("DetailsJobAssignment", fromDetails);
 
@@ -81,7 +81,7 @@ namespace LSLS.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var findJob = _jobAssignmentRepository.GetJobAssingmentById(jobAssignmentId);
+            var findJob = _jobAssignmentRepository.GetJobAssignmentById(jobAssignmentId);
             if (findJob == null)
             {
                 return HttpNotFound();
