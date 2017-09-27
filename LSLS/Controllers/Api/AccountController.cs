@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
+using System.Web.Http.Description;
 using LSLS.Models;
+using Newtonsoft.Json;
 
 namespace LSLS.Controllers.Api
 {
@@ -13,8 +14,8 @@ namespace LSLS.Controllers.Api
     {
         private readonly ApplicationDbContext _db = new ApplicationDbContext();
 
-        // GET: api/Account
-        [AllowAnonymous]
+        // GET: api/Account/CheckLogin
+        [HttpGet]
         public IHttpActionResult CheckLogin(string username, string password)
         {
             var truckDriverInDb = _db.TruckDrivers
@@ -22,11 +23,11 @@ namespace LSLS.Controllers.Api
 
             if (truckDriverInDb == null)
             {
-                return Ok(false);
+                return Ok(new {Status = 0});
             }
 
-            return Ok(truckDriverInDb);
+            return Ok(new { Status = 1, truckDriverInDb.TruckDriverId});          
         }
-       
+     
     }
 }

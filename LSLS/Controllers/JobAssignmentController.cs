@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
@@ -10,13 +7,16 @@ using LSLS.ViewModels;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class JobAssignmentController : Controller
     {
         private readonly IJobAssignmentRepository _jobAssignmentRepository;
+        private readonly ITruckDriverRepository _truckDriverRepository;
 
-        public JobAssignmentController(IJobAssignmentRepository jobAssignmentRepository)
+        public JobAssignmentController(IJobAssignmentRepository jobAssignmentRepository, ITruckDriverRepository truckDriverRepository)
         {
             _jobAssignmentRepository = jobAssignmentRepository;
+            _truckDriverRepository = truckDriverRepository;
         }
 
         // GET: JobAssignment
@@ -35,27 +35,37 @@ namespace LSLS.Controllers
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FormJobAssignmentViewModel fromEdit = _jobAssignmentRepository.FromJobAssignment(jobAssignmentId);
+            var findJob = _jobAssignmentRepository.GetJobAssignmentById(jobAssignmentId);
+            if (findJob == null)
+            {
+                return HttpNotFound();
+            }
 
-            return View("FromEditJobAssignment", fromEdit);
+            var jobViewModel = new FormJobAssignmentViewModel
+            {
+                JobAssignment = findJob,
+                TruckDrivers = _truckDriverRepository.GetAllTruckDrivers(),
+            };
+
+            return View("FromEditJobAssignment", jobViewModel);
         }
 
         // POST: JobAssignment/FromEditJobAssignment
         [HttpPost]
         [ActionName("FromEditJobAssignment")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditJobAssignment(JobAssignment jobAssingment)
+        public ActionResult EditJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
             if (!ModelState.IsValid)
-                return View(jobAssingment);
+                return View(jobAssignmentViewModel);
 
-            var editJob = _jobAssignmentRepository.UpdateJobAssignment(jobAssingment);
+            var editJob = _jobAssignmentRepository.UpdateJobAssignment(jobAssignmentViewModel);
             if (editJob.Equals(true))
             {
                 return RedirectToAction("ListAllJobAssignments");
             }
 
-            return View(jobAssingment);
+            return View(jobAssignmentViewModel);
         }
 
 
@@ -66,10 +76,20 @@ namespace LSLS.Controllers
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            FormJobAssignmentViewModel fromDetails = _jobAssignmentRepository.FromJobAssignment(jobAssignmentId);
 
-            return View("DetailsJobAssignment", fromDetails);
+            var findJob = _jobAssignmentRepository.GetJobAssignmentById(jobAssignmentId);
+            if (findJob == null)
+            {
+                return HttpNotFound();
+            }
 
+            var jobViewModel = new FormJobAssignmentViewModel
+            {
+                JobAssignment = findJob,
+                TruckDrivers = _truckDriverRepository.GetAllTruckDrivers(),
+            };
+
+            return View("DetailsJobAssignment", jobViewModel);
         }
 
         // GET: JobAssignment/DeleteJobAssignment/jobAssignmentId
@@ -106,7 +126,7 @@ namespace LSLS.Controllers
                 return RedirectToAction("ListAllJobAssignments");
             }
 
-            return View(deleteJob);
+            return View();
         }       
     }
 }

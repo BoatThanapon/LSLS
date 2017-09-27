@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
@@ -24,22 +20,27 @@ namespace LSLS.Controllers.Api
 
         // PUT: api/TruckLocation/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTruckLocation(TruckLocation truckLocation)
+        public IHttpActionResult UpdateTruckLocation(int truckDriverId,TruckLocation truckLocation)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var truckLocationIndDb = _db.TruckLocations
-                .FirstOrDefault(t => t.TruckLocationId == truckLocation.TruckLocationId);
+            var truckLocationIndDb = _db.TruckLocations.FirstOrDefault(t => t.TruckDriverId == truckDriverId);
 
-            _db.Entry(truckLocationIndDb).State = EntityState.Modified;
+            if (truckLocationIndDb != null)
+            {
+                truckLocationIndDb.TruckCurrentTime = DateTime.Now;
+
+                _db.Entry(truckLocationIndDb).State = EntityState.Modified;
+            }
 
             _db.SaveChanges();
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok();
         }
-
+        
     }
+    
 }

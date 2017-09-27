@@ -12,7 +12,7 @@
 </ul>
 
 <div class="container">
-    <div class="panel panel-default">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <span class="glyphicon glyphicon-th"></span> Edit Shipping
         </div>
@@ -102,7 +102,7 @@
                     <hr />
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            @Html.ActionLink("Edit", "FormEditTransportationInf", new { shippingId = Model.ShippingId }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Update", "FormEditTransportationInf", new { shippingId = Model.ShippingId }, new { @class = "btn btn-primary" })
                             @Html.ActionLink("Cancel", "ListAllTransportationInfs","", new { @class = "btn btn-default" })
                         </div>
 

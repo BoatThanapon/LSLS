@@ -29,7 +29,7 @@
                     <tr>
                         <th>
                             ShippingNo.
-                        </th>                       
+                        </th>
                         <th>
                             @Html.DisplayNameFor(model => model.OrderDate)
                         </th>
@@ -73,16 +73,16 @@
                                       Html.Label("Not Complete", new { @class = "label label-danger" }))
                             </td>
                             <td>
-                                @(item.JobIsActive.Equals(true) ? 
-                                      Html.Label("Active", new {@class = "label label-success"}) : 
-                                      Html.ActionLink("Add Job", "FromCreateJobAssignment", new {shippingId = item.ShippingId}, new {@class = "btn btn-info btn-sm"}))
+                                @(item.JobIsActive.Equals(true) ?
+                                      Html.Label("Active", new { @class = "label label-success" }) :
+                                      Html.ActionLink("Add Job", "FromCreateJobAssignment", new { shippingId = item.ShippingId }, new { @class = "btn btn-info btn-sm" }))
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "DetailsTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-primary btn-sm" })
                                 @Html.ActionLink("Edit", "FormEditTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-warning btn-sm" })
                                 @Html.ActionLink("Delete", "DeleteTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-danger btn-sm" })
                             </td>
-                            
+
                         </tr>
                     }
                 </tbody>
@@ -95,7 +95,7 @@
 @section scripts
 {
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#shippings").DataTable();
         });
     </script>

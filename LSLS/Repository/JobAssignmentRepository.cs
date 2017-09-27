@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
 using LSLS.ViewModels;
@@ -32,33 +30,65 @@ namespace LSLS.Repository
             return jobAssignmentInDb;
         }
 
-        public bool AddJobAssignment(JobAssignment jobAssignment)
+        public bool AddJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
-            if (jobAssignment == null)
+            if (jobAssignmentViewModel == null)
             {
                 return false;
             }
+
+            JobAssignment jobAssignment = new JobAssignment
+            {
+                ShippingId = jobAssignmentViewModel.JobAssignment.ShippingId,
+                TruckDriverId = jobAssignmentViewModel.JobAssignment.TruckDriverId,
+                JobAssignmentDate = jobAssignmentViewModel.JobAssignment.JobAssignmentDate,
+                StartingPointJob = jobAssignmentViewModel.JobAssignment.StartingPointJob,
+                LatitudeStartJob = jobAssignmentViewModel.JobAssignment.LatitudeStartJob,
+                LongitudeStartJob = jobAssignmentViewModel.JobAssignment.LongitudeStartJob,
+                DestinationJob = jobAssignmentViewModel.JobAssignment.DestinationJob,
+                LatitudeDesJob = jobAssignmentViewModel.JobAssignment.LatitudeDesJob,
+                LongitudeDesJob = jobAssignmentViewModel.JobAssignment.LongitudeDesJob,
+            };
 
             _context.JobAssignments.Add(jobAssignment);
             TransportationInf transportationInf =
                 _context.TransportationInfs.Find(jobAssignment.ShippingId);
 
             if (transportationInf != null)
+            {
                 transportationInf.JobIsActive = true;
+                transportationInf.DateOfTransportation = jobAssignment.JobAssignmentDate;
 
+                _context.Entry(transportationInf).State = EntityState.Modified;
+
+            }
             _context.SaveChanges();
 
             return true;
         }
 
-        public bool UpdateJobAssignment(JobAssignment jobAssingment)
+        public bool UpdateJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
-            if (jobAssingment == null)
+            if (jobAssignmentViewModel == null)
             {
                 return false;
             }
 
-            _context.Entry(jobAssingment).State = EntityState.Modified;
+            JobAssignment jobAssignment = new JobAssignment
+            {
+                JobAssignmentId = jobAssignmentViewModel.JobAssignment.JobAssignmentId,
+                ShippingId = jobAssignmentViewModel.JobAssignment.ShippingId,
+                TruckDriverId = jobAssignmentViewModel.JobAssignment.TruckDriverId,
+                JobAssignmentDate = jobAssignmentViewModel.JobAssignment.JobAssignmentDate,
+                StartingPointJob = jobAssignmentViewModel.JobAssignment.StartingPointJob,
+                LatitudeStartJob = jobAssignmentViewModel.JobAssignment.LatitudeStartJob,
+                LongitudeStartJob = jobAssignmentViewModel.JobAssignment.LongitudeStartJob,
+                DestinationJob = jobAssignmentViewModel.JobAssignment.DestinationJob,
+                LatitudeDesJob = jobAssignmentViewModel.JobAssignment.LatitudeDesJob,
+                LongitudeDesJob = jobAssignmentViewModel.JobAssignment.LongitudeDesJob,
+            };
+
+            _context.Entry(jobAssignment).State = EntityState.Modified;
 
             _context.SaveChanges();
 
@@ -86,24 +116,6 @@ namespace LSLS.Repository
 
             return true;
         }
-
-        public FormJobAssignmentViewModel FromJobAssignment(int? jobAssignmentId)
-        {
-            JobAssignment findJobAssignment = _context.JobAssignments.Find(jobAssignmentId);
-            if (findJobAssignment == null)
-            {
-                return null;
-            }
-
-            FormJobAssignmentViewModel formEditJobAssignment = new FormJobAssignmentViewModel
-            {                
-                TruckDrivers = _context.TruckDrivers.ToList(),
-                JobAssignment = findJobAssignment,
-            };
-
-            return formEditJobAssignment;
-        }
-
 
     }
 }

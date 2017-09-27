@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
-using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers.Api
 {
@@ -20,18 +15,21 @@ namespace LSLS.Controllers.Api
             return _db.TruckDrivers;
         }
 
+        
         // GET: api/TruckDriver/5
         [ResponseType(typeof(TruckDriver))]
-        public IHttpActionResult GetTruckDriver(int id)
+        public IHttpActionResult GetTruckDriver(int truckDriverId)
         {
-            TruckDriver truckDriver = _db.TruckDrivers.Find(id);
+            TruckDriver truckDriver = _db.TruckDrivers.Find(truckDriverId);
             if (truckDriver == null)
             {
                 return NotFound();
+                
             }
 
             return Ok(truckDriver);
-        }
+            
+        }        
 
     }
 }

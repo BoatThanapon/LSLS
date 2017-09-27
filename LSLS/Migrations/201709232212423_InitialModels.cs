@@ -3,12 +3,12 @@ namespace LSLS.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitailModels : DbMigration
+    public partial class InitialModels : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.JobAssingments",
+                "dbo.JobAssignments",
                 c => new
                     {
                         JobAssignmentId = c.Int(nullable: false, identity: true),
@@ -42,6 +42,7 @@ namespace LSLS.Migrations
                         Employer = c.String(nullable: false, maxLength: 30),
                         RecieverName = c.String(nullable: false),
                         StatusOfTransportation = c.Boolean(nullable: false),
+                        JobIsActive = c.Boolean(nullable: false),
                         ShipingDocImageUrl = c.String(),
                     })
                 .PrimaryKey(t => t.ShippingId);
@@ -105,16 +106,16 @@ namespace LSLS.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.TruckLocations", "TruckDriverId", "dbo.TruckDrivers");
-            DropForeignKey("dbo.JobAssingments", "TruckDriverId", "dbo.TruckDrivers");
-            DropForeignKey("dbo.JobAssingments", "ShippingId", "dbo.TransportationInfs");
+            DropForeignKey("dbo.JobAssignments", "TruckDriverId", "dbo.TruckDrivers");
+            DropForeignKey("dbo.JobAssignments", "ShippingId", "dbo.TransportationInfs");
             DropIndex("dbo.TruckLocations", new[] { "TruckDriverId" });
-            DropIndex("dbo.JobAssingments", new[] { "TruckDriverId" });
-            DropIndex("dbo.JobAssingments", new[] { "ShippingId" });
+            DropIndex("dbo.JobAssignments", new[] { "TruckDriverId" });
+            DropIndex("dbo.JobAssignments", new[] { "ShippingId" });
             DropTable("dbo.TruckLocations");
             DropTable("dbo.Staffs");
             DropTable("dbo.TruckDrivers");
             DropTable("dbo.TransportationInfs");
-            DropTable("dbo.JobAssingments");
+            DropTable("dbo.JobAssignments");
         }
     }
 }

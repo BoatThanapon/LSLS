@@ -19,7 +19,7 @@ namespace LSLS.Controllers
         [AllowAnonymous]
         public ViewResult Login()
         {
-            return View("Login");
+            return View(Request.IsAuthenticated ? "Main" : "Login");
         }
 
         [AllowAnonymous]

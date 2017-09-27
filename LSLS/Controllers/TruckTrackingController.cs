@@ -3,6 +3,7 @@ using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class TruckTrackingController : Controller
     {
         private readonly ITruckLocationRepository _truckLocationRepository;
@@ -30,7 +31,7 @@ namespace LSLS.Controllers
         [HttpPost]
         public ActionResult SearchTruckId(string truckId)
         {
-            var resultSearchTruckId = _truckLocationRepository.GetTruckLocationByTruckId(truckId);
+            var resultSearchTruckId = _truckLocationRepository.SearchTruckLocationByTruckId(truckId);
 
             if (resultSearchTruckId != null)
                 return View("SearchTruckId", resultSearchTruckId);

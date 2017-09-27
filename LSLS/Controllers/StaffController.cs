@@ -5,6 +5,7 @@ using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class StaffController : Controller
     {
         private readonly IStaffRepository _staffRepository;

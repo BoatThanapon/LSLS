@@ -50,11 +50,11 @@
         padding: 5px 11px;
     }
 
-    .pac-controls label {
-        font-family: Roboto;
-        font-size: 13px;
-        font-weight: 300;
-    }
+        .pac-controls label {
+            font-family: Roboto;
+            font-size: 13px;
+            font-weight: 300;
+        }
 
     #pac-input {
         background-color: #fff;
@@ -67,9 +67,9 @@
         width: 400px;
     }
 
-    #pac-input:focus {
-        border-color: #4d90fe;
-    }
+        #pac-input:focus {
+            border-color: #4d90fe;
+        }
 
     #title {
         color: #fff;
@@ -95,17 +95,17 @@
 
 <ul class="breadcrumb">
     <li>@Html.ActionLink("Home", "Main", "Account")</li>
-    <li>@Html.ActionLink("Job Assignments", "ListAllJobAssignments", "JobAssignment")</li>
-    <li class="active">Create New Job Assignment</li>
+    <li>@Html.ActionLink("Transportation Information", "ListAllTransportationInfs", "TransportationInf")</li>
+    <li class="active">Edit Job Assignment</li>
 </ul>
 
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-info">
                 <div class="panel-heading">
-                    <span class="glyphicon glyphicon-th"></span> Create New Job Assignment
+                    <span class="glyphicon glyphicon-th"></span> Create Job Assignment
                 </div>
                 <div class="panel-body">
                     @using (Html.BeginForm())
@@ -118,7 +118,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.JobAssignmentDate, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.JobAssignmentDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                    @Html.EditorFor(model => model.JobAssignment.JobAssignmentDate, new { htmlAttributes = new { @class = "form-control", type = "date", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.JobAssignmentDate)
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.ShippingId, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.ShippingId, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point"} })
+                                    @Html.EditorFor(model => model.JobAssignment.ShippingId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.ShippingId)
                                 </div>
                             </div>
@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.StartingPointJob, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.StartingPointJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.EditorFor(model => model.JobAssignment.StartingPointJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.ShippingId)
                                 </div>
                             </div>
@@ -152,7 +152,7 @@
                             <div class="form-group">
                                 @Html.Label("Latitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.EditorFor(model => model.JobAssignment.LatitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Latitude" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.LatitudeStartJob)
                                 </div>
                             </div>
@@ -160,7 +160,7 @@
                             <div class="form-group">
                                 @Html.Label("Longitude", new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.LongitudeStartJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Starting Point" } })
+                                    @Html.EditorFor(model => model.JobAssignment.LongitudeStartJob, new { htmlAttributes = new { @class = "form-control", @text = "StartingPointJob Longitude" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.LongitudeStartJob)
                                 </div>
                             </div>
@@ -169,7 +169,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.DestinationJob, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.EditorFor(model => model.JobAssignment.DestinationJob, new { htmlAttributes = new { @class = "form-control", placeholder = "Destination" } })
+                                    @Html.EditorFor(model => model.JobAssignment.DestinationJob, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.DestinationJob)
                                 </div>
                             </div>
@@ -194,8 +194,8 @@
                             <hr />
                             <div class="form-group">
                                 <div class="col-md-10 col-lg-offset-2">
-                                    <input type="submit" class="btn btn-primary" value="Assign Jop" onclick="return confirm('Make sure that it proud in correct TruckId!');" />
-                                    @Html.ActionLink("Cancel", "ListAllTransportationInfs", "JobAssignment", new { @class = "btn btn-default" })
+                                    <input type="submit" class="btn btn-info" value="Create" onclick="return confirm('Make sure that it proud in correct TruckId!');" />
+                                    @Html.ActionLink("Cancel", "ListAllTransportationInfs", "TransportationInf", new { @class = "btn btn-default" })
                                 </div>
                             </div>
                         </div>

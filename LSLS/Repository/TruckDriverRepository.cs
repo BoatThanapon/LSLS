@@ -33,6 +33,13 @@ namespace LSLS.Repository
             if (truckDriver == null)
                 return false;
             _context.TruckDrivers.Add(truckDriver);
+
+            TruckLocation truckLocation = new TruckLocation
+            {
+                TruckDriverId = truckDriver.TruckDriverId,
+            };
+            _context.TruckLocations.Add(truckLocation);
+
             _context.SaveChanges();
 
             return true;

@@ -8,6 +8,7 @@ using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class TruckDriverController : Controller
     {
         private readonly ITruckDriverRepository _truckDriverRepository;

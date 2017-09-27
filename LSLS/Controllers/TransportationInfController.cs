@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
@@ -10,16 +6,19 @@ using LSLS.ViewModels;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class TransportationInfController : Controller
     {
         private readonly ITransportationInfRepository _transportationInfRepository;
         private readonly IJobAssignmentRepository _jobAssignmentRepository;
+        private readonly ITruckDriverRepository _truckDriverRepository;
 
 
-        public TransportationInfController(ITransportationInfRepository transportationInfRepository, IJobAssignmentRepository jobAssignmentRepository)
+        public TransportationInfController(ITransportationInfRepository transportationInfRepository, IJobAssignmentRepository jobAssignmentRepository, ITruckDriverRepository truckDriverRepository)
         {
             _transportationInfRepository = transportationInfRepository;
             _jobAssignmentRepository = jobAssignmentRepository;
+            _truckDriverRepository = truckDriverRepository;
         }
 
         // GET: TransportationInfs/ListAllTransportationInfs
@@ -131,32 +130,50 @@ namespace LSLS.Controllers
         [HttpGet]
         public ActionResult FromCreateJobAssignment(int? shippingId)
         {
-            FormJobAssignmentViewModel fromCreate = _transportationInfRepository.FromJobAssingment(shippingId);
-            if (fromCreate == null)
+            if (shippingId == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var findTransportationInf = _transportationInfRepository.GetTransportationInfById(shippingId);
+            if (findTransportationInf == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                return HttpNotFound();
             }
 
-            return View("FromCreateJobAssignment", fromCreate);
+            var fromJopViewModel = new FormJobAssignmentViewModel
+            {
+                JobAssignment = new JobAssignment
+                {
+                    ShippingId = findTransportationInf.ShippingId,
+                    StartingPointJob = findTransportationInf.StartingPoint,
+                    DestinationJob = findTransportationInf.Destination,
+                    JobAssignmentDate = findTransportationInf.DateOfTransportation,
+                },
+                TruckDrivers = _truckDriverRepository.GetAllTruckDrivers(),
+            };
+
+            return View("FromCreateJobAssignment", fromJopViewModel);
         }
 
         // POST: JobAssignment/FromCreateJobAssignment
         [HttpPost]
         [ActionName("FromCreateJobAssignment")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateJobAssignment(JobAssignment jobAssingment)
+        public ActionResult CreateJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
             if (!ModelState.IsValid)
-                return View(jobAssingment);
+            {
+                return View("FromCreateJobAssignment", jobAssignmentViewModel);
 
-            var createJob = _jobAssignmentRepository.AddJobAssignment(jobAssingment);
+            }
+            var createJob = _jobAssignmentRepository.AddJobAssignment(jobAssignmentViewModel);
             if (createJob.Equals(true))
             {
                 return RedirectToAction("ListAllTransportationInfs");
             }
-
-            return View(jobAssingment);
+       
+            return View("FromCreateJobAssignment", jobAssignmentViewModel);
         }
-
+        
     }
+
 }

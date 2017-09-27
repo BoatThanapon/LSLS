@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LSLS.Models
 {
@@ -23,16 +22,24 @@ namespace LSLS.Models
         [DataType(DataType.Date)]
         public string JobAssignmentDate { get; set; }
 
+        [Required]
         [Display(Name = "From")]
         public string StartingPointJob { get; set; }
 
+        [Required]
         public float LatitudeStartJob { get; set; }
+
+        [Required]
         public float LongitudeStartJob { get; set; }
 
+        [Required]
         [Display(Name = "To")]
         public string DestinationJob { get; set; }
 
+        [Required]
         public float LatitudeDesJob { get; set; }
+
+        [Required]
         public float LongitudeDesJob { get; set; }
 
         [Display(Name = "Status")]

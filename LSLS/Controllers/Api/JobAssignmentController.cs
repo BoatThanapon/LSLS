@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
@@ -24,55 +21,41 @@ namespace LSLS.Controllers.Api
 
         // GET: api/JobAssignment/5
         [ResponseType(typeof(JobAssignment))]
-        public IHttpActionResult GetJobAssignment(int id)
+        public IHttpActionResult GetJobAssignment(int truckdriverId)
         {
-            JobAssignment jobAssignment = _db.JobAssignments.Find(id);
-            if (jobAssignment == null)
-            {
-                return NotFound();
-            }
+            List<JobAssignment> listJobAssignmentsByTruckDriverId = _db.JobAssignments.Where(j => j.TruckDriverId == truckdriverId).ToList();
 
-            return Ok(jobAssignment);
+            return Ok(listJobAssignmentsByTruckDriverId);
         }
 
         // PUT: api/JobAssignment/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutJobAssignment(int id, JobAssignment jobAssignment)
+        public IHttpActionResult UpdateJobAssignment(int truckDriverId ,JobAssignment jobAssignment)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            var jobAssignmentInDb = _db.JobAssignments.SingleOrDefault(c => c.TruckDriverId == truckDriverId);
 
-            if (id != jobAssignment.JobAssignmentId)
-            {
-                return BadRequest();
-            }
+            _db.Entry(jobAssignmentInDb).State = EntityState.Modified;
 
-            _db.Entry(jobAssignment).State = EntityState.Modified;
+            var shipping = _db.TransportationInfs.Find(jobAssignment.ShippingId);
 
-            try
-            {
-                _db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!JobAssignmentExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            if (shipping != null)
+                shipping.StatusOfTransportation = jobAssignment.JobAssignmentStatus;
 
-            return StatusCode(HttpStatusCode.NoContent);
+            _db.SaveChanges();
+
+            return Ok();
         }
+
+
 
         private bool JobAssignmentExists(int id)
         {
             return _db.JobAssignments.Count(e => e.JobAssignmentId == id) > 0;
         }
+
     }
 }

@@ -27,12 +27,11 @@ namespace LSLS
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
-                "~/Content/bootstrap-theme.css",
+                "~/Content/bootstrap-yeti.css",
                 "~/content/datatables/css/datatables.bootstrap.css",
                 "~/content/typeahead.css",
                 "~/content/toastr.css",
-                "~/Content/Site.css"));
+                "~/Content/site.css"));
         }
     
     }

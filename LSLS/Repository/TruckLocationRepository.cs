@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
@@ -49,7 +50,7 @@ namespace LSLS.Repository
             return truckLocationVMlist.ToList();
         }
 
-        public TruckLocationViewModel GetTruckLocationByTruckId(string truckId)
+        public TruckLocationViewModel SearchTruckLocationByTruckId(string truckId)
         {
             var truckLocation = GetAllTruckLocations();
 
@@ -61,6 +62,27 @@ namespace LSLS.Repository
             }
 
             return null;
+        }
+
+        public TruckLocation GetTruckLocationById(int truckLocationId)
+        {
+            TruckLocation findTruckLocation = _context.TruckLocations.Find(truckLocationId);
+
+            return findTruckLocation;
+        }
+
+        public bool UpdateTruckLocation(TruckLocation truckLocation)
+        {
+            if (truckLocation == null)
+            {
+                return false;
+            }
+
+            _context.Entry(truckLocation).State = EntityState.Modified;
+
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }

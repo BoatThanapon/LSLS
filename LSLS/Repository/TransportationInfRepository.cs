@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
 using LSLS.ViewModels;
@@ -41,6 +39,7 @@ namespace LSLS.Repository
             {
                 return false;
             }
+            transportationInf.StatusOfTransportation = false;
             _context.TransportationInfs.Add(transportationInf);
             _context.SaveChanges();
 
@@ -76,30 +75,6 @@ namespace LSLS.Repository
 
             return true;
         }
-
-        public FormJobAssignmentViewModel FromJobAssingment(int? shippingId)
-        {
-            TransportationInf findTransportationInf = _context.TransportationInfs.Find(shippingId);
-            if (findTransportationInf != null)
-            {
-                FormJobAssignmentViewModel formCreateJobAssignment = new FormJobAssignmentViewModel
-                {
-                    JobAssignment = new JobAssignment
-                    {
-                        ShippingId = findTransportationInf.ShippingId,
-                        StartingPointJob = findTransportationInf.StartingPoint,
-                        DestinationJob = findTransportationInf.Destination,
-                        JobAssignmentDate = findTransportationInf.DateOfTransportation,
-                        
-                    },
-                        TruckDrivers = _context.TruckDrivers.ToList(),
-                        TransportationInf = _context.TransportationInfs.ToList(),
-                    };
-
-                    return formCreateJobAssignment;
-            }
-            return null;
-        }
-            
+           
     }
 }
