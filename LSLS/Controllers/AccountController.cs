@@ -14,18 +14,17 @@ namespace LSLS.Controllers
             _authProvider = authProvider;
         }
 
-
         // GET: Account    
         [AllowAnonymous]
-        public ViewResult Login()
+        public ViewResult ViewLoginStaff()
         {
-            return View(Request.IsAuthenticated ? "Main" : "Login");
+            return View(Request.IsAuthenticated ? "Main" : "ViewLoginStaff");
         }
 
         [AllowAnonymous]
         [HttpPost]
-        [ActionName("Login")]
-        public ActionResult CheckLogin(LoginStaffViewModel loginStaff)
+        [ActionName("ViewLoginStaff")]
+        public ActionResult CheckLoginStaff(LoginStaffViewModel loginStaff)
         {
             var staff = _authProvider.AuthenticateStaff(loginStaff);
 
@@ -46,7 +45,7 @@ namespace LSLS.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("ViewLoginStaff", "Account");
         }
     }
 

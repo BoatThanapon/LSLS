@@ -5,40 +5,45 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
+using LSLS.Repository;
+using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers.Api
 {
+    //Completed
     public class TruckLocationController : ApiController
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
-        // GET: api/TruckLocation
-        public IQueryable<TruckLocation> GetAllTruckLocation()
-        {
-            return _db.TruckLocations;
-        }
+        private readonly ITruckLocationRepository _truckLocationRepository = new TruckLocationRepository(new ApplicationDbContext());
 
         // PUT: api/TruckLocation/5
+        [HttpPut]
         [ResponseType(typeof(void))]
         public IHttpActionResult UpdateTruckLocation(int truckDriverId,TruckLocation truckLocation)
         {
-            if (!ModelState.IsValid)
+            if (truckLocation == null || truckLocation.TruckDriverId != truckDriverId)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
+            }
+            var findTruckLocationByTruckDriverId =
+                _truckLocationRepository.GetTruckLocationByTruckDriverId(truckDriverId);
+
+            if (findTruckLocationByTruckDriverId == null)
+            {
+                return NotFound();
             }
 
-            var truckLocationIndDb = _db.TruckLocations.FirstOrDefault(t => t.TruckDriverId == truckDriverId);
-
-            if (truckLocationIndDb != null)
+            findTruckLocationByTruckDriverId.Latitude = truckLocation.Latitude;
+            findTruckLocationByTruckDriverId.Longitude = truckLocation.Longitude;
+            findTruckLocationByTruckDriverId.TruckCurrentAddress = truckLocation.TruckCurrentAddress;
+            findTruckLocationByTruckDriverId.TruckCurrentTime = DateTime.Now;
+            
+            var updateTruckLocation = _truckLocationRepository.UpdateTruckLocation(findTruckLocationByTruckDriverId);
+            if (updateTruckLocation.Equals(false))
             {
-                truckLocationIndDb.TruckCurrentTime = DateTime.Now;
-
-                _db.Entry(truckLocationIndDb).State = EntityState.Modified;
+                return Ok(false);
             }
 
-            _db.SaveChanges();
-
-            return Ok();
+            return Ok(true);
         }
         
     }

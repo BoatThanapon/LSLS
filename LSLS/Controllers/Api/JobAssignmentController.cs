@@ -6,56 +6,40 @@ using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
+using LSLS.Repository;
+using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers.Api
 {
+    //Completed
     public class JobAssignmentController : ApiController
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
-
-        // GET: api/JobAssignment
-        public IQueryable<JobAssignment> GetJobAssignments()
-        {
-            return _db.JobAssignments;
-        }
+        private readonly IJobAssignmentRepository _jobAssignmentRepository = new JobAssignmentRepository(new ApplicationDbContext());
 
         // GET: api/JobAssignment/5
+        [HttpGet]
         [ResponseType(typeof(JobAssignment))]
-        public IHttpActionResult GetJobAssignment(int truckdriverId)
+        public IHttpActionResult ListJobAssignmentByTruckDriverId(int truckDriverId)
         {
-            List<JobAssignment> listJobAssignmentsByTruckDriverId = _db.JobAssignments.Where(j => j.TruckDriverId == truckdriverId).ToList();
-
+            var listJobAssignmentsByTruckDriverId = _jobAssignmentRepository.GetListJobByTruckDriverId(truckDriverId);
+            
             return Ok(listJobAssignmentsByTruckDriverId);
         }
 
-        // PUT: api/JobAssignment/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult UpdateJobAssignment(int truckDriverId ,JobAssignment jobAssignment)
+        // GET: api/JobAssignment/5
+        [HttpGet]
+        [ResponseType(typeof(JobAssignment))]
+        public IHttpActionResult GetJobAssignmentByJobAssignmentId(int jobAssignmentId)
         {
-            if (!ModelState.IsValid)
+            var findJobAssignmentsByJobAssignmentId = _jobAssignmentRepository.GetJobAssignmentById(jobAssignmentId);
+            if (findJobAssignmentsByJobAssignmentId == null)
             {
-                return BadRequest(ModelState);
+                return NotFound();
             }
-            var jobAssignmentInDb = _db.JobAssignments.SingleOrDefault(c => c.TruckDriverId == truckDriverId);
 
-            _db.Entry(jobAssignmentInDb).State = EntityState.Modified;
-
-            var shipping = _db.TransportationInfs.Find(jobAssignment.ShippingId);
-
-            if (shipping != null)
-                shipping.StatusOfTransportation = jobAssignment.JobAssignmentStatus;
-
-            _db.SaveChanges();
-
-            return Ok();
+            return Ok(findJobAssignmentsByJobAssignmentId);
         }
 
-
-
-        private bool JobAssignmentExists(int id)
-        {
-            return _db.JobAssignments.Count(e => e.JobAssignmentId == id) > 0;
-        }
 
     }
 }

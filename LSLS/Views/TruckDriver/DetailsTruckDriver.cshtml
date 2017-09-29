@@ -120,7 +120,7 @@
                 </div>
                 <br />
 
-                @Html.HiddenFor(m => m.TruckDriverId);
+                @Html.HiddenFor(m => m.TruckDriverId)
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         @Html.ActionLink("Update", "FormEditTruckDriver", new { truckdriverId = Model.TruckDriverId }, new { @class = "btn btn-primary" })
@@ -130,4 +130,5 @@
             </div>
         </div>
 
-    </div></div>
+    </div>
+</div>

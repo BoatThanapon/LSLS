@@ -81,12 +81,13 @@
                 </dd>
                 
                 <dt>
-                    @Html.DisplayNameFor(model => model.ShipingDocImageUrl) :
+                    @Html.DisplayNameFor(model => model.RecieverName) :
                 </dt>
 
                 <dd>
-                    @(Model.ShipingDocImageUrl != null ? Html.DisplayFor(model => model.ShipingDocImageUrl) : Html.Display(" - "))
-
+                    @(Model.RecieveDateTime.Equals(null) ?
+                          Html.Label("Not Complete Yet!", new { @class = "text-danger" }) :
+                          Html.DisplayFor(model => model.RecieveDateTime, new { @class = "text-success" }))
                 </dd>
 
                 <dt>

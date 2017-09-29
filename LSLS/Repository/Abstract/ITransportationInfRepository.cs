@@ -15,5 +15,6 @@ namespace LSLS.Repository.Abstract
         bool AddTransportationInf(TransportationInf transportationInf);
         bool UpdateTransportationInf(TransportationInf transportationInf);
         bool DeleteTransportationInf(int? shippingId);
+       
     }
 }

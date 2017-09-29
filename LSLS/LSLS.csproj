@@ -235,6 +235,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\JobAssignmentController.cs" />
+    <Compile Include="Controllers\Api\TransportationInfController.cs" />
     <Compile Include="Controllers\Api\TruckDriverController.cs" />
     <Compile Include="Controllers\Api\TruckLocationController.cs" />
     <Compile Include="Controllers\JobAssignmentController.cs" />
@@ -254,6 +255,10 @@
     <Compile Include="Migrations\201709261800204_UpdateAnnotationJobAssignmentModel.Designer.cs">
       <DependentUpon>201709261800204_UpdateAnnotationJobAssignmentModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709270923278_AddRecieveDateTimeInTransportationInfModel.cs" />
+    <Compile Include="Migrations\201709270923278_AddRecieveDateTimeInTransportationInfModel.Designer.cs">
+      <DependentUpon>201709270923278_AddRecieveDateTimeInTransportationInfModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\JobAssignment.cs" />
@@ -269,7 +274,7 @@
     </Compile>
     <Compile Include="Repository\Abstract\IJobAssignmentRepository.cs" />
     <Compile Include="Repository\Abstract\ITransportationInfRepository.cs" />
-    <Compile Include="Repository\FormsAuthProvider.cs" />
+    <Compile Include="Repository\AuthProvider.cs" />
     <Compile Include="Repository\Abstract\IAuthProvider.cs" />
     <Compile Include="Repository\Abstract\IStaffRepository.cs" />
     <Compile Include="Repository\Abstract\ITruckDriverRepository.cs" />
@@ -589,17 +594,17 @@
     <Content Include="Views\TruckTracking\SearchTruckId.cshtml" />
     <Content Include="Views\Account\Main.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\TransportationInf\ListAllTransportationInfs.cshtml" />
     <Content Include="Views\TransportationInf\FormCreateTransportationInf.cshtml" />
     <Content Include="Views\TransportationInf\DetailsTransportationInf.cshtml" />
-    <Content Include="Views\TransportationInf\FormEditTransportationInf.cshtml" />
     <Content Include="Views\TransportationInf\DeleteTransportationInf.cshtml" />
     <Content Include="Views\JobAssignment\ListAllJobAssignments.cshtml" />
     <Content Include="Views\TransportationInf\FromCreateJobAssignment.cshtml" />
     <Content Include="Views\JobAssignment\FromEditJobAssignment.cshtml" />
     <Content Include="Views\JobAssignment\DetailsJobAssignment.cshtml" />
     <Content Include="Views\JobAssignment\DeleteJobAssignment.cshtml" />
+    <Content Include="Views\TransportationInf\FormEditTransportationInf.cshtml" />
+    <Content Include="Views\Account\ViewLoginStaff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -610,6 +615,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709261800204_UpdateAnnotationJobAssignmentModel.resx">
       <DependentUpon>201709261800204_UpdateAnnotationJobAssignmentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709270923278_AddRecieveDateTimeInTransportationInfModel.resx">
+      <DependentUpon>201709270923278_AddRecieveDateTimeInTransportationInfModel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

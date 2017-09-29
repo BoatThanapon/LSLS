@@ -6,11 +6,11 @@ using LSLS.ViewModels;
 
 namespace LSLS.Repository
 {
-    public class FormsAuthProvider : IAuthProvider
+    public class AuthProvider : IAuthProvider
     {
         private readonly ApplicationDbContext _context;
 
-        public FormsAuthProvider(ApplicationDbContext context)
+        public AuthProvider(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -31,16 +31,17 @@ namespace LSLS.Repository
             return staffInDb;
         }
 
-        public bool AuthenticateTruckDriver(string username, string password)
+        public TruckDriver AuthenticateTruckDriver(string username, string password)
         {
             TruckDriver truckDriverInDb = _context.TruckDrivers.FirstOrDefault(u =>
                 u.TruckDriverUsername.Equals(username) &&
                 u.TruckDriverPassword.Equals(password));
 
             if (truckDriverInDb == null)
-                return false;
-
-            return true;
+            {
+                return null;
+            }
+            return truckDriverInDb;
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using LSLS.Models;
 using LSLS.Repository.Abstract;
-using LSLS.ViewModels;
 
 namespace LSLS.Repository
 {
@@ -40,6 +39,8 @@ namespace LSLS.Repository
                 return false;
             }
             transportationInf.StatusOfTransportation = false;
+                            transportationInf.JobIsActive = false;
+
             _context.TransportationInfs.Add(transportationInf);
             _context.SaveChanges();
 
@@ -52,12 +53,36 @@ namespace LSLS.Repository
             {
                 return false;
             }
+ 
+            if (transportationInf.JobIsActive.Equals(true))
+            {               
+                var findJob = _context.JobAssignments.FirstOrDefault(j => j.ShippingId == transportationInf.ShippingId);
+                if (findJob != null)
+                {
+                    findJob.JobAssignmentDate = transportationInf.DateOfTransportation;
+                    findJob.StartingPointJob = transportationInf.StartingPoint;
+                    findJob.DestinationJob = transportationInf.Destination;
+                    findJob.JobAssignmentStatus = transportationInf.StatusOfTransportation;
 
-            _context.Entry(transportationInf).State = EntityState.Modified;
+                    transportationInf.JobIsActive = true;
+                    _context.Entry(transportationInf).State = EntityState.Modified;
 
-            _context.SaveChanges();
+                    _context.SaveChanges();
 
-            return true;
+                    return true;
+                }
+            }
+            else
+            {
+                transportationInf.JobIsActive = false;
+                _context.Entry(transportationInf).State = EntityState.Modified;
+               
+                _context.SaveChanges();
+
+                return true;
+            }
+
+            return false;
         }
 
         public bool DeleteTransportationInf(int? shippingId)

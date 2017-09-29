@@ -5,6 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    #map {
+        height: 625px;
+        width: 100%;
+    }
+    #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 25%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+    }
+</style>
 
 <ul class="breadcrumb">
     <li>@Html.ActionLink("Home", "Main", "Account")</li>
@@ -27,6 +46,15 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                         <div class="form-horizontal">
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.JobAssignment.JobAssignmentStatus, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @(Model.JobAssignment.JobAssignmentStatus.Equals(true) ?
+                                          Html.Label("Complete", new { @class = "alert alert-success" }) :
+                                          Html.Label("Not Complete", new { @class = "alert alert-danger" }))
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.JobAssignmentDate, new { @class = "control-label col-md-2" })
@@ -40,7 +68,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.JobAssignment.TruckDriverId, new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    @Html.DropDownListFor(model => model.JobAssignment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.DropDownListFor(model => model.JobAssignment.TruckDriverId, new SelectList(Model.TruckDrivers, "TruckDriverId", "TruckId"), "Select", new { @class = "form-control", disabled = "disabled" })
                                     @Html.ValidationMessageFor(model => model.JobAssignment.TruckDriverId)
                                 </div>
                             </div>
@@ -122,13 +150,7 @@
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-th"></span> Map
                 </div>
-                <iframe width=100%
-                        height="450px"
-                        frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4
-                        &origin=@Model.JobAssignment.StartingPointJob
-                        &destination=@Model.JobAssignment.DestinationJob"
-                        allowfullscreen></iframe>
+                <div id="map"></div>
             </div>
         </div>
 
@@ -143,73 +165,61 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 
-<script>
-
-</script>
 
 
 <script>
-        // This sample uses the Place Autocomplete widget to allow the user to search
-        // for and select a place. The sample then displays an info window containing
-        // the place ID and other information about the place that the user has
-        // selected.
+    var data = @Html.Raw(Json.Encode(Model.JobAssignment));
 
-        // This example requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        //<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-        function initMap() {
-            var map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 15.767156, lng: 101.1128905 },
-                zoom: 13
-            });
-
-            var input = document.getElementById('pac-input');
-
-            var autocomplete = new google.maps.places.Autocomplete(input);
-            autocomplete.bindTo('bounds', map);
-
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-            var infowindow = new google.maps.InfoWindow();
-            var infowindowContent = document.getElementById('infowindow-content');
-            infowindow.setContent(infowindowContent);
-            var marker = new google.maps.Marker({
+    function initMap() {
+        var pointA = new google.maps.LatLng(data.LatitudeStartJob, data.LongitudeStartJob),
+            pointB = new google.maps.LatLng(data.LatitudeDesJob, data.LongitudeDesJob),
+            myOptions = {
+                zoom: 6,
+                center: pointA
+            },
+            map = new google.maps.Map(document.getElementById('map'), myOptions),
+            // Instantiate a directions service.
+            directionsService = new google.maps.DirectionsService,
+            directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            }),
+            markerA = new google.maps.Marker({
+                position: pointA,
+                title: data.StartingPointJob,
+                label: "A",
+                map: map
+            }),
+            markerB = new google.maps.Marker({
+                position: pointB,
+                title: data.DestinationJob,
+                label: "B",
                 map: map
             });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
 
-            autocomplete.addListener('place_changed', function () {
-                infowindow.close();
-                var place = autocomplete.getPlace();
-                if (!place.geometry) {
-                    return;
-                }
+        // get route from A to B
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
 
-                if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport);
-                } else {
-                    map.setCenter(place.geometry.location);
-                    map.setZoom(17);
-                }
+    }
 
-                // Set the position of the marker using the place ID and location.
-                marker.setPlace({
-                    location: place.geometry.location
-                });
-                marker.setVisible(true);
 
-                infowindowContent.children['place-name'].textContent = place.name;
-                infowindowContent.children['place-address'].textContent =
-                    place.formatted_address;
 
-                infowindowContent.children['lat'].textContent = place.geometry.location.lat;
-                infowindowContent.children['lng'].textContent = place.geometry.location.lng;
-                infowindow.open(map, marker);
-            });
-        }
+    function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+        directionsService.route({
+            origin: pointA,
+            destination: pointB,
+            travelMode: google.maps.TravelMode.DRIVING
+        }, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
+        });
+    }
+
+    initMap();
+    
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&libraries=places&callback=initMap"
-        async defer></script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzxtZCeSypA1WNa4foGcKlir1Kmj3LjA4&callback=initMap">
+</script>

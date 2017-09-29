@@ -6,28 +6,30 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using LSLS.Models;
+using LSLS.Repository;
+using LSLS.Repository.Abstract;
 using Newtonsoft.Json;
 
 namespace LSLS.Controllers.Api
 {
+    //Completed
     public class AccountController : ApiController
     {
-        private readonly ApplicationDbContext _db = new ApplicationDbContext();
+        private readonly IAuthProvider _authProvider = new AuthProvider(new ApplicationDbContext());
 
-        // GET: api/Account/CheckLogin
+        // GET: api/Account/CheckTruckDriverLogin
         [HttpGet]
-        public IHttpActionResult CheckLogin(string username, string password)
+        [AllowAnonymous]
+        public IHttpActionResult CheckTruckDriverLogin(string username, string password)
         {
-            var truckDriverInDb = _db.TruckDrivers
-                .FirstOrDefault(t => t.TruckDriverUsername.Equals(username) && t.TruckDriverPassword.Equals(password));
-
-            if (truckDriverInDb == null)
+            var checkTruckDriverLogin = _authProvider.AuthenticateTruckDriver(username, password);
+            if (checkTruckDriverLogin == null)
             {
                 return Ok(new {Status = 0});
             }
 
-            return Ok(new { Status = 1, truckDriverInDb.TruckDriverId});          
+            return Ok(new { Status = 1, checkTruckDriverLogin.TruckDriverId});          
         }
-     
+
     }
 }

@@ -12,7 +12,7 @@ namespace LSLS
             routes.MapRoute(
                 "Default",
                 "{controller}/{action}/{id}",
-                new {controller = "Account", action = "Login", id = UrlParameter.Optional}
+                new {controller = "Account", action = "ViewLoginStaff", id = UrlParameter.Optional}
             );
         }
     }

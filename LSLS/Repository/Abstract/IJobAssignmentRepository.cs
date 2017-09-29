@@ -11,5 +11,7 @@ namespace LSLS.Repository.Abstract
         bool AddJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel);
         bool UpdateJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel);
         bool DeleteJobAssignment(int? jobAssignmentId);
+
+        List<JobAssignment> GetListJobByTruckDriverId(int truckDriverId);
     }
 }

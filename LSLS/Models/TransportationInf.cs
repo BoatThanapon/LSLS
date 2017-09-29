@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace LSLS.Models
 {
@@ -47,10 +48,7 @@ namespace LSLS.Models
         [Required]
         public bool JobIsActive { get; set; }
 
-
-        [DataType(DataType.ImageUrl)]
-        [Display(Name = "Shipping Document")]
-        public string ShipingDocImageUrl { get; set; }
+        public DateTime? RecieveDateTime { get; set; }
 
 
     }

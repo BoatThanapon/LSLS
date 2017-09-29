@@ -64,12 +64,18 @@ namespace LSLS.Repository
             return null;
         }
 
-        public TruckLocation GetTruckLocationById(int truckLocationId)
+        public TruckLocation GetTruckLocationByTruckDriverId(int truckDriverId)
         {
-            TruckLocation findTruckLocation = _context.TruckLocations.Find(truckLocationId);
+            var findTruckId = _context.TruckLocations.FirstOrDefault(u => u.TruckDriverId.Equals(truckDriverId));
 
-            return findTruckLocation;
-        }
+            if (findTruckId == null)
+            {
+                return null;
+            }
+
+            return findTruckId;
+         }
+        
 
         public bool UpdateTruckLocation(TruckLocation truckLocation)
         {

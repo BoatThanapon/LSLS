@@ -90,6 +90,16 @@ namespace LSLS.Repository
 
             _context.Entry(jobAssignment).State = EntityState.Modified;
 
+            var findTransportationInf = _context.TransportationInfs.Find(jobAssignment.ShippingId);
+            if (findTransportationInf == null)
+                return false;
+          
+            findTransportationInf.DateOfTransportation = jobAssignment.JobAssignmentDate;
+            findTransportationInf.StartingPoint = jobAssignment.StartingPointJob;
+            findTransportationInf.Destination = jobAssignment.DestinationJob;
+
+            _context.Entry(findTransportationInf).State = EntityState.Modified;
+
             _context.SaveChanges();
 
             return true;
@@ -115,6 +125,12 @@ namespace LSLS.Repository
             _context.SaveChanges();
 
             return true;
+        }
+
+        public List<JobAssignment> GetListJobByTruckDriverId(int truckDriverId)
+        {
+            List<JobAssignment> listJobAssignmentsByTruckDriverId = _context.JobAssignments.Where(j => j.TruckDriverId == truckDriverId).ToList();
+            return listJobAssignmentsByTruckDriverId;
         }
 
     }

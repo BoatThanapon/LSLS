@@ -24,7 +24,7 @@ namespace LSLS.Infrastructure
             container.RegisterType<IStaffRepository, StaffRepository>();
             container.RegisterType<ITruckDriverRepository, TruckDriverRepository>();
             container.RegisterType<ITruckLocationRepository, TruckLocationRepository>();
-            container.RegisterType<IAuthProvider, FormsAuthProvider>();
+            container.RegisterType<IAuthProvider, AuthProvider>();
             container.RegisterType<IJobAssignmentRepository, JobAssignmentRepository>();
             container.RegisterType<ITransportationInfRepository, TransportationInfRepository>();
 
