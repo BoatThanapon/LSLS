@@ -24,6 +24,7 @@ namespace LSLS.Models
 
         [Required]
         [Display(Name = "From")]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = "StartingPointJob length must be between 4 to 30 characters")]
         public string StartingPointJob { get; set; }
 
         [Required]
@@ -34,6 +35,7 @@ namespace LSLS.Models
 
         [Required]
         [Display(Name = "To")]
+        [StringLength(30, MinimumLength = 4, ErrorMessage = "DestinationJob length must be between 4 to 30 characters")]
         public string DestinationJob { get; set; }
 
         [Required]

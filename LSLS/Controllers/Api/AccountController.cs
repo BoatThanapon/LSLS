@@ -13,6 +13,7 @@ using Newtonsoft.Json;
 namespace LSLS.Controllers.Api
 {
     //Completed
+    [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
         private readonly IAuthProvider _authProvider = new AuthProvider(new ApplicationDbContext());
@@ -20,6 +21,7 @@ namespace LSLS.Controllers.Api
         // GET: api/Account/CheckTruckDriverLogin
         [HttpGet]
         [AllowAnonymous]
+        [Route("CheckTruckDriverLogin")]
         public IHttpActionResult CheckTruckDriverLogin(string username, string password)
         {
             var checkTruckDriverLogin = _authProvider.AuthenticateTruckDriver(username, password);

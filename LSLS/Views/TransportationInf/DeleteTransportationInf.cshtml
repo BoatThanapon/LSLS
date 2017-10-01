@@ -73,21 +73,21 @@
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.RecieverName) :
+                    @Html.DisplayNameFor(model => model.ReceiverName) :
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.RecieverName)
+                    @Html.DisplayFor(model => model.ReceiverName)
                 </dd>
                 
                 <dt>
-                    @Html.DisplayNameFor(model => model.RecieverName) :
+                    @Html.DisplayNameFor(model => model.ReceiveDateTime) :
                 </dt>
 
                 <dd>
-                    @(Model.RecieveDateTime.Equals(null) ?
+                    @(Model.ReceiveDateTime.Equals(null) ?
                           Html.Label("Not Complete Yet!", new { @class = "text-danger" }) :
-                          Html.DisplayFor(model => model.RecieveDateTime, new { @class = "text-success" }))
+                          Html.DisplayFor(model => model.ReceiveDateTime, new { @class = "text-success" }))
                 </dd>
 
                 <dt>

@@ -14,30 +14,35 @@ using LSLS.Repository.Abstract;
 
 namespace LSLS.Controllers.Api
 {
+    [RoutePrefix("api/TransportationInf")]
     public class TransportationInfController : ApiController
     {
         private readonly ITransportationInfRepository _transportationInfRepository = new TransportationInfRepository(new ApplicationDbContext());
 
-        // GET: api/TransportationInf/5
+        // GET: api/TransportationInf/GetTransportationInf
+        [HttpGet]
         [ResponseType(typeof(TransportationInf))]
-        public IHttpActionResult GetTransportationInf(int shippingId)
+        [Route("GetTransportationInf")]
+        public IHttpActionResult GetTransportationInfByShippingId(int shippingId)
         {
             var findTransportationInf = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (findTransportationInf == null)
             {
-                return NotFound();
+                return Ok();
             }
 
             return Ok(findTransportationInf);
         }
 
-        // PUT: api/TransportationInf/5
+        // PUT: api/TransportationInf/UpdateTransportationInf
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTransportationInf(int shippingId, TransportationInf transportationInf)
+        [Route("UpdateTransportationInf")]
+        public IHttpActionResult UpdateTransportationInf(int shippingId, TransportationInf transportationInf)
         {
             if (transportationInf == null || transportationInf.ShippingId != shippingId)
             {
-                return BadRequest();
+                return Ok(false);
             }
 
             var findTransportationInf = _transportationInfRepository.GetTransportationInfById(shippingId);
@@ -45,9 +50,17 @@ namespace LSLS.Controllers.Api
             {
                 return NotFound();
             }
-           
-            findTransportationInf = transportationInf;
-            findTransportationInf.RecieveDateTime = DateTime.Now;
+
+            findTransportationInf.DateOfTransportation = transportationInf.DateOfTransportation;
+            findTransportationInf.OrderDate = transportationInf.OrderDate;
+            findTransportationInf.ProductName = transportationInf.ProductName;
+            findTransportationInf.StartingPoint = transportationInf.StartingPoint;
+            findTransportationInf.Destination = transportationInf.Destination;
+            findTransportationInf.Employer = transportationInf.Employer;
+            findTransportationInf.ReceiverName = transportationInf.ReceiverName;
+            findTransportationInf.JobIsActive = transportationInf.JobIsActive;
+            findTransportationInf.StatusOfTransportation = transportationInf.StatusOfTransportation;
+            findTransportationInf.ReceiveDateTime = DateTime.Now.ToLocalTime();
 
             var updateTransportationInf = _transportationInfRepository.UpdateTransportationInf(findTransportationInf);
             if (updateTransportationInf.Equals(false))

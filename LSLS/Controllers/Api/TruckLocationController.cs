@@ -11,13 +11,15 @@ using LSLS.Repository.Abstract;
 namespace LSLS.Controllers.Api
 {
     //Completed
+    [RoutePrefix("api/TruckLocation")]
     public class TruckLocationController : ApiController
     {
         private readonly ITruckLocationRepository _truckLocationRepository = new TruckLocationRepository(new ApplicationDbContext());
 
-        // PUT: api/TruckLocation/5
+        // PUT: api/TruckLocation/UpdateTruckLocation
         [HttpPut]
         [ResponseType(typeof(void))]
+        [Route("UpdateTruckLocation")]
         public IHttpActionResult UpdateTruckLocation(int truckDriverId,TruckLocation truckLocation)
         {
             if (truckLocation == null || truckLocation.TruckDriverId != truckDriverId)

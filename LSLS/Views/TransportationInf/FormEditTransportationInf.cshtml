@@ -26,7 +26,7 @@
                     @Html.HiddenFor(model => model.ShippingId)
                     @Html.HiddenFor(model => model.StatusOfTransportation)
                     @Html.HiddenFor(model => model.JobIsActive)
-                    @Html.HiddenFor(model => model.RecieveDateTime)
+                    @Html.HiddenFor(model => model.ReceiveDateTime)
 
                     
                     <div class="form-group">
@@ -38,6 +38,7 @@
 
                         </div>
                     </div>
+                   
 
                     <div class="form-group">
                         @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -88,26 +89,27 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.RecieverName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.RecieverName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.RecieverName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
                         </div>
                     </div>
-
+                    
                     <div class="form-group">
-                        @Html.LabelFor(model => model.RecieveDateTime, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ReceiveDateTime, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @(Model.RecieveDateTime.Equals(null) ?
-                                  Html.Label("Not Complete Yet!", new { @class = "text-danger" }) :
-                                  Html.DisplayFor(model => model.RecieveDateTime, new { @class = "text-success" }))
+                            @(Model.ReceiveDateTime.Equals(null) ?
+                                  Html.Label("Not Complete Yet!", new { @class = "alert alert-dismissible alert-danger" }) :
+                                  Html.EditorFor(model => model.ReceiveDateTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                  )
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <input type="submit" value="Edit" class="btn btn-warning" />
-                            @Html.ActionLink("Cancel", "ListAllTransportationInfs", "", new { @class = "btn btn-default" })
+                            @Html.ActionLink("Cancel", "ListAllTransportationInfs","", new { @class = "btn btn-default" })
                         </div>
                     </div>
                 </div>

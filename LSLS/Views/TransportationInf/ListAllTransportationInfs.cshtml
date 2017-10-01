@@ -75,7 +75,7 @@
                             <td>
                                 @(item.JobIsActive.Equals(true) ?
                                       Html.Label("Active", new { @class = "label label-success" }) :
-                                      Html.ActionLink("Add Job", "FromCreateJobAssignment", new { shippingId = item.ShippingId }, new { @class = "btn btn-info btn-sm" }))
+                                      Html.ActionLink("Add Job", "FormCreateJobAssignment", new { shippingId = item.ShippingId }, new { @class = "btn btn-info btn-sm" }))
                             </td>
                             <td>
                                 @Html.ActionLink("Details", "DetailsTransportationInf", new { shippingId = item.ShippingId }, new { @class = "btn btn-primary btn-sm" })

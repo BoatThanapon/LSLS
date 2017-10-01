@@ -8,15 +8,17 @@ using Microsoft.AspNet.Identity;
 
 namespace LSLS.Controllers.Api
 {
-    //Pass
+    //Complete
+    [RoutePrefix("api/TruckDriver")]
     public class TruckDriverController : ApiController
     {
         private readonly ITruckDriverRepository _truckDriverRepository = new TruckDriverRepository(new ApplicationDbContext());
-       
-        // GET: api/TruckDriver/5
+
+        // GET: api/TruckDriver/GetTruckDriverInfo
         [HttpGet]       
         [ResponseType(typeof(TruckDriver))]
-        public IHttpActionResult GetTruckDriver(int truckDriverId)
+        [Route("GetTruckDriverInfo")]
+        public IHttpActionResult GetTruckDriverInfo(int truckDriverId)
         {
             var findTruckDriverByTruckDriverId = _truckDriverRepository.GetTruckDriverById(truckDriverId);
             if (findTruckDriverByTruckDriverId == null)

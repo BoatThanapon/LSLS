@@ -133,5 +133,11 @@ namespace LSLS.Repository
             return listJobAssignmentsByTruckDriverId;
         }
 
+        /*
+        public JobAssignment GetJobAssingmentInfoByJobAssignmentId(int? jobAssignmentId)
+        {
+            
+        }
+        */
     }
 }

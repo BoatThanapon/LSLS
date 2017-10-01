@@ -13,5 +13,7 @@ namespace LSLS.Repository.Abstract
         bool DeleteJobAssignment(int? jobAssignmentId);
 
         List<JobAssignment> GetListJobByTruckDriverId(int truckDriverId);
+        //JobAssignment GetJobInfoByJobAssignmentId(int? jobAssignmentId);
     }
 }
+

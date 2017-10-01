@@ -22,7 +22,7 @@ namespace LSLS.Controllers
         }
 
         // GET: TransportationInfs/ListAllTransportationInfs
-        public ActionResult ListAllTransportationInfs()
+        public ViewResult ListAllTransportationInfs()
         {
             var listTranInf = _transportationInfRepository.GetAllTransportationInfs();
             return View("ListAllTransportationInfs", listTranInf);
@@ -42,13 +42,15 @@ namespace LSLS.Controllers
             return View("DetailsTransportationInf", detailsTrans);
         }
 
+        //เปลี่ยนเป็น Form
         //GET: TransportationInfs/FormCreateTransportationInf
         [HttpGet]
-        public ActionResult FormCreateTransportationInf()
+        public ViewResult FormCreateTransportationInf()
         {
             return View("FormCreateTransportationInf");
         }
 
+        //เปลี่ยนเป็น Form
         //POST: TransportationInfs/FormCreateTransportationInf
         [HttpPost]
         [ActionName("FormCreateTransportationInf")]
@@ -125,10 +127,10 @@ namespace LSLS.Controllers
             return View("DeleteTransportationInf");
         }
 
-
+        //เปลี่ยนเป็น Form
         // GET: JobAssignment/FormCreateJobAssignment
         [HttpGet]
-        public ActionResult FromCreateJobAssignment(int? shippingId)
+        public ActionResult FormCreateJobAssignment(int? shippingId)
         {
             if (shippingId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -139,7 +141,7 @@ namespace LSLS.Controllers
                 return HttpNotFound();
             }
 
-            var fromJopViewModel = new FormJobAssignmentViewModel
+            var formJopViewModel = new FormJobAssignmentViewModel
             {
                 JobAssignment = new JobAssignment
                 {
@@ -151,18 +153,19 @@ namespace LSLS.Controllers
                 TruckDrivers = _truckDriverRepository.GetAllTruckDrivers(),
             };
 
-            return View("FromCreateJobAssignment", fromJopViewModel);
+            return View("FormCreateJobAssignment", formJopViewModel);
         }
 
-        // POST: JobAssignment/FromCreateJobAssignment
+        //เปลี่ยนเป็น Form
+        // POST: JobAssignment/FormCreateJobAssignment
         [HttpPost]
-        [ActionName("FromCreateJobAssignment")]
+        [ActionName("FormCreateJobAssignment")]
         [ValidateAntiForgeryToken]
         public ActionResult CreateJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View("FromCreateJobAssignment", jobAssignmentViewModel);
+                return View("FormCreateJobAssignment", jobAssignmentViewModel);
 
             }
             var createJob = _jobAssignmentRepository.AddJobAssignment(jobAssignmentViewModel);
@@ -171,7 +174,7 @@ namespace LSLS.Controllers
                 return RedirectToAction("ListAllTransportationInfs");
             }
        
-            return View("FromCreateJobAssignment", jobAssignmentViewModel);
+            return View("FormCreateJobAssignment", jobAssignmentViewModel);
         }
         
     }

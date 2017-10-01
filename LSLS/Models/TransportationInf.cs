@@ -38,8 +38,8 @@ namespace LSLS.Models
         public string Employer { get; set; }
 
         [Required]
-        [Display(Name = "Reciever Name")]
-        public string RecieverName { get; set; }
+        [Display(Name = "Receiver Name")]
+        public string ReceiverName { get; set; }
 
         [Required]
         [Display(Name = "Status of Transportation")]
@@ -48,8 +48,9 @@ namespace LSLS.Models
         [Required]
         public bool JobIsActive { get; set; }
 
-        public DateTime? RecieveDateTime { get; set; }
+        public DateTime? ReceiveDateTime { get; set; }
 
+        public string ShippingDocImage { get; set; }
 
     }
 }

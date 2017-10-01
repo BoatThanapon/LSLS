@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="LSLS.Controllers.Api.AccountController">
+    <Position X="0.5" Y="0.5" Width="5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\Api\AccountController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSLS.Controllers.Api.JobAssignmentController">
+    <Position X="6.5" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\Api\JobAssignmentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSLS.Controllers.Api.TransportationInfController">
+    <Position X="1" Y="2.5" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAEABA=</HashCode>
+      <FileName>Controllers\Api\TransportationInfController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSLS.Controllers.Api.TruckDriverController">
+    <Position X="8" Y="2.75" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\Api\TruckDriverController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LSLS.Controllers.Api.TruckLocationController">
+    <Position X="3.75" Y="0.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAA=</HashCode>
+      <FileName>Controllers\Api\TruckLocationController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

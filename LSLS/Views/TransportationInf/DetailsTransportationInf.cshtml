@@ -84,19 +84,20 @@
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.RecieverName, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ReceiverName, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.RecieverName, new { htmlAttributes = new { @class = "form-control", placeholder = "RecieverName", disabled = "disabled" } })
-                            @Html.ValidationMessageFor(model => model.RecieverName, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control", placeholder = "RecieverName", disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        @Html.LabelFor(model => model.RecieveDateTime, new { @class = "control-label col-md-2" })
+                        @Html.LabelFor(model => model.ReceiveDateTime, new { @class = "control-label col-md-2" })
                         <div class="col-md-10">
-                            @(Model.RecieveDateTime.Equals(null) ?
-                                  Html.Label("Not Complete Yet!", new { @class = "text-danger" }) :
-                                  Html.DisplayFor(model => model.RecieveDateTime, new { @class = "text-success" }))
+                            @(Model.ReceiveDateTime.Equals(null) ?
+                                  Html.Label("Not Complete Yet!", new { @class = "alert alert-dismissible alert-danger" }) :
+                                  Html.EditorFor(model => model.ReceiveDateTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            )
                         </div>
                     </div>
 

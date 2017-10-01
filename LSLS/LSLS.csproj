@@ -259,6 +259,18 @@
     <Compile Include="Migrations\201709270923278_AddRecieveDateTimeInTransportationInfModel.Designer.cs">
       <DependentUpon>201709270923278_AddRecieveDateTimeInTransportationInfModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709301511133_FixTransportationInfClass.cs" />
+    <Compile Include="Migrations\201709301511133_FixTransportationInfClass.Designer.cs">
+      <DependentUpon>201709301511133_FixTransportationInfClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709301616221_UpdateInitialModels.cs" />
+    <Compile Include="Migrations\201709301616221_UpdateInitialModels.Designer.cs">
+      <DependentUpon>201709301616221_UpdateInitialModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710011158335_AddPropertyShippingDocImage.cs" />
+    <Compile Include="Migrations\201710011158335_AddPropertyShippingDocImage.Designer.cs">
+      <DependentUpon>201710011158335_AddPropertyShippingDocImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\JobAssignment.cs" />
@@ -547,6 +559,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="ClassDiagram3.cd" />
     <None Include="Properties\PublishProfiles\lsls - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -599,8 +612,8 @@
     <Content Include="Views\TransportationInf\DetailsTransportationInf.cshtml" />
     <Content Include="Views\TransportationInf\DeleteTransportationInf.cshtml" />
     <Content Include="Views\JobAssignment\ListAllJobAssignments.cshtml" />
-    <Content Include="Views\TransportationInf\FromCreateJobAssignment.cshtml" />
-    <Content Include="Views\JobAssignment\FromEditJobAssignment.cshtml" />
+    <Content Include="Views\TransportationInf\FormCreateJobAssignment.cshtml" />
+    <Content Include="Views\JobAssignment\FormEditJobAssignment.cshtml" />
     <Content Include="Views\JobAssignment\DetailsJobAssignment.cshtml" />
     <Content Include="Views\JobAssignment\DeleteJobAssignment.cshtml" />
     <Content Include="Views\TransportationInf\FormEditTransportationInf.cshtml" />
@@ -618,6 +631,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709270923278_AddRecieveDateTimeInTransportationInfModel.resx">
       <DependentUpon>201709270923278_AddRecieveDateTimeInTransportationInfModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709301511133_FixTransportationInfClass.resx">
+      <DependentUpon>201709301511133_FixTransportationInfClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709301616221_UpdateInitialModels.resx">
+      <DependentUpon>201709301616221_UpdateInitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710011158335_AddPropertyShippingDocImage.resx">
+      <DependentUpon>201710011158335_AddPropertyShippingDocImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

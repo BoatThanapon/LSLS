@@ -12,26 +12,34 @@ using LSLS.Repository.Abstract;
 namespace LSLS.Controllers.Api
 {
     //Completed
+    [RoutePrefix("api/JobAssignment")]
+
     public class JobAssignmentController : ApiController
     {
         private readonly IJobAssignmentRepository _jobAssignmentRepository = new JobAssignmentRepository(new ApplicationDbContext());
 
-        // GET: api/JobAssignment/5
+        // GET: api/JobAssignment/ListJobAssignment
         [HttpGet]
         [ResponseType(typeof(JobAssignment))]
+        [Route("GetListJobAssignment")]
         public IHttpActionResult ListJobAssignmentByTruckDriverId(int truckDriverId)
         {
             var listJobAssignmentsByTruckDriverId = _jobAssignmentRepository.GetListJobByTruckDriverId(truckDriverId);
-            
+            if (listJobAssignmentsByTruckDriverId == null)
+            {
+                return Ok();
+            }
             return Ok(listJobAssignmentsByTruckDriverId);
         }
 
-        // GET: api/JobAssignment/5
+        /*
+        // GET: api/JobAssignment/GetJobInfo
         [HttpGet]
         [ResponseType(typeof(JobAssignment))]
-        public IHttpActionResult GetJobAssignmentByJobAssignmentId(int jobAssignmentId)
+        [Route("GetJobInfo")]
+        public IHttpActionResult GetJobAssingmentInfoByJobAssignmentId(int jobAssignmentId)
         {
-            var findJobAssignmentsByJobAssignmentId = _jobAssignmentRepository.GetJobAssignmentById(jobAssignmentId);
+            var findJobAssignmentsByJobAssignmentId = _jobAssignmentRepository.GetJobAssingmentInfoByJobAssignmentId(jobAssignmentId);
             if (findJobAssignmentsByJobAssignmentId == null)
             {
                 return NotFound();
@@ -40,6 +48,6 @@ namespace LSLS.Controllers.Api
             return Ok(findJobAssignmentsByJobAssignmentId);
         }
 
-
+        */
     }
 }

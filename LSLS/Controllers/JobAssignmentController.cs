@@ -21,7 +21,7 @@ namespace LSLS.Controllers
 
         // GET: JobAssignment
         [HttpGet]
-        public ActionResult ListAllJobAssignments()
+        public ViewResult ListAllJobAssignments()
         {
             IEnumerable<JobAssignment> listJobAssingments = _jobAssignmentRepository.GetAllJobAssignments();
 
@@ -29,8 +29,9 @@ namespace LSLS.Controllers
         }
 
         // GET: JobAssignment/FormEditJobAssignment/jobAssignmentId
+        //เปลี่ยนเป็น Form
         [HttpGet]
-        public ActionResult FromEditJobAssignment(int? jobAssignmentId)
+        public ActionResult FormEditJobAssignment(int? jobAssignmentId)
         {
             if (jobAssignmentId == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,12 +48,13 @@ namespace LSLS.Controllers
                 TruckDrivers = _truckDriverRepository.GetAllTruckDrivers(),
             };
 
-            return View("FromEditJobAssignment", jobViewModel);
+            return View("FormEditJobAssignment", jobViewModel);
         }
 
-        // POST: JobAssignment/FromEditJobAssignment
+        // POST: JobAssignment/FormEditJobAssignment
+        //เปลี่ยนเป็น Form
         [HttpPost]
-        [ActionName("FromEditJobAssignment")]
+        [ActionName("FormEditJobAssignment")]
         [ValidateAntiForgeryToken]
         public ActionResult EditJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
