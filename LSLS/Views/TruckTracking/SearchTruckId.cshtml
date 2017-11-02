@@ -22,7 +22,7 @@
 <div class="container-fluid body-content">
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>
@@ -30,6 +30,7 @@
                     </h4>
                 </div>
                 <div class="panel-body">
+                    
                     <ul class="list-group">
                         <li class="list-group-item">
                             <span class="badge">@Html.DisplayFor(model => model.TruckDriverFullname)</span>
@@ -40,7 +41,9 @@
                             Last Updated
                         </li>
                         <li class="list-group-item">
-                            <span class="badge">@Html.DisplayFor(model => model.TruckCurrentAddress)</span>
+                            <span class="badge">
+                                @Html.DisplayFor(model => model.TruckCurrentAddress)
+                            </span>
                             Current Address
                         </li>
                     </ul>
@@ -49,7 +52,7 @@
             @Html.ActionLink("Back To Truck Tracking", "TruckTracking", "TruckTracking", new { @class = "btn btn-primary btn-block" })
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="panel panel-default">
                 <div class="panel-heading">Map</div>
                 <div id="map"></div>
@@ -84,7 +87,7 @@
             function() {
                 if (infowindow) infowindow.close();
                 infowindow = new google.maps.InfoWindow({
-                    content: "<div class='infoDiv'><h3>" + data.TruckId + "</h3>" + data.TruckDriverFullname + "</div>"
+                    content: "<div class='infoDiv'><h3> TruckID: " + data.TruckId + "</h3>" +"<h4>Fullname: "+ data.TruckDriverFullname+"</h4>"+"</br>Address: " + data.TruckCurrentAddress +"</div>"
                 });
                 infowindow.open(map, marker);
             });

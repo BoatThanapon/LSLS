@@ -65,6 +65,24 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis, Version=1.29.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.29.2\lib\net45\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth, Version=1.29.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.29.2\lib\net45\Google.Apis.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Auth.PlatformServices, Version=1.29.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Auth.1.29.2\lib\net45\Google.Apis.Auth.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Core, Version=1.29.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Core.1.29.2\lib\net45\Google.Apis.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v3, Version=1.29.2.995, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Drive.v3.1.29.2.995\lib\net45\Google.Apis.Drive.v3.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.PlatformServices, Version=1.29.2.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.1.29.2\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -271,8 +289,25 @@
     <Compile Include="Migrations\201710011158335_AddPropertyShippingDocImage.Designer.cs">
       <DependentUpon>201710011158335_AddPropertyShippingDocImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710021651450_deleteShippingDocIng.cs" />
+    <Compile Include="Migrations\201710021651450_deleteShippingDocIng.Designer.cs">
+      <DependentUpon>201710021651450_deleteShippingDocIng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710021654482_ChangStringToByteShippingDocImg.cs" />
+    <Compile Include="Migrations\201710021654482_ChangStringToByteShippingDocImg.Designer.cs">
+      <DependentUpon>201710021654482_ChangStringToByteShippingDocImg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710031719343_UpdateShippingModel.cs" />
+    <Compile Include="Migrations\201710031719343_UpdateShippingModel.Designer.cs">
+      <DependentUpon>201710031719343_UpdateShippingModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711021340476_AddFileOnlineModel.cs" />
+    <Compile Include="Migrations\201711021340476_AddFileOnlineModel.Designer.cs">
+      <DependentUpon>201711021340476_AddFileOnlineModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\FileOnline.cs" />
     <Compile Include="Models\JobAssignment.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TransportationInf.cs" />
@@ -284,6 +319,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repository\Abstract\FileOnlineRepository.cs" />
     <Compile Include="Repository\Abstract\IJobAssignmentRepository.cs" />
     <Compile Include="Repository\Abstract\ITransportationInfRepository.cs" />
     <Compile Include="Repository\AuthProvider.cs" />
@@ -291,6 +327,7 @@
     <Compile Include="Repository\Abstract\IStaffRepository.cs" />
     <Compile Include="Repository\Abstract\ITruckDriverRepository.cs" />
     <Compile Include="Repository\Abstract\ITruckLocationRepository.cs" />
+    <Compile Include="Repository\FileOnlineRepository.cs" />
     <Compile Include="Repository\JobAssignmentRepository.cs" />
     <Compile Include="Repository\StaffRepository.cs" />
     <Compile Include="Repository\TransportationInfRepository.cs" />
@@ -559,7 +596,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="ClassDiagram3.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Properties\PublishProfiles\lsls - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -641,6 +678,18 @@
     <EmbeddedResource Include="Migrations\201710011158335_AddPropertyShippingDocImage.resx">
       <DependentUpon>201710011158335_AddPropertyShippingDocImage.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021651450_deleteShippingDocIng.resx">
+      <DependentUpon>201710021651450_deleteShippingDocIng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021654482_ChangStringToByteShippingDocImg.resx">
+      <DependentUpon>201710021654482_ChangStringToByteShippingDocImg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710031719343_UpdateShippingModel.resx">
+      <DependentUpon>201710031719343_UpdateShippingModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711021340476_AddFileOnlineModel.resx">
+      <DependentUpon>201711021340476_AddFileOnlineModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -648,9 +697,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\ShippingDoc\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

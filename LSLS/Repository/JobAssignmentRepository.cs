@@ -127,7 +127,7 @@ namespace LSLS.Repository
             return true;
         }
 
-        public List<JobAssignment> GetListJobByTruckDriverId(int truckDriverId)
+        public List<JobAssignment> GetListJobByTruckDriverId(int? truckDriverId)
         {
             List<JobAssignment> listJobAssignmentsByTruckDriverId = _context.JobAssignments.Where(j => j.TruckDriverId == truckDriverId).ToList();
             return listJobAssignmentsByTruckDriverId;

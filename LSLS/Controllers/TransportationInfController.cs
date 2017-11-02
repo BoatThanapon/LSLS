@@ -72,7 +72,7 @@ namespace LSLS.Controllers
         public ActionResult FormEditTransportationInf(int? shippingId)
         {
             if (shippingId == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return null;
 
             TransportationInf transportationInfInDb = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (transportationInfInDb == null)
@@ -102,7 +102,7 @@ namespace LSLS.Controllers
         public ActionResult DeleteTransportationInf(int? shippingId)
         {
             if (shippingId == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return null;
 
             TransportationInf transportationInfInDb = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (transportationInfInDb == null)
@@ -124,7 +124,7 @@ namespace LSLS.Controllers
             if (transportationInfInDb.Equals(true))
                 return RedirectToAction("ListAllTransportationInfs");
 
-            return View("DeleteTransportationInf");
+            return View();
         }
 
         //เปลี่ยนเป็น Form
@@ -133,7 +133,7 @@ namespace LSLS.Controllers
         public ActionResult FormCreateJobAssignment(int? shippingId)
         {
             if (shippingId == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return null;
 
             var findTransportationInf = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (findTransportationInf == null)

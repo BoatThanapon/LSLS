@@ -50,7 +50,11 @@ namespace LSLS.Models
 
         public DateTime? ReceiveDateTime { get; set; }
 
-        public string ShippingDocImage { get; set; }
+        
+        public byte[] ShippingDocImage { get; set; }
+
+        [Display(Name = "Shipping Note")]
+        public string ShippingNote { get; set; }
 
     }
 }

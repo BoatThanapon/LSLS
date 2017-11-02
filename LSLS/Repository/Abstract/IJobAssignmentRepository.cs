@@ -12,7 +12,7 @@ namespace LSLS.Repository.Abstract
         bool UpdateJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel);
         bool DeleteJobAssignment(int? jobAssignmentId);
 
-        List<JobAssignment> GetListJobByTruckDriverId(int truckDriverId);
+        List<JobAssignment> GetListJobByTruckDriverId(int? truckDriverId);
         //JobAssignment GetJobInfoByJobAssignmentId(int? jobAssignmentId);
     }
 }
