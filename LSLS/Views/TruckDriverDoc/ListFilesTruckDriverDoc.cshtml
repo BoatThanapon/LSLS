@@ -1,0 +1,92 @@
+﻿@model LSLS.ViewModels.ListFileTruckDriverDocViewModel
+
+@{
+    ViewBag.Title = "ListFilesTruckDriver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="breadcrumb-item active">List Files @Model.TruckDriverDocument.TruckDriver.TruckDriverFullname</li>
+</ul>
+
+
+<div class="container-fluid">
+    
+    <p>
+        @Html.ActionLink("Upload File", "UploadFileTruckDriverDocView", new { truckDriverDocId = Model.TruckDriverDocument.TruckDriverDocId }, new {@class = "btn btn-success"})
+    </p>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">@Model.TruckDriverDocument.TruckDriver.TruckDriverFullname Files</h5>
+        </div>
+
+        <div class="card-body">
+
+            <table id="fileTruckDriver" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>File Name</th>
+                    <th>File Category</th>
+                    <th>Last Modified</th>
+                    <th>Option</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.FileDetails)
+                {
+                    <tr>
+                        <td>
+                            <a target="_blank" href="@Url.Action("PrintFileFromTruckDriverView", "TruckDriverDoc", new {fileId = item.FileId})">
+                                @Html.DisplayFor(modelItem => item.FileName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileCategory)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastModified)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" target="_blank" href="@Url.Action("PrintFileFromTruckDriverView", "TruckDriverDoc", new { fileId = item.FileId })">
+                                        Print
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("ShareFileTruckDriverView", "TruckDriverDoc", new {fileId = item.FileId})">
+                                        Share...
+                                    </a>
+                                    <a class="dropdown-item" href="@Url.Action("DeleteFileFromTruckDriverDocView", "TruckDriverDoc", new {fileId = item.FileId})">
+                                        Delete
+                                    </a>
+                                </div>
+                            </div>
+
+                           
+                        </td>
+
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#fileTruckDriver").DataTable();          
+        });
+
+    </script>
+}

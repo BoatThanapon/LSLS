@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using LSLS.Repository;
 using LSLS.Repository.Abstract;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Mvc;
+using Unity;
+using Unity.AspNet.Mvc;
 
 namespace LSLS.Infrastructure
 {
@@ -27,6 +27,8 @@ namespace LSLS.Infrastructure
             container.RegisterType<IAuthProvider, AuthProvider>();
             container.RegisterType<IJobAssignmentRepository, JobAssignmentRepository>();
             container.RegisterType<ITransportationInfRepository, TransportationInfRepository>();
+            container.RegisterType<ITruckDriverDocRepository, TruckDriverDocRepository>();
+
 
 
             RegisterTypes(container);

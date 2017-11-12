@@ -15,8 +15,8 @@ namespace LSLS.Models
 
         public DbSet<TransportationInf> TransportationInfs { get; set; }
 
-        public DbSet<FileOnline> FilesOnlines { get; set; }
-
+        public DbSet<TruckDriverDocument> TruckDriverDocuments { get; set; }
+        public DbSet<FileDetail> FileDetails { get; set; }
 
         public ApplicationDbContext()
             : base("name=ApplicationDbContext")

@@ -20,12 +20,12 @@ namespace LSLS.Controllers.Api
     public class TransportationInfController : ApiController
     {
         private readonly ITransportationInfRepository _transportationInfRepository = new TransportationInfRepository(new ApplicationDbContext());
-
+        /*
         public TransportationInfController(ITransportationInfRepository repository)
         {
             _transportationInfRepository = repository;
         }
-
+        */
         // GET: api/TransportationInf/GetTransportationInf
         [HttpGet]
         [ResponseType(typeof(TransportationInf))]

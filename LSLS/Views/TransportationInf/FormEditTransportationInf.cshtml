@@ -6,22 +6,22 @@
 }
 
 <ul class="breadcrumb">
-    <li>@Html.ActionLink("Home", "Main", "Account")</li>
-    <li>@Html.ActionLink("Transportation Informations", "ListAllTransportationInfs", "TransportationInf")</li>
-    <li class="active">Edit Shipping</li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTransportationInfs", "TransportationInf")">Transportation Informations</a></li>
+    <li class="breadcrumb-item active">Edit Shipping</li>
 </ul>
 
 <div class="container">
-    <div class="panel panel-warning">
-        <div class="panel-heading">
-            <span class="glyphicon glyphicon-th"></span> Edit Shipping
+    <div class="card border-warning">
+        <div class="card-header text-dark bg-warning">
+            <h5 class="card-title">Edit Shipping</h5> 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
 
-                <div class="form-horizontal">
+                <form>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.ShippingId)
                     @Html.HiddenFor(model => model.StatusOfTransportation)
@@ -30,8 +30,8 @@
 
                     
                     <div class="form-group">
-                        @Html.LabelFor(model => model.StatusOfTransportation, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.StatusOfTransportation, new { @class = "col-5" })
+                        <div class="col-7">
                             @(Model.StatusOfTransportation.Equals(true) ?
                                   Html.Label("Complete", new { @class = "alert alert-success" }) :
                                   Html.Label("Not Complete", new { @class = "alert alert-danger" }))
@@ -41,86 +41,87 @@
                    
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.OrderDate, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.DateOfTransportation, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.DateOfTransportation, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.DateOfTransportation, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.DateOfTransportation, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.StartingPoint, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.StartingPoint, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.StartingPoint, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.StartingPoint, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.Employer, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.Employer, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.Employer, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.Employer, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.ReceiverName, htmlAttributes: new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.ReceiverName, new { htmlAttributes = new { @class = "form-control" } })
                             @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ShippingNote, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.ShippingNote, new { @class = "col-5" })
+                        <div class="col-7">
                             @Html.EditorFor(model => model.ShippingNote, new { htmlAttributes = new { @class = "form-control", placeholder = "Shipping Note", disabled = "disabled" } })
                             @Html.ValidationMessageFor(model => model.ShippingNote, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        @Html.LabelFor(model => model.ReceiveDateTime, new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
+                        @Html.LabelFor(model => model.ReceiveDateTime, new { @class = "col-5" })
+                        <div class="col-7">
                             @(Model.ReceiveDateTime.Equals(null) ?
                                   Html.Label("Not Complete Yet!", new { @class = "alert alert-dismissible alert-danger" }) :
                                   Html.EditorFor(model => model.ReceiveDateTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                                   )
                         </div>
                     </div>
-
+                    
+                    <hr/>
                     <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
+                        <div class="col-7">
                             <input type="submit" value="Edit" class="btn btn-warning" />
-                            @Html.ActionLink("Cancel", "ListAllTransportationInfs","", new { @class = "btn btn-default" })
+                            @Html.ActionLink("Cancel", "ListAllTransportationInfs","", new { @class = "btn btn-outline-secondary" })
                         </div>
                     </div>
-                </div>
+                </form>
             }
         </div>
     </div>

@@ -1,0 +1,64 @@
+﻿@model LSLS.Models.FileDetail
+
+@{
+    ViewBag.Title = "UploadFileTruckDriverView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.TruckDriverDocId })">List Files</a></li>
+    <li class="breadcrumb-item active">Upload File</li>
+</ul>
+
+<div class="container">
+    <div class="card border-success">
+        <div class="card-header text-white bg-success">
+            <h5 class="card-title">Upload File</h5>
+        </div>
+        <div class="card-body">
+                      
+            @using (Html.BeginForm("UploadFileTruckDriverDocView", "TruckDriverDoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                <form>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.TruckDriverDocId)
+                    @Html.HiddenFor(model => model.FileName)
+
+                    
+                    <div class="form-group">
+                        @Html.Label("File Category", new {@class = "col-5"})
+                        <div class="col-7">
+                            @Html.EditorFor(model => model.FileCategory, new { htmlAttributes = new { @class = "form-control", placeholder = "File Category" } })
+                            @Html.ValidationMessageFor(model => model.FileCategory, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Select File", new {@class = "col-5"})
+                        <div class="col-7">
+                            @Html.TextBox("file", "", new { type = "file"})
+                        </div>
+                    </div>
+
+                    <hr/>
+
+                    <div class="form-group">
+                        <div class="col-7">
+                            <input type="submit" value="Upload" class="btn btn-success"/>
+                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId",new { truckDriverDocId = @Model.TruckDriverDocId }, new {@class = "btn btn-outline-secondary"})
+                        </div>
+                    </div>
+                </form>
+    
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

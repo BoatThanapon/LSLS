@@ -12,17 +12,17 @@
 }
 
 <ul class="breadcrumb">
-    <li>@Html.ActionLink("Home", "Main", "Account")</li>
-    <li>@Html.ActionLink("Transportation Information", "ListAllTransportationInfs", "TransportationInf")</li>
-    <li class="active">Delete Transportation Information</li>
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTransportationInfs", "TransportationInf")">Transportation Informations</a></li>
+    <li class="breadcrumb-item active">Delete Shipping Document</li>
 </ul>
 
 <div class="container">
-    <div class="panel panel-danger">
-        <div class="panel-heading">
-            <span class="glyphicon glyphicon-th"></span> Delete Transportation Information
+    <div class="card border-danger">
+        <div class="card-header text-white bg-danger">
+            <h5 class="card-title">Delete Shipping Document</h5> 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <dl class="dl-horizontal">
                 <dt>
                     @Html.DisplayNameFor(model => model.Employer) :
@@ -94,8 +94,8 @@
 
                 <dd>
                     @(Model.ReceiveDateTime.Equals(null) ?
-                          Html.Label("Not Complete Yet!", new { @class = "text-danger" }) :
-                          Html.DisplayFor(model => model.ReceiveDateTime, new { @class = "text-success" }))
+                          Html.Label("Not Complete Yet!", new { @class = "badge badge-danger" }) :
+                          Html.DisplayFor(model => model.ReceiveDateTime, new { @class = "badge badge-success" }))
                 </dd>
 
                 <dt>
@@ -104,8 +104,8 @@
 
                 <dd>
                     @(Model.StatusOfTransportation.Equals(true) ?
-                      Html.Label("Complete", new { @class = "label label-success" }) :
-                      Html.Label("Not Complete", new { @class = "label label-danger" }))
+                      Html.Label("Complete", new { @class = "badge badge-success" }) :
+                      Html.Label("Not Complete", new { @class = "badge badge-danger" }))
                 </dd>
 
             </dl>
@@ -116,9 +116,9 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-group">
-                    <div class="col-md-offset-1 col-md-8">
+                    <div class="col-md-8">
                         <input type="submit" value="Delete" class="btn btn-danger " onclick="return confirm('Do you want to delete ? ');" />
-                        @Html.ActionLink("Cancel", "ListAllTransportationInfs", "", new { @class = "btn btn-default" })
+                        @Html.ActionLink("Cancel", "ListAllTransportationInfs", "", new { @class = "btn btn-outline-secondary" })
                     </div>
                 </div>
             }

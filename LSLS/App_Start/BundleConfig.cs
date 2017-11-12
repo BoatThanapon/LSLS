@@ -10,12 +10,12 @@ namespace LSLS
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js",
-                "~/scripts/bootbox.js",
                 "~/Scripts/respond.js",
-                "~/scripts/datatables/jquery.datatables.js",
-                "~/scripts/datatables/datatables.bootstrap.js",
-                "~/scripts/typeahead.bundle.js",
-                "~/scripts/toastr.js"
+                "~/Scripts/datatables/jquery.dataTables.js",
+                "~/Scripts/datatables/dataTables.bootstrap4.js",
+                "~/Scripts/popper.js",
+                "~/Scripts/jquery-3.2.1.js",
+                "~/Scripts/jquery-1.12.4.js"
             ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -27,10 +27,8 @@ namespace LSLS
                 "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap-yeti.css",
-                "~/content/datatables/css/datatables.bootstrap.css",
-                "~/content/typeahead.css",
-                "~/content/toastr.css",
+                "~/Content/bootstrap.css",
+                "~/content/datatables/css/dataTables.bootstrap4.css",
                 "~/Content/site.css"));
         }
     

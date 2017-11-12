@@ -1,0 +1,99 @@
+﻿@model LSLS.ViewModels.SentToMailViewModel
+
+@{
+    ViewBag.Title = "ShareFileTruckDriverView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    $(document).ready(function () {
+        if ('@ViewBag.Message' === 'Sent') {
+            alert('Mail has been sent successfully');
+        }
+    });
+</script>
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="breadcrumb-item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.FileDetail.TruckDriverDocId })">List Files</a></li>
+    <li class="breadcrumb-item active">Delete File</li>
+</ul>
+
+
+<div class="container">
+    <div class="card border-primary">
+        <div class="card-header text-white bg-primary">
+            <h5 class="card-title">Share File</h5>
+        </div>
+        <div class="card-body">
+
+            @using (Html.BeginForm("ShareFileTruckDriverView", "TruckDriverDoc", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
+            {
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.FileDetail.TruckDriverDocId)
+
+                @Html.HiddenFor(model => model.FileDetail.FileId)
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.Label("File Category")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FileDetail.FileCategory)
+                    </dd>
+
+                    <dt>
+                        @Html.Label("File Name")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FileDetail.FileName)
+                    </dd>
+
+                </dl>
+                <hr />
+                <form>
+                    <div class="form-group">
+                        @Html.Label("Sent To", new {@class = "col-5"})
+                        <div class="col-7">
+                            @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control", placeholder = "Sent To" } })
+                            @Html.ValidationMessageFor(model => model.To, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.Label("Subject", new {@class = "col-5"})
+                        <div class="col-7">
+                            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = "Subjecty" } })
+                            @Html.ValidationMessageFor(model => model.Subject, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        @Html.Label("Description", new {@class = "col-5"})
+                        <div class="col-7">
+                            @Html.EditorFor(m => m.Body, new { htmlAttributes = new { @class = "form-control", placeholder = "Body" } })
+                            @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-7">
+                            <input type="submit" value="Send" class="btn btn-primary"/>
+                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId", new {truckDriverDocId = @Model.FileDetail.TruckDriverDocId}, new {@class = "btn btn-outline-secondary"})
+                        </div>
+                    </div>
+                </form>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

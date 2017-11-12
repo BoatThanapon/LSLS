@@ -40,6 +40,13 @@ namespace LSLS.Repository
             };
             _context.TruckLocations.Add(truckLocation);
 
+            TruckDriverDocument truckDriverDocument = new TruckDriverDocument
+            {
+                TruckDriverId = truckDriver.TruckDriverId
+            };
+            _context.TruckDriverDocuments.Add(truckDriverDocument);
+
+
             _context.SaveChanges();
 
             return true;
