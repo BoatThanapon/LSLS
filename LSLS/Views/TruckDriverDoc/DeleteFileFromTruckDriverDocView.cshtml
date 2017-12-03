@@ -6,18 +6,18 @@
 }
 
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.TruckDriverDocId })">List Files</a></li>
-    <li class="breadcrumb-item active">Delete File</li>
+    <li class="item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.TruckDriverDocId })">List Files</a></li>
+    <li class="item active">Delete File</li>
 </ul>
 
 <div class="container">
-    <div class="card border-danger">
-        <div class="card-header text-white bg-danger">
-            <h5 class="card-title">Delete File</h5>
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h5 class="panel-title">Delete File</h5>
         </div>
-        <div class="card-body">
+        <div class="panel-body">
 
             @using (Html.BeginForm("DeleteFileFromTruckDriverDocView", "TruckDriverDoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
@@ -46,7 +46,7 @@
                 <hr/>
                 <form>
                     <div class="form-group">
-                        <div class="col-7">
+                        <div class="col-md-10 col-md-offset-1">
                             <input type="submit" value="Delete" class="btn btn-danger" />
                             @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId", new { truckDriverDocId = @Model.TruckDriverDocId }, new { @class = "btn btn-outline-secondary" })
                         </div>

@@ -57,14 +57,13 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateTransportationInf(TransportationInf transportationInf)
         {
-            if (!ModelState.IsValid)
-                return View(transportationInf);
-
-            bool transportationInfAdd = _transportationInfRepository.AddTransportationInf(transportationInf);
-            if (transportationInfAdd.Equals(true))
-                return RedirectToAction("ListAllTransportationInfs");
-
-            return View(transportationInf);
+            if (ModelState.IsValid)
+            {
+                bool transportationInfAdd = _transportationInfRepository.AddTransportationInf(transportationInf);
+                if (transportationInfAdd.Equals(true))
+                    return RedirectToAction("ListAllTransportationInfs");
+            }
+            return View("FormCreateTransportationInf", transportationInf);
         }
 
         //GET TransportationInfs/FormEditTransportationInf/shippingId
@@ -72,7 +71,7 @@ namespace LSLS.Controllers
         public ActionResult FormEditTransportationInf(int? shippingId)
         {
             if (shippingId == null)
-                return null;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             TransportationInf transportationInfInDb = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (transportationInfInDb == null)
@@ -88,13 +87,13 @@ namespace LSLS.Controllers
         public ActionResult EditTransportationInf(TransportationInf transportationInf)
         {
             if (!ModelState.IsValid)
-                return View(transportationInf);
+                return View("FormEditTransportationInf", transportationInf);
 
             bool transportationInfEdit = _transportationInfRepository.UpdateTransportationInf(transportationInf);
             if (transportationInfEdit.Equals(true))
                 return RedirectToAction("ListAllTransportationInfs");
 
-            return View(transportationInf);
+            return View("FormEditTransportationInf", transportationInf);
         }
 
         // GET: TransportationInfs/DeleteTransportationInf/shippingId
@@ -102,7 +101,7 @@ namespace LSLS.Controllers
         public ActionResult DeleteTransportationInf(int? shippingId)
         {
             if (shippingId == null)
-                return null;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             TransportationInf transportationInfInDb = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (transportationInfInDb == null)
@@ -117,14 +116,11 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTransportationInfConfirmed(int? shippingId)
         {
-            if (shippingId == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             bool transportationInfInDb = _transportationInfRepository.DeleteTransportationInf(shippingId);
             if (transportationInfInDb.Equals(true))
                 return RedirectToAction("ListAllTransportationInfs");
 
-            return View();
+            return View("DeleteTransportationInf");
         }
 
         //เปลี่ยนเป็น Form
@@ -133,7 +129,7 @@ namespace LSLS.Controllers
         public ActionResult FormCreateJobAssignment(int? shippingId)
         {
             if (shippingId == null)
-                return null;
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             var findTransportationInf = _transportationInfRepository.GetTransportationInfById(shippingId);
             if (findTransportationInf == null)

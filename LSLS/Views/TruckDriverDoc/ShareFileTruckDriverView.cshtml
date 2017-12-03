@@ -13,19 +13,19 @@
 </script>
 
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.FileDetail.TruckDriverDocId })">List Files</a></li>
-    <li class="breadcrumb-item active">Delete File</li>
+    <li class="item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.FileDetail.TruckDriverDocId })">List Files</a></li>
+    <li class="item active">Share File</li>
 </ul>
 
 
 <div class="container">
-    <div class="card border-primary">
-        <div class="card-header text-white bg-primary">
-            <h5 class="card-title">Share File</h5>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h5 class="panel-title">Share File</h5>
         </div>
-        <div class="card-body">
+        <div class="panel-body">
 
             @using (Html.BeginForm("ShareFileTruckDriverView", "TruckDriverDoc", FormMethod.Post, new { @id = "form1", @enctype = "multipart/form-data" }))
             {
@@ -53,38 +53,39 @@
 
                 </dl>
                 <hr />
-                <form>
+                <div class="form-horizontal">
                     <div class="form-group">
-                        @Html.Label("Sent To", new {@class = "col-5"})
-                        <div class="col-7">
+                        @Html.Label("Sent To", new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
                             @Html.EditorFor(model => model.To, new { htmlAttributes = new { @class = "form-control", placeholder = "Sent To" } })
                             @Html.ValidationMessageFor(model => model.To, "", new {@class = "text-danger"})
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        @Html.Label("Subject", new {@class = "col-5"})
-                        <div class="col-7">
+                        @Html.Label("Subject", new {@class = "control-label col-md-2"})
+                        <div class="col-md-10">
                             @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", placeholder = "Subjecty" } })
                             @Html.ValidationMessageFor(model => model.Subject, "", new {@class = "text-danger"})
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        @Html.Label("Description", new {@class = "col-5"})
-                        <div class="col-7">
+                        @Html.Label("Description", new {@class = "control-label col-md-2" })
+                        <div class="col-md-10">
                             @Html.EditorFor(m => m.Body, new { htmlAttributes = new { @class = "form-control", placeholder = "Body" } })
                             @Html.ValidationMessageFor(model => model.Body, "", new {@class = "text-danger"})
                         </div>
                     </div>
-
+                    
+                    <hr/>
                     <div class="form-group">
-                        <div class="col-7">
+                        <div class="col-md-7 col-md-offset-2">
                             <input type="submit" value="Send" class="btn btn-primary"/>
-                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId", new {truckDriverDocId = @Model.FileDetail.TruckDriverDocId}, new {@class = "btn btn-outline-secondary"})
+                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId", new {truckDriverDocId = @Model.FileDetail.TruckDriverDocId}, new {@class = "btn btn-default"})
                         </div>
                     </div>
-                </form>
+                </div>
 
             }
 

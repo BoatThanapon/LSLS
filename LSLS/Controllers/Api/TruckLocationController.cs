@@ -12,7 +12,7 @@ using LSLS.Repository.Abstract;
 namespace LSLS.Controllers.Api
 {
     //Completed
-    [RoutePrefix("api/TruckLocation")]
+    [RoutePrefix(prefix: "api/TruckLocation")]
     public class TruckLocationController : ApiController
     {
         private readonly ITruckLocationRepository _truckLocationRepository = new TruckLocationRepository(new ApplicationDbContext());
@@ -63,13 +63,11 @@ namespace LSLS.Controllers.Api
             findTruckLocationByTruckDriverId.Longitude = truckLocation.Longitude;
 
             //
-
-
-
-            findTruckLocationByTruckDriverId.TruckCurrentTime = DateTime.Now;
-
-
-            
+            DateTime dateTime = DateTime.UtcNow;
+            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var convertedTime = TimeZoneInfo.ConvertTime(dateTime, timeZoneInfo);
+            findTruckLocationByTruckDriverId.TruckCurrentTime = convertedTime;
+           
             var updateTruckLocation = _truckLocationRepository.UpdateTruckLocation(findTruckLocationByTruckDriverId);
             if (updateTruckLocation.Equals(false))
             {

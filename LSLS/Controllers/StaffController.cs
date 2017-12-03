@@ -63,23 +63,24 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveStaff(Staff staff)
         {
-            if (!ModelState.IsValid)
-                return View(staff);
-
-            if (staff.StaffId == 0)
+            // ReSharper disable once InvertIf
+            if (ModelState.IsValid)
             {
-                var staffAdd = _staffRepository.AddStaff(staff);
-                if (staffAdd.Equals(true))
-                    return RedirectToAction("ListAllStaffs");
-            }
-            else
-            {
-                var staffEdit = _staffRepository.UpdateStaff(staff);
-                if (staffEdit.Equals(true))
-                    return RedirectToAction("ListAllStaffs");
+                if (staff.StaffId == 0)
+                {
+                    var staffAdd = _staffRepository.AddStaff(staff);
+                    if (staffAdd.Equals(true))
+                        return RedirectToAction("ListAllStaffs");
+                }
+                else
+                {
+                    var staffEdit = _staffRepository.UpdateStaff(staff);
+                    if (staffEdit.Equals(true))
+                        return RedirectToAction("ListAllStaffs");
+                }
             }
 
-            return View(staff);
+            return View("FormCreateStaff", staff);
         }
 
 

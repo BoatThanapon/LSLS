@@ -6,52 +6,60 @@
 }
 
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.TruckDriverDocId })">List Files</a></li>
-    <li class="breadcrumb-item active">Upload File</li>
+    <li class="item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="item"><a href="@Url.Action("ListAllTruckDriverDoc", "TruckDriverDoc")">Truck's Driver Document</a></li>
+    <li class="item"><a href="@Url.Action("ListFilesByTruckDriverDocId","TruckDriverDoc", new { truckDriverDocId = @Model.TruckDriverDocId })">List Files</a></li>
+    <li class="item active">Upload File</li>
 </ul>
 
 <div class="container">
-    <div class="card border-success">
-        <div class="card-header text-white bg-success">
-            <h5 class="card-title">Upload File</h5>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h5 class="panel-title">Upload File</h5>
         </div>
-        <div class="card-body">
+        <div class="panel-body">
                       
             @using (Html.BeginForm("UploadFileTruckDriverDocView", "TruckDriverDoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
+
                 @Html.AntiForgeryToken()
-                <form>
+                <div class="form-horizontal">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     @Html.HiddenFor(model => model.TruckDriverDocId)
                     @Html.HiddenFor(model => model.FileName)
 
                     
                     <div class="form-group">
-                        @Html.Label("File Category", new {@class = "col-5"})
-                        <div class="col-7">
+                        @Html.Label("File Category", new {@class = "control-label col-lg-2" })
+                        <div class="col-lg-10">
                             @Html.EditorFor(model => model.FileCategory, new { htmlAttributes = new { @class = "form-control", placeholder = "File Category" } })
                             @Html.ValidationMessageFor(model => model.FileCategory, "", new {@class = "text-danger"})
+
                         </div>
                     </div>
+                    
 
                     <div class="form-group">
-                        @Html.Label("Select File", new {@class = "col-5"})
-                        <div class="col-7">
-                            @Html.TextBox("file", "", new { type = "file"})
+                        @Html.Label("Select File (PDF File)", new {@class = "control-label col-md-2" })
+                        <div class="col-lg-10">
+                            @Html.TextBox("file", "", new {type = "file"})
+
                         </div>
+                        <label class="text-danger col-lg-2">@ViewBag.Message</label>
+                        <br/>
+
                     </div>
 
                     <hr/>
 
                     <div class="form-group">
-                        <div class="col-7">
+                        <div class="col-md-10 col-md-offset-2">
                             <input type="submit" value="Upload" class="btn btn-success"/>
-                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId",new { truckDriverDocId = @Model.TruckDriverDocId }, new {@class = "btn btn-outline-secondary"})
+                            @Html.ActionLink("Cancel", "ListFilesByTruckDriverDocId",new { truckDriverDocId = @Model.TruckDriverDocId }, new {@class = "btn btn-default"})
                         </div>
                     </div>
-                </form>
+
+                </div>
     
             }
 

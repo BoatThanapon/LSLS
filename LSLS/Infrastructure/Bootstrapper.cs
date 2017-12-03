@@ -28,6 +28,8 @@ namespace LSLS.Infrastructure
             container.RegisterType<IJobAssignmentRepository, JobAssignmentRepository>();
             container.RegisterType<ITransportationInfRepository, TransportationInfRepository>();
             container.RegisterType<ITruckDriverDocRepository, TruckDriverDocRepository>();
+            container.RegisterType<IPaymentDocRepository, PaymentDocRepository>();
+            container.RegisterType<IReportTransportationRepository, ReportTransportationRepository>();
 
 
 

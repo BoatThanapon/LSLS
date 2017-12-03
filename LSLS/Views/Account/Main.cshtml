@@ -3,29 +3,93 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="clearfix">
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="display-3">
-                <strong>Welcome <a>@(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</a> </strong> 
-                    <span>
-                        To LSLS
-                    </span>
-            </h1>
-            <hr />
-            <h4>
-                <strong>Logical Supporting Logistic System</strong>
-                <br />
-            </h4>
-            <h5>
-                is the application for support the logistic company.
-                The user can use two platforms together.
-                Logical Supporting Logistic System provides on this web application and Android mobile application for used to help each other.
-                In the side of company staff and truck's driver for getting more efficient.
-            </h5>
+<script>
+    $('.carousel').carousel()
 
-            
-       
+</script>
+<div class="row">
+    <div class="container">
+        <div class="col-lg-12">
+            <div id="carouselExampleControls" class="carousel" data-ride="carousel">
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="http://www.itracking.asia/wp-content/uploads/2015/07/gps-vehicle-tracking.jpg" alt="Los Angeles" style="width: 100%; height: 450px">                       
+                    </div>
+                </div>      
+            </div>     
+            <br/>
+            <div class="">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="">
+                        <h1 class="display-3 text-dark text-center">
+                            Welcome <strong><a>@(Request.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</a> </strong>
+                            <span>
+                                To LSLS
+                            </span>
+                        </h1>
+                    </div>
+
+                    <br/>
+
+                </div>
+                <div class="col-lg-5">
+
+                    <h1 class="display-3">
+                        <strong>LSLS</strong>
+                    </h1>
+                    <hr/>
+                    <h4>
+                        <strong>Logical Supporting Logistic System</strong>
+                        <br/>
+                    </h4>
+                    <h5>
+                        is the application for support the logistic company.
+                        The user can use two platforms together.
+                        Logical Supporting Logistic System provides on this web application and Android mobile application for used to help each other.
+                        In the side of company staff and truck's driver for getting more efficient.
+                    </h5>
+                </div>
+                <div class="col-lg-1"></div>
+                <div class="col-lg-6">
+
+                    <h1 class="display-3">
+                        <strong>Feature </strong>
+                    </h1>
+                    <hr/>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong> Feature-01:</strong> User Account Management
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-02:</strong> Authentication System
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-03:</strong> Truck and Product Tracking 
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-04:</strong> Job Assignment 
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-05:</strong> Transportation Information Record
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-06:</strong> Documentation
+                        </li>
+                        <li class="list-group-item">
+                            <strong> Feature-07:</strong> Shipping Report
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+
         </div>
+       
     </div>
+        
 </div>
+    
+
+  </div> 

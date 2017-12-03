@@ -28,10 +28,10 @@ namespace LSLS.Controllers
         }
 
         // Get: TruckTracking/SearchTruckId
-        [HttpPost]
+        [HttpGet]
         public ActionResult SearchTruckId(string truckId)
         {
-            var resultSearchTruckId = _truckLocationRepository.SearchTruckLocationByTruckId(truckId);
+            var resultSearchTruckId = _truckLocationRepository.SearchTruckLocationByTruckId(truckId.Trim());
 
             if (resultSearchTruckId != null)
                 return View("SearchTruckId", resultSearchTruckId);

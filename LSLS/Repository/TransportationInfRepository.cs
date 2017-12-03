@@ -90,7 +90,6 @@ namespace LSLS.Repository
             if (shippingId == null)
                 return false;
 
-            // ReSharper disable once SuggestVarOrType_SimpleTypes
             TransportationInf transportationInfInDb = _context.TransportationInfs.Find(shippingId);
             if (transportationInfInDb == null)
                 return false;

@@ -56,6 +56,18 @@ namespace LSLS.Repository
             return fileDetail;
         }
 
+        public bool AddFileDetails(FileDetail fileDetail)
+        {
+            if (fileDetail == null)
+            {
+                return false;
+            }
+
+            _context.FileDetails.Add(fileDetail);
+            return true;
+        }
+
+
         public void SaveChanges()
         {           
             _context.SaveChanges();

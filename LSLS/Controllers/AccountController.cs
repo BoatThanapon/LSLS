@@ -32,7 +32,7 @@ namespace LSLS.Controllers
                 return RedirectToAction("Main", "Account");
             ModelState.AddModelError("", "");
 
-            return View(loginStaff);
+            return View("ViewLoginStaff", loginStaff);
         }
 
         [Authorize]

@@ -58,16 +58,16 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditJobAssignment(FormJobAssignmentViewModel jobAssignmentViewModel)
         {
-            if (!ModelState.IsValid)
-                return View(jobAssignmentViewModel);
-
-            var editJob = _jobAssignmentRepository.UpdateJobAssignment(jobAssignmentViewModel);
-            if (editJob.Equals(true))
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("ListAllJobAssignments");
+                var editJob = _jobAssignmentRepository.UpdateJobAssignment(jobAssignmentViewModel);
+                if (editJob.Equals(true))
+                {
+                    return RedirectToAction("ListAllJobAssignments");
+                }
             }
 
-            return View(jobAssignmentViewModel);
+            return View("FormEditJobAssignment", jobAssignmentViewModel);
         }
 
 
@@ -117,18 +117,13 @@ namespace LSLS.Controllers
         [ActionName("DeleteJobAssignment")]
         public ActionResult DeleteJobAssignmentConfirmed(int? jobAssignmentId)
         {
-            if (jobAssignmentId == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
             var deleteJob = _jobAssignmentRepository.DeleteJobAssignment(jobAssignmentId);
             if (deleteJob.Equals(true))
             {
                 return RedirectToAction("ListAllJobAssignments");
             }
 
-            return View();
+            return View("DeleteJobAssignment");
         }       
     }
 }

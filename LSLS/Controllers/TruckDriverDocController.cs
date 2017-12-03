@@ -12,6 +12,7 @@ using LSLS.ViewModels;
 
 namespace LSLS.Controllers
 {
+    [Authorize]
     public class TruckDriverDocController : Controller
     {
 
@@ -79,6 +80,10 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UploadFileTruckDriverDoc(FileDetail fileUpload)
         {
+            DateTime dateTime = DateTime.UtcNow;
+            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var convertedTime = TimeZoneInfo.ConvertTime(dateTime, timeZoneInfo);
+
             if (ModelState.IsValid)
             {
                 List<FileDetail> fileDetails = new List<FileDetail>();
@@ -95,37 +100,50 @@ namespace LSLS.Controllers
                             Extension = Path.GetExtension(fileName),
                             FileId = Guid.NewGuid(),
                             FileCategory = fileUpload.FileCategory,
-                            LastModified = DateTime.Now
-                            
-                        };
-                        fileDetails.Add(fileDetail);
+                            LastModified = convertedTime
 
-                        var path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), fileDetail.FileId + fileDetail.Extension);
-                        file.SaveAs(path);
+                        };
+
+                        if (fileDetail.Extension == ".pdf")
+                        {
+                            fileDetails.Add(fileDetail);
+
+                            var path = Path.Combine(Server.MapPath("~/App_Data/Upload/"), fileDetail.FileId + fileDetail.Extension);
+                            file.SaveAs(path);
+
+                            var findTruckDriverDocAndTruckDriverById =
+                                _truckDriverDocRepository.GetTruckDriverDocAndTruckDriverById(fileUpload.TruckDriverDocId);
+
+                            if (findTruckDriverDocAndTruckDriverById != null)
+                            {
+                                findTruckDriverDocAndTruckDriverById.FileDetails = fileDetails;
+                                bool addFileDetail = _truckDriverDocRepository.AddFileDetails(fileDetail);
+                                if (addFileDetail.Equals(true))
+                                {
+                                    _truckDriverDocRepository.SaveChanges();
+
+                                    var listFilesByTruckDriverDocId =
+                                        _truckDriverDocRepository.ListFilesByTruckDriverDocId(fileUpload.TruckDriverDocId);
+
+                                    ListFileTruckDriverDocViewModel listFileTruckDriverDoc = new ListFileTruckDriverDocViewModel
+                                    {
+                                        TruckDriverDocument = findTruckDriverDocAndTruckDriverById,
+                                        FileDetails = listFilesByTruckDriverDocId
+                                    };
+
+                                    return View("ListFilesTruckDriverDoc", listFileTruckDriverDoc);
+
+                                }
+
+                            }
+                        }
+
+                        ViewBag.Message = "Please, upload PDF File Only";
+                        return View(fileUpload);
                     }
                 }
-
-                var listFilesByTruckDriverDocId =
-                    _truckDriverDocRepository.ListFilesByTruckDriverDocId(fileUpload.TruckDriverDocId);
-
-                var findTruckDriverDocAndTruckDriverById =
-                    _truckDriverDocRepository.GetTruckDriverDocAndTruckDriverById(fileUpload.TruckDriverDocId);
-
-                if (findTruckDriverDocAndTruckDriverById != null)
-                {
-                    findTruckDriverDocAndTruckDriverById.FileDetails = fileDetails;
-                    _truckDriverDocRepository.SaveChanges();
-
-                    ListFileTruckDriverDocViewModel listFileTruckDriverDoc = new ListFileTruckDriverDocViewModel
-                    {
-                        TruckDriverDocument = findTruckDriverDocAndTruckDriverById,
-                        FileDetails = listFilesByTruckDriverDocId
-                    };
-
-                    return View("ListFilesTruckDriverDoc", listFileTruckDriverDoc);
-                }
+                return View(fileUpload);
             }
-
             return View(fileUpload);
         }
 

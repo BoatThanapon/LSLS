@@ -1,0 +1,149 @@
+﻿@using System.Globalization
+@model LSLS.ViewModels.ReportTransportationViewModel
+@{
+    ViewBag.Title = "ReportTransportationMainView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="breadcrumb-item active">Report Transportation Informations</li>
+</ul>
+
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Report Shipping Is Completed</h5>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("ListTransportationInfIsCompletedInMonth", "ReportTransportation", FormMethod.Get))
+                    {
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                  
+                            <div class="form-group">
+                                @Html.Label("Month", new {@class = "control-label col-md-2"})
+
+                                <div class="col-md-10">
+
+                                    @{
+                                        int[] months = Enumerable.Range(1, 12).ToArray();
+                                    }
+                                    @Html.DropDownListFor(x => x.Month,
+                                        months.Select(x =>
+                                            new SelectListItem
+                                            {
+                                                Text = CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedMonthNames[x - 1] + " (" + x + ")",
+                                                Value = x.ToString()
+                                            }
+                                            ), new {@class = "form-control"})
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Year", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+
+                                    @{
+                                        int[] years = Enumerable.Range(2010, 30).ToArray();
+                                    }
+                                    @Html.DropDownListFor(x => x.Year,
+                                        years.Select(x =>
+                                            new SelectListItem
+                                            {
+                                                Text = x.ToString(),
+                                                Value = x.ToString()
+                                            }
+                                            ), new {@class = "form-control"})
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-2">
+                                    <input type="submit" value="Search" class="btn btn-success"/>
+                                    <input type="reset" value="reset" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+    
+
+
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h5 class="panel-title">Report Shipping Is Not Completed</h5>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("ListTransportationInfIsNotCompletedInMonth", "ReportTransportation", FormMethod.Get))
+                    {
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.Label("Month", new { @class = "control-label col-md-2" })
+
+                                <div class="col-md-10">
+
+                                    @{
+                                        int[] months = Enumerable.Range(1, 12).ToArray();
+                                    }
+                                    @Html.DropDownListFor(x => x.Month,
+                                        months.Select(x =>
+                                            new SelectListItem
+                                            {
+                                                Text = CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedMonthNames[x - 1] + " (" + x + ")",
+                                                Value = x.ToString()
+                                            }
+                                            ), new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Year", new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+
+                                    @{
+                                        int[] years = Enumerable.Range(2010, 30).ToArray();
+                                    }
+                                    @Html.DropDownListFor(x => x.Year,
+                                        years.Select(x =>
+                                            new SelectListItem
+                                            {
+                                                Text = x.ToString(),
+                                                Value = x.ToString()
+                                            }
+                                            ), new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-2">
+                                    <input type="submit" value="Search" class="btn btn-danger" />
+                                    <input type="reset" value="reset" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    }
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

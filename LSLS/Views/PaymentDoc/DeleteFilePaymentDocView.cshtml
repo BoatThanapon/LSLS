@@ -1,0 +1,59 @@
+﻿@model LSLS.Models.PaymentDocument
+
+@{
+    ViewBag.Title = "DeleteFilePaymentDocView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li class="item"><a href="@Url.Action("Main", "Account")">Home</a></li>
+    <li class="item"><a href="@Url.Action("ListAllPaymentDocs", "PaymentDoc")">Payment Document</a></li>
+    <li class="item active">Delete Payment Document File</li>
+</ul>
+
+
+<div class="container">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h5 class="panel-title">Delete File</h5>
+        </div>
+        <div class="panel-body">
+
+            @using (Html.BeginForm("DeleteFilePaymentDocView", "PaymentDoc", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.PaymentDocId)
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.Label("File Name")
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.PaymentFileName)
+                    </dd>
+
+                </dl>
+                <hr />
+                <form>
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-2">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                            @Html.ActionLink("Cancel", "ListAllPaymentDocs", null, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </form>
+
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

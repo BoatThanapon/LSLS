@@ -15,6 +15,8 @@ namespace LSLS.Repository.Abstract
         IEnumerable<FileDetail> ListFilesByTruckDriverDocId(int truckDriverDocId);
         FileDetail GetFileDetailById(Guid fileId);
 
+        bool AddFileDetails(FileDetail fileDetail);
+
         void SaveChanges();
 
         bool DeleteFileFromTruckDriverDoc(FileDetail fileDetail);

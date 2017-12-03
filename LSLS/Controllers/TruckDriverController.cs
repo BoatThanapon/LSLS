@@ -65,22 +65,21 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveTruckDriver(TruckDriver truckDriver)
         {
-            if (!ModelState.IsValid)
-                return View(truckDriver);
-
-            if (truckDriver.TruckDriverId == 0)
+            if (ModelState.IsValid)
             {
-                var truckdriverAdd = _truckDriverRepository.AddTruckDriver(truckDriver);
-                if (truckdriverAdd.Equals(true))
-                    return RedirectToAction("ListAllTruckDrivers");
+                if (truckDriver.TruckDriverId == 0)
+                {
+                    var truckdriverAdd = _truckDriverRepository.AddTruckDriver(truckDriver);
+                    if (truckdriverAdd.Equals(true))
+                        return RedirectToAction("ListAllTruckDrivers");                  
+                }
+                else
+                {
+                    var truckdriverEdit = _truckDriverRepository.UpdateTruckDriver(truckDriver);
+                    if (truckdriverEdit.Equals(true))
+                        return RedirectToAction("ListAllTruckDrivers");
+                }
             }
-            else
-            {
-                var truckdriverEdit = _truckDriverRepository.UpdateTruckDriver(truckDriver);
-                if (truckdriverEdit.Equals(true))
-                    return RedirectToAction("ListAllTruckDrivers");
-            }
-
             return View(truckDriver);
         }
 
@@ -104,9 +103,6 @@ namespace LSLS.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteTruckDriverConfirmed(int? truckdriverId)
         {
-            if (truckdriverId == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
             var truckDriver = _truckDriverRepository.DeleteTruckDriver(truckdriverId);
             if (truckDriver.Equals(true))
                 return RedirectToAction("ListAllTruckDrivers");

@@ -5,136 +5,129 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <ul class="breadcrumb">
-    <li class="breadcrumb-item"><a href="@Url.Action("Main", "Account")">Home</a></li>
-    <li class="breadcrumb-item"><a href="@Url.Action("ListAllTruckDrivers", "TruckDriver")">Truck's Driver</a></li>
-    <li class="breadcrumb-item active">Edit Truck's Driver</li>
+    <li>@Html.ActionLink("Home", "Main", "Account")</li>
+    <li>@Html.ActionLink("Truck's Drivers", "ListAllTruckDrivers", "TruckDriver")</li>
+    <li class="active">Truck's Driver Profile</li>
 </ul>
 
 <div class="container">
-    <div class="card border-info">
-        <div class="card-header text-white bg-info">
-            Edit Truck's Driver
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">Truck's Driver Profile</h2>
         </div>
-        <div class="card-body">
-            @using (Html.BeginForm("SaveTruckDriver", "TruckDriver"))
-            {
-                @Html.AntiForgeryToken()
+        <div class="panel-body">
+            <div class="form-horizontal">
+                <h4>
+                    <strong>Truck's Driver Account</strong>
+                </h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                <form>
-                    <h5 class="card-title">Truck's Driver Account</h5>
-
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverUsername, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverUsername, new { htmlAttributes = new { @class = "form-control", placeholder = "Username", @readonly = "readonly" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverUsername, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverUsername, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverPassword, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverPassword, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverPassword, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverConfirmPassword, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverConfirmPassword, new { htmlAttributes = new { @class = "form-control", placeholder = "Confirm Password", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverConfirmPassword, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverConfirmPassword, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <br />
-                    <h5 class="card-title">Truck's Driver Information</h5>
-                    <hr />
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverFullname, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverFullname, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        </div>
+                <br />
+                <h4>
+                    <strong>Truck's Driver Information</strong>
+                </h4>
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverFullname, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverFullname, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverGender, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.DropDownListFor(model => model.TruckDriverGender, new[]
-                        {
-                            new SelectListItem {Text = "Select", Value = ""},
-                            new SelectListItem {Text = "Male", Value = "Male"},
-                            new SelectListItem {Text = "Female", Value = "Female"}
-                        }, new { @class = "form-control", disabled = "disabled" })
-
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverGender, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverGender, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverCitizenId, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverCitizenId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverCitizenId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverCitizenId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverDriverLicenseId, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverDriverLicenseId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverDriverLicenseId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverDriverLicenseId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverBirthdate, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.TextBoxFor(m => m.TruckDriverBirthdate, new { @class = "form-control", placeholder = "DD/MM/YYYY", type = "date", disabled = "disabled" })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverBirthdate, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.TruckDriverBirthdate, new { @class = "form-control", disabled = "disabled", type = "date" })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverAddress, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverAddress, new { htmlAttributes = new { @class = "form-control", placeholder = "Address", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverAddress, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverAddress, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverEmail, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "example@example.com", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverEmail, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverEmail, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckDriverTelephoneNo, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckDriverTelephoneNo, new { htmlAttributes = new { @class = "form-control", placeholder = "0123456789", disabled = "disabled" } })
-                        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckDriverTelephoneNo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckDriverTelephoneNo, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
+                </div>
 
-                    <br />
-                    <h4>
-                        <strong>Truck Information</strong>
-                    </h4>
-                    <hr />
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.TruckId, new { @class = "col-md-5" })
-                        <div class="col-md-7">
-                            @Html.EditorFor(model => model.TruckId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
-                        </div>
+                <br />
+                <h4>
+                    <strong>Truck Information</strong>
+                </h4>
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.TruckId, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TruckId, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
                     </div>
-                    <br />
+                </div>
+                <br />
 
-                    @Html.HiddenFor(m => m.TruckDriverId)
-                    <div class="form-group">
-                        <div class="col-md-7">
-                            @Html.ActionLink("Update", "FormEditTruckDriver", new {truckdriverId = Model.TruckDriverId}, new {@class = "btn btn-info"})
-                            @Html.ActionLink("Cancel", "ListAllTruckDrivers", "TruckDriver", new { @class = "btn btn-outline-secondary" })
-                        </div>
+                @Html.HiddenFor(m => m.TruckDriverId)
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.ActionLink("Update", "FormEditTruckDriver", new { truckdriverId = Model.TruckDriverId }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Cancel", "ListAllTruckDrivers", "TruckDriver", new { @class = "btn btn-default" })
                     </div>
-                </form>
-            }
+                </div>
+            </div>
         </div>
 
     </div>

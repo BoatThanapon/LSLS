@@ -18,12 +18,12 @@ namespace LSLS.Controllers.Api
     {
         private readonly IJobAssignmentRepository _jobAssignmentRepository = new JobAssignmentRepository(new ApplicationDbContext());
 
-        /*
+        
         public JobAssignmentController(IJobAssignmentRepository repository)
         {
             _jobAssignmentRepository = repository;
         }
-        */
+        
         // GET: api/JobAssignment/ListJobAssignment
         [HttpGet]
         [ResponseType(typeof(JobAssignment))]

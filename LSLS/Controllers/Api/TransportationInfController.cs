@@ -20,12 +20,12 @@ namespace LSLS.Controllers.Api
     public class TransportationInfController : ApiController
     {
         private readonly ITransportationInfRepository _transportationInfRepository = new TransportationInfRepository(new ApplicationDbContext());
-        /*
+        
         public TransportationInfController(ITransportationInfRepository repository)
         {
             _transportationInfRepository = repository;
         }
-        */
+        
         // GET: api/TransportationInf/GetTransportationInf
         [HttpGet]
         [ResponseType(typeof(TransportationInf))]
@@ -66,10 +66,16 @@ namespace LSLS.Controllers.Api
             findTransportationInf.Employer = transportationInf.Employer;
             findTransportationInf.ReceiverName = transportationInf.ReceiverName;
             findTransportationInf.JobIsActive = transportationInf.JobIsActive;
-            findTransportationInf.StatusOfTransportation = transportationInf.StatusOfTransportation;           
-            findTransportationInf.ReceiveDateTime = DateTime.Now.ToLocalTime();
+            findTransportationInf.StatusOfTransportation = transportationInf.StatusOfTransportation; 
             findTransportationInf.ShippingDocImage = transportationInf.ShippingDocImage;
             findTransportationInf.ShippingNote = transportationInf.ShippingNote;
+
+            DateTime dateTime = DateTime.UtcNow;
+            var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+            var convertedTime = TimeZoneInfo.ConvertTime(dateTime, timeZoneInfo);
+
+            findTransportationInf.ReceiveDateTime = convertedTime;
+
 
 
             // ReSharper disable once UseNullPropagation

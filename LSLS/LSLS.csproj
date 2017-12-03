@@ -57,7 +57,7 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\CommonServiceLocator.dll</HintPath>
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -206,29 +206,29 @@
     <Reference Include="Thinktecture.IdentityModel.Core, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Thinktecture.IdentityModel.Core.1.4.0\lib\net45\Thinktecture.IdentityModel.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Abstractions.2.1.1\lib\net45\Unity.Abstractions.dll</HintPath>
+    <Reference Include="Unity.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Abstractions.2.2.0\lib\net45\Unity.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Configuration, Version=5.0.2.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Configuration.dll</HintPath>
+    <Reference Include="Unity.Configuration, Version=5.0.3.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Container, Version=5.1.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Container.5.1.1\lib\net45\Unity.Container.dll</HintPath>
+    <Reference Include="Unity.Container, Version=5.2.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Container.5.2.0\lib\net45\Unity.Container.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Interception, Version=5.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Interception.dll</HintPath>
+    <Reference Include="Unity.Interception, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Interception.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Interception.Configuration, Version=5.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.Interception.Configuration.dll</HintPath>
+    <Reference Include="Unity.Interception.Configuration, Version=5.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.Interception.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Mvc, Version=5.0.2.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.Mvc.5.0.2\lib\net45\Unity.Mvc.dll</HintPath>
+    <Reference Include="Unity.Mvc, Version=5.0.3.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.5.0.3\lib\net45\Unity.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RegistrationByConvention, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
+    <Reference Include="Unity.RegistrationByConvention, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ServiceLocation, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.1.2\lib\net45\Unity.ServiceLocation.dll</HintPath>
+    <Reference Include="Unity.ServiceLocation, Version=2.0.3.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.2.0\lib\net45\Unity.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
       <HintPath>..\packages\WebActivatorEx.2.2.0\lib\net40\WebActivatorEx.dll</HintPath>
@@ -251,6 +251,8 @@
     <Compile Include="Controllers\Api\TruckDriverController.cs" />
     <Compile Include="Controllers\Api\TruckLocationController.cs" />
     <Compile Include="Controllers\JobAssignmentController.cs" />
+    <Compile Include="Controllers\PaymentDocController.cs" />
+    <Compile Include="Controllers\ReportTransportationController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\TransportationInfController.cs" />
     <Compile Include="Controllers\TruckDriverController.cs" />
@@ -308,10 +310,35 @@
     <Compile Include="Migrations\201711101636098_UpdateTruckDriverDocumentAndFileDetailModel.Designer.cs">
       <DependentUpon>201711101636098_UpdateTruckDriverDocumentAndFileDetailModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711130657021_AddPaymentDocumentModel.cs" />
+    <Compile Include="Migrations\201711130657021_AddPaymentDocumentModel.Designer.cs">
+      <DependentUpon>201711130657021_AddPaymentDocumentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130838449_UpdateInitailModel.cs" />
+    <Compile Include="Migrations\201711130838449_UpdateInitailModel.Designer.cs">
+      <DependentUpon>201711130838449_UpdateInitailModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130845533_UpdateInitailModel1.cs" />
+    <Compile Include="Migrations\201711130845533_UpdateInitailModel1.Designer.cs">
+      <DependentUpon>201711130845533_UpdateInitailModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130851450_AddPaymentDocumentModel1.cs" />
+    <Compile Include="Migrations\201711130851450_AddPaymentDocumentModel1.Designer.cs">
+      <DependentUpon>201711130851450_AddPaymentDocumentModel1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711130907501_updatePaymentDocumentModel.cs" />
+    <Compile Include="Migrations\201711130907501_updatePaymentDocumentModel.Designer.cs">
+      <DependentUpon>201711130907501_updatePaymentDocumentModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711131003539_UpdateModels.cs" />
+    <Compile Include="Migrations\201711131003539_UpdateModels.Designer.cs">
+      <DependentUpon>201711131003539_UpdateModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\FileDetail.cs" />
     <Compile Include="Models\JobAssignment.cs" />
+    <Compile Include="Models\PaymentDocument.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TransportationInf.cs" />
     <Compile Include="Models\TruckDriver.cs" />
@@ -324,6 +351,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repository\Abstract\IJobAssignmentRepository.cs" />
+    <Compile Include="Repository\Abstract\IPaymentDocRepository.cs" />
+    <Compile Include="Repository\Abstract\IReportTransportationRepository.cs" />
     <Compile Include="Repository\Abstract\ITransportationInfRepository.cs" />
     <Compile Include="Repository\Abstract\ITruckDriverDocRepository.cs" />
     <Compile Include="Repository\AuthProvider.cs" />
@@ -332,23 +361,27 @@
     <Compile Include="Repository\Abstract\ITruckDriverRepository.cs" />
     <Compile Include="Repository\Abstract\ITruckLocationRepository.cs" />
     <Compile Include="Repository\JobAssignmentRepository.cs" />
+    <Compile Include="Repository\PaymentDocRepository.cs" />
+    <Compile Include="Repository\ReportTransportationRepository.cs" />
     <Compile Include="Repository\StaffRepository.cs" />
     <Compile Include="Repository\TransportationInfRepository.cs" />
     <Compile Include="Repository\TruckDriverDocRepository.cs" />
     <Compile Include="Repository\TruckDriverRepository.cs" />
     <Compile Include="Repository\TruckLocationRepository.cs" />
     <Compile Include="ViewModels\ListFileTruckDriverDocViewModel.cs" />
+    <Compile Include="ViewModels\PaymentDocViewModel.cs" />
+    <Compile Include="ViewModels\ReportTransportationViewModel.cs" />
     <Compile Include="ViewModels\SentToMailViewModel.cs" />
+    <Compile Include="ViewModels\SharePaymentViewModel.cs" />
     <Compile Include="ViewModels\TruckDriverDocViewModel.cs" />
     <Compile Include="ViewModels\FormJobAssignmentViewModel.cs" />
     <Compile Include="ViewModels\LoginStaffViewModel.cs" />
     <Compile Include="ViewModels\TruckLocationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-grid.css" />
-    <Content Include="Content\bootstrap-grid.min.css" />
-    <Content Include="Content\bootstrap-reboot.css" />
-    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-yeti.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -509,15 +542,33 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="ClassDiagram1.cd" />
+    <None Include="Properties\PublishProfiles\lsls - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\lsls - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
@@ -594,29 +645,6 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
-    <Content Include="Content\DataTables\css\semanticui.scss" />
-    <Content Include="Content\DataTables\css\mixins.scss" />
-    <Content Include="Content\DataTables\css\common.scss" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <None Include="Properties\PublishProfiles\lsls - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\lsls - Web Deploy.pubxml" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.min.js.br" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.br" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\.DS_Store" />
-    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
     <Content Include="Scripts\jquery-3.2.1.slim.js" />
@@ -631,18 +659,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\popper-utils.js" />
-    <Content Include="Scripts\popper-utils.min.js" />
-    <Content Include="Scripts\popper.js" />
-    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -686,20 +706,13 @@
     <Content Include="Views\TruckDriverDoc\UploadFileTruckDriverDocView.cshtml" />
     <Content Include="Views\TruckDriverDoc\DeleteFileFromTruckDriverDocView.cshtml" />
     <Content Include="Views\TruckDriverDoc\ShareFileTruckDriverView.cshtml" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.min.js.br" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.br" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
-    <Content Include="Scripts\README.md" />
-    <Content Include="Scripts\popper.min.js.map" />
-    <Content Include="Scripts\popper.min.js.gz" />
-    <Content Include="Scripts\popper.min.js.br" />
-    <Content Include="Scripts\popper.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.map" />
-    <Content Include="Scripts\popper-utils.min.js.br" />
-    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\PaymentDoc\ListAllPaymentDocs.cshtml" />
+    <Content Include="Views\PaymentDoc\UploadFilePaymentDocView.cshtml" />
+    <Content Include="Views\PaymentDoc\ShareFilePaymentDocView.cshtml" />
+    <Content Include="Views\PaymentDoc\DeleteFilePaymentDocView.cshtml" />
+    <Content Include="Views\ReportTransportation\ReportTransportationMainView.cshtml" />
+    <Content Include="Views\ReportTransportation\ListTransportationInfIsCompletedInMonth.cshtml" />
+    <Content Include="Views\ReportTransportation\ListTransportationInfIsNotCompletedInMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -741,6 +754,24 @@
     <EmbeddedResource Include="Migrations\201711101636098_UpdateTruckDriverDocumentAndFileDetailModel.resx">
       <DependentUpon>201711101636098_UpdateTruckDriverDocumentAndFileDetailModel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130657021_AddPaymentDocumentModel.resx">
+      <DependentUpon>201711130657021_AddPaymentDocumentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130838449_UpdateInitailModel.resx">
+      <DependentUpon>201711130838449_UpdateInitailModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130845533_UpdateInitailModel1.resx">
+      <DependentUpon>201711130845533_UpdateInitailModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130851450_AddPaymentDocumentModel1.resx">
+      <DependentUpon>201711130851450_AddPaymentDocumentModel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711130907501_updatePaymentDocumentModel.resx">
+      <DependentUpon>201711130907501_updatePaymentDocumentModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711131003539_UpdateModels.resx">
+      <DependentUpon>201711131003539_UpdateModels.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -753,9 +784,7 @@
   <ItemGroup>
     <Folder Include="App_Data\PaymentDoc\" />
     <Folder Include="App_Data\Upload\" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <Folder Include="Content\img\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
