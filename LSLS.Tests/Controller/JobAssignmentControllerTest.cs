@@ -24,7 +24,7 @@ namespace LSLS.Tests.Controller
             // Arrange
             var jobList = MockJobAssignmentsList();
             var jobAssignmentRepository = new Mock<IJobAssignmentRepository>();
-            jobAssignmentRepository.Setup(e => e.GetAllJobAssignments()).Returns(jobList.AsQueryable());
+            jobAssignmentRepository.Setup(e => e.GetAllJobAssignments()).Returns(jobList);
 
             var truckDriverList = MockListTruckDrivers();
             var truckDriverRepository = new Mock<ITruckDriverRepository>();
@@ -35,9 +35,9 @@ namespace LSLS.Tests.Controller
 
             // Act 
             var result = controller.ListAllJobAssignments() as ViewResult;
-
+            var model = result.Model;
             // Assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(model, jobList);
             Assert.AreEqual(result.ViewName, "ListAllJobAssignments");
         }
 
@@ -93,7 +93,7 @@ namespace LSLS.Tests.Controller
             var controller = new JobAssignmentController(jobAssignmentRepository.Object, truckDriverRepository.Object);
 
             // Act 
-            var result = controller.FormEditJobAssignment(1) as ViewResult;
+            var result = controller.FormEditJobAssignment(job.JobAssignmentId) as ViewResult;
             var viewName = result.ViewName;
             var model = result.Model as FormJobAssignmentViewModel;
 
@@ -125,7 +125,7 @@ namespace LSLS.Tests.Controller
 
             // Assert
             Assert.AreEqual(viewName, "FormEditJobAssignment");
-            Assert.IsNotNull(modelView);
+            Assert.AreEqual(modelView,job);
         }
 
         [TestMethod]
@@ -224,13 +224,14 @@ namespace LSLS.Tests.Controller
             var controller = new JobAssignmentController(jobAssignmentRepository.Object, truckDriverRepository.Object);
 
             // Act 
-            var result = controller.DetailsJobAssignment(1) as ViewResult;
+            var result = controller.DetailsJobAssignment(job.JobAssignmentId) as ViewResult;
             var viewName = result.ViewName;
-            var model = result.Model as FormJobAssignmentViewModel;
+            var model = result.Model;           
 
             // Assert
             Assert.AreEqual(viewName, "DetailsJobAssignment");
             Assert.IsNotNull(model);
+
         }
 
 
@@ -287,8 +288,8 @@ namespace LSLS.Tests.Controller
 
             // Act 
             var result = controller.DeleteJobAssignment(job.JobAssignmentId) as ViewResult;
-            var viewName = result.ViewName;
-            var model = result.Model as JobAssignment;
+            var viewName = result.ViewName;           
+            var model = result.Model;
 
             // Assert
             Assert.AreEqual(viewName, "DeleteJobAssignment");

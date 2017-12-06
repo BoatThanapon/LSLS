@@ -15,7 +15,7 @@ namespace LSLS.Tests.Controller
     [TestClass]
     public class TruckDriverControllerTest
     {
-        // ListAllStaffs -------------------------------------------------------
+        // ListAllTruckDrivers -------------------------------------------------------
 
         [TestMethod]
         public void Test_ListAllTruckDrivers_Return_List_And_ViewName_Correct()

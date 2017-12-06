@@ -35,10 +35,12 @@ namespace LSLS.Tests.Controller
 
             // Act 
             var result = controller.ListAllStaffs() as ViewResult;
+            var model = result.Model;
 
             // Assert
-            Assert.IsNotNull(result);
             Assert.AreEqual(result.ViewName, "ListAllStaffs");
+            Assert.AreEqual(model, staffList);
+
         }
 
         //FormCreateStaff-------------------------------------------------------------------------------
@@ -106,9 +108,11 @@ namespace LSLS.Tests.Controller
             // Act
             var result = controller.DetailsStaff(1) as ViewResult;
             var viewName = result.ViewName;
+            var model = result.Model;
 
             // Assert
             Assert.AreEqual(viewName, "DetailsStaff");
+            Assert.AreEqual(model, staff);
         }
 
 

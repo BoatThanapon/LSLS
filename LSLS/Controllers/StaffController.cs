@@ -17,7 +17,7 @@ namespace LSLS.Controllers
 
         // GET: Staff/ListAllStaffs
         [HttpGet]
-        public ActionResult ListAllStaffs()
+        public ViewResult ListAllStaffs()
         {
             return View("ListAllStaffs", _staffRepository.GetAllStaffs());
         }

@@ -50,7 +50,6 @@ namespace LSLS.Controllers
             return View("FormCreateTransportationInf");
         }
 
-        //เปลี่ยนเป็น Form
         //POST: TransportationInfs/FormCreateTransportationInf
         [HttpPost]
         [ActionName("FormCreateTransportationInf")]

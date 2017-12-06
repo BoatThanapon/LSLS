@@ -26,9 +26,10 @@ namespace LSLS.Tests.Controller
 
             // Act 
             var result = controller.TruckTracking() as ViewResult;
+            var model = result.Model;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(model);
             Assert.AreEqual(result.ViewName, "TruckTracking");
         }
 
@@ -65,10 +66,12 @@ namespace LSLS.Tests.Controller
 
             // Act 
             var result = controller.SearchTruckId(truckLocation.TruckId) as ViewResult;
+            var model = result.Model;
 
             // Assert
-            Assert.IsNotNull(result);
             Assert.AreEqual(result.ViewName, "SearchTruckId");
+            Assert.AreEqual(model, truckLocation);
+
         }
 
         [TestMethod]
@@ -83,9 +86,8 @@ namespace LSLS.Tests.Controller
             // Act 
             var result = controller.SearchTruckId("CM-0004") as ViewResult;
 
-            // Assert
-            Assert.IsNotNull(result);
             Assert.AreEqual(result.ViewName, "TruckTracking");
+
         }
 
 

@@ -38,11 +38,6 @@ namespace LSLS.Controllers
         {
             var listFilesByTruckDriverDocId = _truckDriverDocRepository.ListFilesByTruckDriverDocId(truckDriverDocId);
 
-            if (listFilesByTruckDriverDocId == null)
-            {
-                return null;
-            }
-
             var findTruckDriverDocAndTruckDriverById =
                 _truckDriverDocRepository.GetTruckDriverDocAndTruckDriverById(truckDriverDocId);
 
@@ -60,10 +55,6 @@ namespace LSLS.Controllers
         public ActionResult UploadFileTruckDriverDocView(int truckDriverDocId)
         {
             var findTruckDriverDoc = _truckDriverDocRepository.GetTruckDriverDocumentById(truckDriverDocId);
-            if (findTruckDriverDoc == null)
-            {
-                return HttpNotFound();
-            }
 
             FileDetail fileDetail = new FileDetail()
             {
@@ -87,7 +78,7 @@ namespace LSLS.Controllers
             if (ModelState.IsValid)
             {
                 List<FileDetail> fileDetails = new List<FileDetail>();
-                for (int i = 0; i < Request.Files.Count; i++)
+                for (var i = 0; i < Request.Files.Count; i++)
                 {
                     var file = Request.Files[i];
 
@@ -139,12 +130,12 @@ namespace LSLS.Controllers
                         }
 
                         ViewBag.Message = "Please, upload PDF File Only";
-                        return View(fileUpload);
+                        return View("UploadFileTruckDriverDocView",fileUpload);
                     }
                 }
-                return View(fileUpload);
+                return View("UploadFileTruckDriverDocView",fileUpload);
             }
-            return View(fileUpload);
+            return View("UploadFileTruckDriverDocView",fileUpload);
         }
 
 

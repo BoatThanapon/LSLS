@@ -88,14 +88,14 @@ namespace LSLS.Controllers
                         }
 
                         ViewBag.Message = "Please, upload PDF File Only";
-                        return View(payment);
+                        return View("UploadFilePaymentDocView",payment);
                     }
 
                 }
 
             }
 
-            return View(paymentDocument);
+            return View("UploadFilePaymentDocView",paymentDocument);
         }
 
         //GET: PrintPaymentDocView
@@ -160,7 +160,7 @@ namespace LSLS.Controllers
                 }
             }
 
-            return View(sentToMail);
+            return View("ShareFilePaymentDocView",sentToMail);
         }
 
 

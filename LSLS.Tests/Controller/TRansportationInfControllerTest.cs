@@ -27,15 +27,15 @@ namespace LSLS.Tests.Controller
             var mockJob = new Mock<IJobAssignmentRepository>();
 
             var mockTrans = new Mock<ITransportationInfRepository>();
-            mockTrans.Setup(m => m.GetAllTransportationInfs()).Returns(transportationInfList.AsQueryable());
+            mockTrans.Setup(m => m.GetAllTransportationInfs()).Returns(transportationInfList);
 
             var controller = new TransportationInfController(mockTrans.Object, mockJob.Object, mockTruckDriver.Object);
 
             // Act 
             var result = controller.ListAllTransportationInfs() as ViewResult;
-
+            var model = result.Model;
             // Assert
-            Assert.IsNotNull(result);
+            Assert.AreEqual(model, transportationInfList);
             Assert.AreEqual(result.ViewName, "ListAllTransportationInfs");
         }
 
@@ -98,9 +98,11 @@ namespace LSLS.Tests.Controller
             // Act
             var result = controller.DetailsTransportationInf(1) as ViewResult;
             var viewName = result.ViewName;
+            var model = result.Model;
 
             // Assert       
             Assert.AreEqual(viewName, "DetailsTransportationInf");
+            Assert.AreEqual(model, transportationInf);
         }
 
         //FormCreateTransportationInf----------------------------------------------------------------------
